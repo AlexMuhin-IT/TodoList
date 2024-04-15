@@ -20,7 +20,11 @@ export const App = () => {
     if (!isLoading) {
       setIsInitialized(true)
       if (data?.resultCode === ResultCode.Success) {
-        dispatch(setIsLoggedIn({ isLoggedIn: true }))
+        dispatch(
+          setIsLoggedIn({
+            isLoggedIn: true,
+          }),
+        )
       }
     }
   }, [isLoading, data])
