@@ -14,16 +14,24 @@ export const appSlice = createSlice({
     isLoggedIn: false,
   },
   reducers: (create) => ({
-    setAppError: create.reducer<{ error: string | null }>((state, action) => {
+    setAppError: create.reducer<{
+      error: string | null
+    }>((state, action) => {
       state.error = action.payload.error
     }),
-    setAppStatus: create.reducer<{ status: RequestStatus }>((state, action) => {
+    setAppStatus: create.reducer<{
+      status: RequestStatus
+    }>((state, action) => {
       state.status = action.payload.status
     }),
-    changeTheme: create.reducer<{ themeMode: ThemeMode }>((state, action) => {
+    changeTheme: create.reducer<{
+      themeMode: ThemeMode
+    }>((state, action) => {
       state.themeMode = action.payload.themeMode
     }),
-    setIsLoggedIn: create.reducer<{ isLoggedIn: boolean }>((state, action) => {
+    setIsLoggedIn: create.reducer<{
+      isLoggedIn: boolean
+    }>((state, action) => {
       state.isLoggedIn = action.payload.isLoggedIn
     }),
   }),
