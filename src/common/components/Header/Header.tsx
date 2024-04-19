@@ -33,7 +33,11 @@ export const Header = () => {
     logout()
       .then((res) => {
         if (res.data?.resultCode === ResultCode.Success) {
-          dispatch(setIsLoggedIn({ isLoggedIn: false }))
+          dispatch(
+            setIsLoggedIn({
+              isLoggedIn: false,
+            }),
+          )
           localStorage.removeItem("sn-token")
         }
       })
