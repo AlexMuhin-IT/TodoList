@@ -19,7 +19,11 @@ export const handleError = (api: BaseQueryApi, result: QueryReturnValue<unknown,
 
       case 400:
       case 500:
-        error = (result.error.data as { message: string }).message
+        error = (
+          result.error.data as {
+            message: string
+          }
+        ).message
         break
 
       default:
@@ -29,8 +33,18 @@ export const handleError = (api: BaseQueryApi, result: QueryReturnValue<unknown,
     api.dispatch(setAppError({ error }))
   }
 
-  if ((result.data as { resultCode: ResultCode }).resultCode === ResultCode.Error) {
-    const messages = (result.data as { messages: string[] }).messages
+  if (
+    (
+      result.data as {
+        resultCode: ResultCode
+      }
+    ).resultCode === ResultCode.Error
+  ) {
+    const messages = (
+      result.data as {
+        messages: string[]
+      }
+    ).messages
     error = messages.length ? messages[0] : error
     api.dispatch(setAppError({ error }))
   }
