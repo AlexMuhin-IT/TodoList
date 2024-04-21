@@ -8,7 +8,10 @@ export const LoginFormLabel = () => {
       <p>
         To login get registered
         <a
-          style={{ color: theme.palette.primary.main, marginLeft: "5px" }}
+          style={{
+            color: theme.palette.primary.main,
+            marginLeft: "5px",
+          }}
           href={"https://social-network.samuraijs.com/"}
           target={"_blank"}
           rel="noreferrer"
