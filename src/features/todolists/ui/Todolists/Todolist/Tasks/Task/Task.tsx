@@ -20,14 +20,25 @@ export const Task = ({ task, todolist }: Props) => {
   const disabled = todolist.entityStatus === "loading"
 
   const removeTaskHandler = () => {
-    removeTask({ todolistId: todolist.id, taskId: task.id })
+    removeTask({
+      todolistId: todolist.id,
+      taskId: task.id,
+    })
   }
   const changeTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
     let status = e.currentTarget.checked ? TaskStatus.Completed : TaskStatus.New
-    updateTask({ todolistId: todolist.id, taskId: task.id, model: { ...task, status } })
+    updateTask({
+      todolistId: todolist.id,
+      taskId: task.id,
+      model: { ...task, status },
+    })
   }
   const changeTaskTitleHandler = (title: string) => {
-    updateTask({ todolistId: todolist.id, taskId: task.id, model: { ...task, title } })
+    updateTask({
+      todolistId: todolist.id,
+      taskId: task.id,
+      model: { ...task, title },
+    })
   }
 
   return (
