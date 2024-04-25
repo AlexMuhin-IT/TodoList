@@ -6,28 +6,24 @@ import { useGetTodolistsQuery } from "features/todolists/api/todolistsApi"
 import { TodolistSkeleton } from "features/todolists/ui/skeletons/TodolistSkeleton/TodolistSkeleton"
 
 const Todolists = () => {
-  const { data: todolists, isLoading } =
-    useGetTodolistsQuery(undefined, {
-      pollingInterval: 10000,
-      skipPollingIfUnfocused: true,
-    })
+  const { data: todolists, isLoading } = useGetTodolistsQuery(undefined, {
+    pollingInterval: 10000,
+    skipPollingIfUnfocused: true,
+  })
 
   if (isLoading) {
     return (
       <div
         style={{
           display: "flex",
-          justifyContent:
-            "space-between",
+          justifyContent: "space-between",
           gap: "32px",
         }}
       >
         {Array(3)
           .fill(null)
           .map((_, id) => (
-            <TodolistSkeleton
-              key={id}
-            />
+            <TodolistSkeleton key={id} />
           ))}
       </div>
     )
@@ -38,10 +34,7 @@ const Todolists = () => {
       {todolists?.map((tl) => (
         <Grid key={tl.id}>
           <Paper sx={{ p: "10px" }}>
-            <Todolist
-              key={tl.id}
-              todolist={tl}
-            />
+            <Todolist key={tl.id} todolist={tl} />
           </Paper>
         </Grid>
       ))}
