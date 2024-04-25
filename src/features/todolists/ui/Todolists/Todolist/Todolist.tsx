@@ -10,15 +10,10 @@ import { DomainTodolist } from "features/todolists/lib/types/types"
 export type TodolistPropsType = {
   todolist: DomainTodolist
 }
-export const Todolist = ({
-  todolist,
-}: TodolistPropsType) => {
-  const [addTask] =
-    useCreateTaskMutation()
+export const Todolist = ({ todolist }: TodolistPropsType) => {
+  const [addTask] = useCreateTaskMutation()
 
-  const addTaskCallback = (
-    title: string,
-  ) => {
+  const addTaskCallback = (title: string) => {
     addTask({
       todolistId: todolist.id,
       title,
@@ -27,20 +22,10 @@ export const Todolist = ({
 
   return (
     <div className={s.wrapper}>
-      <TodolistTitle
-        todolist={todolist}
-      />
-      <AddItemForm
-        addItem={addTaskCallback}
-        disabled={
-          todolist.entityStatus ===
-          "loading"
-        }
-      />
+      <TodolistTitle todolist={todolist} />
+      <AddItemForm addItem={addTaskCallback} disabled={todolist.entityStatus === "loading"} />
       <Tasks todolist={todolist} />
-      <FilterTasksButtons
-        todolist={todolist}
-      />
+      <FilterTasksButtons todolist={todolist} />
     </div>
   )
 }
