@@ -4,8 +4,8 @@ import s from "./TodolistTitle/TodolistTitle.module.css"
 import { FilterTasksButtons } from "./FilterTasksButtons/FilterTasksButtons"
 import { AddItemForm } from "common/components"
 import React from "react"
-import { DomainTodolist } from "features/todolists/model/todolistsSlice"
 import { useCreateTaskMutation } from "features/todolists/api/tasksApi"
+import { DomainTodolist } from "features/todolists/lib/types/types"
 
 export type TodolistPropsType = {
   todolist: DomainTodolist
