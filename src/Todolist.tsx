@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button} from "./components/Button";
+import {FilterValuesType} from "./App";
 
 export type TaskType = {
     id: number
@@ -9,28 +10,32 @@ export type TaskType = {
 
 type PropsType = {
     title: string
-    tasks: Array<TaskType>
+    task: Array<TaskType>
     date?: string
+    removeTask: (taskId: number) => void
+    changeFilter: (filter: FilterValuesType) => void
 }
 
-export const Todolist = ({title, tasks, date}: PropsType) => {
+export const Todolist = ({title, task, date, removeTask, changeFilter}: PropsType) => {
     return (
         <div>
             <h3>{title}</h3>
             <div>
                 <input/>
-                <Button title={'+'}/>
+                <Button title={'+'} onClick={() => {
+                }}/>
             </div>
-            {tasks.length === 0 ? (
+            {task.length === 0 ? (
                 <p>Тасков нет</p>
             ) : (
                 <ul>
-                    {tasks.map(tasks => {
+                    {task.map(task => {
                         return (
                             <>
                                 <li>
-                                    <input type="checkbox" checked={tasks.isDone}/>
-                                    <span>{tasks.title}</span>
+                                    <input type="checkbox" checked={task.isDone}/>
+                                    <span>{task.title}</span>
+                                    <Button title={'X'} onClick={() => removeTask(task.id)}/>
                                 </li>
                             </>
                         )
@@ -38,9 +43,9 @@ export const Todolist = ({title, tasks, date}: PropsType) => {
                 </ul>
             )}
             <div>
-                <Button title={'All'}/>
-                <Button title={'Active'}/>
-                <Button title={'Completed'}/>
+                <Button title={'All'} onClick={() => changeFilter('all')}/>
+                <Button title={'Active'} onClick={() => changeFilter('active')}/>
+                <Button title={'Completed'} onClick={() => changeFilter('completed')}/>
             </div>
             <div>{date}</div>
         </div>
