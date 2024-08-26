@@ -58,7 +58,7 @@ export const Todolist = ({title, task, date, removeTask, changeFilter, addTask}:
                     value={taskTitle}
                     onChange={changeTaskTitleHandler}
                     onKeyUp={addTaskOnKeyUpHandler}
-                    placeholder={'useState'}
+                    placeholder={'New Skills'}
                 />
                 <Button title={'+'}
                         onClick={addTaskHandler}

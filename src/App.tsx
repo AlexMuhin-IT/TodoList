@@ -7,16 +7,7 @@ import {v1, v4} from "uuid";
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
 function App() {
-    const addTask = (title: string) => {
-        const newTask = {
-            id: v4(),
-            title,
-            isDone: false,
-        }
 
-        const newTasks = [newTask, ...tasks]
-        setTasks(newTasks)
-    }
     const [tasks, setTasks] = useState<TaskType[]>([
         {id: v1(), title: 'HTML&CSS', isDone: true},
         {id: v1(), title: 'JS', isDone: true},
@@ -29,7 +20,15 @@ function App() {
         const filteredTasks = tasks.filter(t => t.id !== taskId)
         setTasks(filteredTasks);
     }
-
+    const addTask = (title: string) => {
+        const newTask = {
+            id: v4(),
+            title,
+            isDone: false,
+        }
+        const newTasks = [newTask, ...tasks]
+        setTasks(newTasks)
+    }
     const [filter, setFilter] = useState<FilterValuesType>('all')
 
     let filteredTasks: Array<TaskType> = tasks
