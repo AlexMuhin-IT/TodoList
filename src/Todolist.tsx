@@ -1,25 +1,45 @@
-import React from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import {Button} from "./components/Button";
 
 type TodolistPropsType = {
     title: string;
     tasks: TaskType[]
-    removeTask: (taskId: number) => void;
+    removeTask: (taskId: string) => void;
+    addTask: (title: string) => void
 }
 export type TaskType = {
-    id: number
+    id: string
     title: string
     isDone: boolean
+
 }
 
-export const Todolist = ({title, tasks, removeTask}: TodolistPropsType) => {
+export const Todolist = ({title, tasks, removeTask, addTask}: TodolistPropsType) => {
+    const [taskTitle, setTaskTitle] = useState('')
 
+    const addTaskHandler = () => {
+        addTask(taskTitle)
+        setTaskTitle('')
+    }
+    const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        setTaskTitle(event.currentTarget.value);
+    }
     return (
         <div>
             <h2>{title}</h2>
             <div>
-                <input/>
-                <Button title={'+'} onClick={()=>{}}/>
+                <input value={taskTitle}
+                       onChange={changeTaskTitleHandler}
+                       onKeyDown={event => {
+                           if (event.key === 'Enter') {
+                               addTaskHandler()
+                           }
+                       }}
+
+                />
+                <Button title={'+'}
+                        onClick={addTaskHandler}
+                />
             </div>
             {tasks.length === 0 ? (
                 <p>Тасков нет</p>
@@ -40,9 +60,12 @@ export const Todolist = ({title, tasks, removeTask}: TodolistPropsType) => {
                 </ul>
             )}
             <div>
-                <Button title={'All'} onClick={()=>{}}/>
-                <Button title={'Active'} onClick={()=>{}}/>
-                <Button title={'Completed'} onClick={()=>{}}/>
+                <Button title={'All'} onClick={() => {
+                }}/>
+                <Button title={'Active'} onClick={() => {
+                }}/>
+                <Button title={'Completed'} onClick={() => {
+                }}/>
             </div>
         </div>
     )
