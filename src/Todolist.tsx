@@ -17,15 +17,18 @@ export type TaskType = {
 }
 
 export const Todolist = ({title, tasks, removeTask, addTask, changeFilter}: TodolistPropsType) => {
+
     const [taskTitle, setTaskTitle] = useState('')
 
     const addTaskHandler = () => {
         addTask(taskTitle)
         setTaskTitle('')
     }
+
     const changeTaskTitleHandler = (event: ChangeEvent<HTMLInputElement>) => {
         setTaskTitle(event.currentTarget.value);
     }
+
     const addTaskOnKeyDownHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {
             addTaskHandler()
@@ -35,6 +38,7 @@ export const Todolist = ({title, tasks, removeTask, addTask, changeFilter}: Todo
     const changeFilterTasksHandler = (filter: FilterValuesType) => {
         changeFilter(filter)
     }
+
     return (
         <div>
             <h2>{title}</h2>
