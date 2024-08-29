@@ -1,12 +1,12 @@
 import React, {ChangeEvent, useState} from 'react';
 import {Button} from "./components/Button";
-import {strict} from "node:assert";
+
 
 type TodolistProps = {
     title: string;
     tasks: TasksPropsType[]
     addTask: (title: string) => void;
-    removeTask: (id: string) => void;
+    removeTask?: (id: string) => void;
 
 }
 export type TasksPropsType = {
