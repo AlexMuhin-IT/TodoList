@@ -5,7 +5,7 @@ import {v1,} from "uuid";
 
 function App() {
 
-    const [tasks, setTasks] = useState([
+    let [tasks, setTasks] = useState([
         {id: v1(), title: 'HTML&CSS', isDone: true},
         {id: v1(), title: 'JS', isDone: true},
         {id: v1(), title: 'React', isDone: true},
@@ -15,12 +15,6 @@ function App() {
         {id: v1(), title: 'Typescript', isDone: false},
         {id: v1(), title: 'RTK query', isDone: false},
     ])
-    const tasks2 = [
-        {id: v1(), title: 'Hello world', isDone: true},
-        {id: v1(), title: 'I am Happy', isDone: false},
-        {id: v1(), title: 'Yo', isDone: false},
-        {id: v1(), title: 'Yes', isDone: true},
-    ]
 
     const addTask = (newTaskTitle: string) => {
         const newTask = {
@@ -32,8 +26,9 @@ function App() {
             return [newTask, ...prevTasks]
         })
     }
-    const removeTask = (newTaskTitle: string) => {
-
+    const removeTask = (value: string) => {
+        tasks = tasks.filter((task)=> task.id !== value)
+        setTasks(tasks)
     }
 
     return (
@@ -43,12 +38,6 @@ function App() {
                       addTask={addTask}
                       removeTask={removeTask}
             />
-            <Todolist title={'Заголовок номер 1'}
-                      tasks={tasks2}
-                      addTask={addTask}
-                      removeTask={removeTask}
-            />
-
         </div>
     );
 }

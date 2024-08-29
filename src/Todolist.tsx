@@ -6,8 +6,7 @@ type TodolistProps = {
     title: string;
     tasks: TasksPropsType[]
     addTask: (title: string) => void;
-    removeTask?: (id: string) => void;
-
+    removeTask: (value: string) => void;
 }
 export type TasksPropsType = {
     id: string;
@@ -28,11 +27,10 @@ export const Todolist = ({title, tasks, addTask, removeTask}: TodolistProps) => 
     };
 
     // const handlerRemoveTask = () => {
-    //     removeTask()
-    //     setNewTaskTitle('')
+    //     alert(Todolist.id)
     // }
     return (
-        <div>
+        <div style={{background: 'darkkhaki'}}>
             <h3>{title}</h3>
             <div>
                 <input placeholder={'Введите название'} type="text" value={newTaskTitle}
@@ -41,25 +39,27 @@ export const Todolist = ({title, tasks, addTask, removeTask}: TodolistProps) => 
                     title={'+'}
                     onClick={handleAddTask}/>
             </div>
-            <ul>
-                {tasks.map(t => {
-                    return (
-                        <li key={t.id}>
-                            <input type="checkbox" checked={t.isDone}/><span>{t.title}</span>
-                            <Button title={'X'}/>
-                        </li>
-                    )
-
-
-                })}
-            </ul>
+            {tasks.length === 0 ? (<p>Taskoff HET</p>) : (
+                <ul>
+                    {tasks.map(t => {
+                        return (
+                            <li key={t.id}>
+                                <input type="checkbox" checked={t.isDone}/>
+                                <span>{t.title}</span>
+                                <Button
+                                    onClick={()=>{removeTask(t.id)}}
+                                    title={'X'}/>
+                            </li>
+                        )
+                    })}
+                </ul>
+            )}
             <div>
                 <button>All</button>
                 <button>Active</button>
                 <button>Competed</button>
             </div>
         </div>
-    )
-        ;
+    );
 };
 
