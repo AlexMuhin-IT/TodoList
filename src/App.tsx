@@ -1,11 +1,15 @@
 import './App.css';
 import React, {useState} from "react";
-import {Todolist} from "./Todolist";
+import {TaskType, Todolist} from "./Todolist";
 import {v1,} from "uuid";
+
+export type TasksTodolistType = 'all' | 'active' | 'completed';
 
 function App() {
 
-    let [tasks, setTasks] = useState([
+    const [filter, setFilter] = useState<TasksTodolistType>('all');
+
+    const [tasks, setTasks] = useState<TaskType[]>([
         {id: v1(), title: 'HTML&CSS', isDone: true},
         {id: v1(), title: 'JS', isDone: true},
         {id: v1(), title: 'React', isDone: true},
@@ -15,7 +19,19 @@ function App() {
         {id: v1(), title: 'Typescript', isDone: false},
         {id: v1(), title: 'RTK query', isDone: false},
     ])
-
+    // ФИЛЬТРАЦИЯ ЭЛЕМЕНТОВ
+    const changeFilter = (filter: TasksTodolistType) => {
+        setFilter(filter)
+    }
+    let tasksForTodolist = tasks
+    if (filter === 'active') {
+        tasksForTodolist = tasks.filter(task => !task.isDone)
+    }
+    if (filter === 'completed') {
+        tasksForTodolist = tasks.filter(task => task.isDone)
+    }
+    //----------------------
+    //Добавления новых тасок
     const addTask = (newTaskTitle: string) => {
         const newTask = {
             id: v1(),
@@ -26,17 +42,22 @@ function App() {
             return [newTask, ...prevTasks]
         })
     }
+    //----------------------
+    //Удаление тасок
     const removeTask = (value: string) => {
-        tasks = tasks.filter((task)=> task.id !== value)
-        setTasks(tasks)
+        const filteredTasks = tasks.filter((task) => {
+            return task.id !== value
+        })
+        setTasks(filteredTasks)
     }
-
+    //----------------------
     return (
         <div className="App">
             <Todolist title={'Заголовок номер 1'}
-                      tasks={tasks}
+                      tasks={tasksForTodolist}
                       addTask={addTask}
                       removeTask={removeTask}
+                      changeFilter={changeFilter}
             />
         </div>
     );
