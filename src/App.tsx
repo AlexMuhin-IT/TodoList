@@ -31,6 +31,20 @@ function App() {
         tasksForTodolist = tasks.filter(task => task.isDone)
     }
     //----------------------
+    //Изменение состояния checkbox
+    const changeTaskStatus = (taskId: string, taskStatus: boolean) => {
+        const task = tasks.find(t => t.id === taskId)
+        if (task) {
+            task.isDone = taskStatus
+            setTasks([...tasks])
+        }
+    }
+    // Перерисовка task checkbox методом map
+    // const changeTaskStatus = (taskId: string, taskStatus: boolean) => {
+    //     const newState = tasks.map(task=>(task.id === taskId ? {...task, isDone: taskStatus}  : task));
+    // setTasks(newState);
+    // }
+    //----------------------
     //Добавления новых тасок
     const addTask = (newTaskTitle: string) => {
         const newTask = {
@@ -51,6 +65,7 @@ function App() {
         setTasks(filteredTasks)
     }
     //----------------------
+
     return (
         <div className="App">
             <Todolist title={'Заголовок номер 1'}
@@ -58,6 +73,8 @@ function App() {
                       addTask={addTask}
                       removeTask={removeTask}
                       changeFilter={changeFilter}
+                      changeTaskStatus={changeTaskStatus}
+                      filter={filter}
             />
         </div>
     );
