@@ -1,13 +1,16 @@
 import './App.css';
 import React, {useState} from "react";
-import {TaskType, Todolist} from "./Todolist";
-import {v1,} from "uuid";
+import {v1} from "uuid";
+import {Todolist} from "./Todolist";
 
-export type TasksTodolistType = 'all' | 'active' | 'completed';
+type FilteredTodolist = 'all' | 'completed' | 'active'
+export type TaskType = {
+    id: string
+    title: string
+    isDone: boolean
+}
 
-function App() {
-
-    const [filter, setFilter] = useState<TasksTodolistType>('all');
+export const App = () => {
 
     const [tasks, setTasks] = useState<TaskType[]>([
         {id: v1(), title: 'HTML&CSS', isDone: true},
@@ -19,62 +22,31 @@ function App() {
         {id: v1(), title: 'Typescript', isDone: false},
         {id: v1(), title: 'RTK query', isDone: false},
     ])
-    // ФИЛЬТРАЦИЯ ЭЛЕМЕНТОВ
-    const changeFilter = (filter: TasksTodolistType) => {
-        setFilter(filter)
-    }
-    let tasksForTodolist = tasks
+
+    const [filter, setFilter] = useState('all')
+
+    let taskForTodolist = tasks
     if (filter === 'active') {
-        tasksForTodolist = tasks.filter(task => !task.isDone)
+        taskForTodolist = tasks.filter(task => !task.isDone)
     }
     if (filter === 'completed') {
-        tasksForTodolist = tasks.filter(task => task.isDone)
+        taskForTodolist = tasks.filter(task => task.isDone)
     }
-    //----------------------
-    //Изменение состояния checkbox
-    const changeTaskStatus = (taskId: string, taskStatus: boolean) => {
-        const task = tasks.find(t => t.id === taskId)
-        if (task) {
-            task.isDone = taskStatus
-            setTasks([...tasks])
-        }
-    }
-    // Перерисовка task checkbox методом map
-    // const changeTaskStatus = (taskId: string, taskStatus: boolean) => {
-    //     const newState = tasks.map(task=>(task.id === taskId ? {...task, isDone: taskStatus}  : task));
-    // setTasks(newState);
-    // }
-    //----------------------
-    //Добавления новых тасок
-    const addTask = (newTaskTitle: string) => {
-        const newTask = {
-            id: v1(),
-            title: newTaskTitle,
-            isDone: false
-        }
-        setTasks((prevTasks) => {
-            return [newTask, ...prevTasks]
-        })
-    }
-    //----------------------
-    //Удаление тасок
-    const removeTask = (value: string) => {
-        const filteredTasks = tasks.filter((task) => {
-            return task.id !== value
+
+
+    const removeTask = (taskId: string) => {
+        const filteredTasks = tasks.filter(task => {
+            return task.id !== taskId
         })
         setTasks(filteredTasks)
     }
-    //----------------------
 
     return (
         <div className="App">
-            <Todolist title={'Заголовок номер 1'}
-                      tasks={tasksForTodolist}
-                      addTask={addTask}
-                      removeTask={removeTask}
-                      changeFilter={changeFilter}
-                      changeTaskStatus={changeTaskStatus}
-                      filter={filter}
+            <Todolist
+                title={'New Todolist'}
+                tasks={taskForTodolist}
+                removeTask={removeTask}
             />
         </div>
     );

@@ -1,22 +1,16 @@
-import React, {ButtonHTMLAttributes} from 'react';
+import React from 'react';
+import {ReactComponent} from "*.svg";
 
 type ButtonPropsType = {
-    className?: string;
-} & ButtonHTMLAttributes<HTMLButtonElement>
+    title: string;
+    onClick?: () => void;
+}
 
 
-export const Button = (props: ButtonPropsType) => {
-    const {title,
-        children,
-        onClick,
-        className,
-        ...otherProps} = props
+export const Button = ({title, onClick}:ButtonPropsType) => {
     return (
-        <>
-            <button onClick={onClick}
-                    className={className}
-            >{children}</button>
-        </>
+        <button
+            onClick={onClick}
+        >{title}</button>
     );
 };
-
