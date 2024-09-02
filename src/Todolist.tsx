@@ -1,10 +1,10 @@
 import React from 'react';
 import {Button} from "./components/Button";
-import {TasksTypeProps} from "./App";
+import { TaskType} from "./App";
 
 type TodolistPropsType = {
     title: string
-    tasks: TasksTypeProps[]
+    tasks: TaskType[]
 }
 
 
@@ -18,7 +18,7 @@ export const Todolist = ({title, tasks}: TodolistPropsType) => {
             </div>
             <div>
                 {tasks.length === 0 ?
-                    <p> NO TASK</p> : (
+                    <p>NO TASK</p> : (
                         <ul>
                             {tasks.map(t => {
                                 return (
