@@ -4,7 +4,6 @@ import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 
 
-
 export type TaskType = {
     id: string
     title: string
@@ -22,13 +21,22 @@ function App() {
         {id: v1(), title: "Redux", isDone: false},
     ]);
 
-
+    const removeTask = (taskId: string) => {
+        const filteredTasks = tasks.filter(task => task.id !== taskId);
+        setTask(filteredTasks);
+    }
+    // const filterTask=(isDone: boolean) => {
+    //     const filteredTasks = tasks.filter(task => task.isDone === isDone);
+    // }
 
     return (
         <div className="App">
             <Todolist
                 tasks={tasks}
-                title={"New Todolist"}/>
+                title={"New Todolist"}
+                removeTask={removeTask}
+            />
+
         </div>
     );
 }

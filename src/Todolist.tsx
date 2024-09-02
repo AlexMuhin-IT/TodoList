@@ -5,10 +5,13 @@ import { TaskType} from "./App";
 type TodolistPropsType = {
     title: string
     tasks: TaskType[]
+
+    removeTask: (taskId: string) => void;
 }
 
 
-export const Todolist = ({title, tasks}: TodolistPropsType) => {
+export const Todolist = ({title, tasks, removeTask}: TodolistPropsType) => {
+
     return (
         <div>
             <h2>{title}</h2>
@@ -25,7 +28,8 @@ export const Todolist = ({title, tasks}: TodolistPropsType) => {
                                     <li key={t.id}>
                                         <input type="checkbox" checked={t.isDone}/>
                                         <span>{t.title}</span>
-                                        <Button title={'X'}/>
+                                        <Button onClick={()=>removeTask(t.id)}
+                                                title={'X'}/>
                                     </li>
                                 )
                             })}
