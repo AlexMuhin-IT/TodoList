@@ -19,17 +19,18 @@ function App() {
         {id: v1(), title: "Figma", isDone: true},
         {id: v1(), title: "Redux", isDone: false},
     ]);
-    const removeTask=(id: string) => {
-
+    const removeTask = (taskId: string) => {
+       const taskRemove = tasks.filter((t)=>t.id !== taskId);
+       setTask(taskRemove)
     }
-    const addTask = (t: TaskPropsType) => {
+    const addTask = (title: string) => {
         const newTask = {
-            id: t.id,
-            title: t.title,
-            isDone: t.isDone
+            id: v1(),
+            title,
+            isDone: false,
         }
-        // setTask(newTask)
-        alert('new task')
+        const newTasks = [newTask, ...tasks]
+        setTask(newTasks)
     }
 
     return (
