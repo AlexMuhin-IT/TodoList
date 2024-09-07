@@ -24,6 +24,7 @@ export const Todolist = ({title, tasks, removeTask, changeFilter, addTask}: Todo
     }
     return (
         <div>
+
             <h2>{title}</h2>
             <div>
                 <input
