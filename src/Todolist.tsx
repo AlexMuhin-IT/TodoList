@@ -1,17 +1,18 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {Button} from "./components/Button";
-import {FilterValuesType, TaskPropsType} from "./App";
+import {FilterValuesType, TaskType} from "./App";
 
 type TodolistPropsType = {
     todolistId: string,
     title: string,
-    tasks: TaskPropsType[]
+    tasks: TaskType[]
     addTask: (todolistId: string, title: string) => void
     removeTask: (todolistId: string, taskId: string) => void
     changeFilter: (todolistId: string, filter: FilterValuesType) => void
     changeTaskStatus: (todolistId: string, taskId: string, taskStatus: boolean) => void
     filter: FilterValuesType
     removeTodolist: (todolistId: string) => void
+
 }
 
 export const Todolist = ({
@@ -54,7 +55,8 @@ export const Todolist = ({
     }
 
     return (
-        <div>
+        // <div className={todolistId < todolistId ? 'todolist-wrapper' : 'todolist-secondary'}>
+        <div className={'todolist-wrapper'}>
             <div className={'todolist-title-container'}>
                 <h3>{title}</h3>
                 <Button title={'x'} onClick={removeTodolistHandler}/>
@@ -71,7 +73,7 @@ export const Todolist = ({
             {error && <div className={'error-message'}>{error}</div>}
             <div>
                 <ul>
-                    {tasks.map((t: TaskPropsType) => {
+                    {tasks.map((t: TaskType) => {
                         const removeTaskHandler = () => {
                             removeTask(todolistId, t.id)
                         }

@@ -37,3 +37,15 @@ ul{
     display: flex;
     align-items: center;
 }
+
+.todolist-wrapper{
+    background: linear-gradient(rgba(180, 23, 224, 0.45), rgba(224, 154, 23, 0.45));
+    /*rgba(180, 23, 224, 0.45) | rgba(224, 154, 23, 0.45);*/
+    padding: 10px;
+    border-radius: 15px;
+}
+/*.todolist-secondary{*/
+/*    background-color: rgba(224, 154, 23, 0.45);*/
+/*    padding: 10px;*/
+/*    border-radius: 15px;*/
+/*}*/
