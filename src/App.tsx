@@ -48,8 +48,7 @@ function App() {
         const newState = tasks.map(t => (t.id === taskId ? {...t, isDone: taskStatus} : t))
         setTask(newState)
     }
-
-
+    
     return (
         <div className="App">
             <Todolist
