@@ -3,13 +3,15 @@ import {Button} from "./components/Button";
 import {FilterValuesType, TaskPropsType} from "./App";
 
 type TodolistPropsType = {
+    todolistId: string,
     title: string,
     tasks: TaskPropsType[]
-    addTask: (title: string) => void
-    removeTask: (taskId: string) => void
-    changeFilter: (filterValues: FilterValuesType) => void
-    changeTaskStatus: (taskId: string, taskStatus: boolean) => void
+    addTask: (todolistId: string, title: string) => void
+    removeTask: (todolistId: string, taskId: string) => void
+    changeFilter: (todolistId: string, filter: FilterValuesType) => void
+    changeTaskStatus: (todolistId: string, taskId: string, taskStatus: boolean) => void
     filter: FilterValuesType
+    removeTodolist: (todolistId: string) => void
 }
 
 export const Todolist = ({
@@ -19,7 +21,9 @@ export const Todolist = ({
                              removeTask,
                              changeFilter,
                              changeTaskStatus,
-                             filter
+                             filter,
+                             todolistId,
+                             removeTodolist
                          }: TodolistPropsType) => {
 
     const [taskTitle, setNewTitle] = useState('')
@@ -27,7 +31,7 @@ export const Todolist = ({
 
     const addTaskHandler = () => {
         if (taskTitle.trim() !== '') {
-            addTask(taskTitle.trim())
+            addTask(todolistId, taskTitle.trim())
             setNewTitle('')
         } else {
             setError('Title is required')
@@ -42,14 +46,19 @@ export const Todolist = ({
             addTaskHandler()
         }
     }
-    const changeFilterTasksHandler = (filter: FilterValuesType) => {
-        changeFilter(filter)
+    const changeFilterTasksHandler = (todolistId: string, filter: FilterValuesType) => {
+        changeFilter(todolistId, filter)
     }
-
+    const removeTodolistHandler = () => {
+        removeTodolist(todolistId)
+    }
 
     return (
         <div>
-            <h3>{title}</h3>
+            <div className={'todolist-title-container'}>
+                <h3>{title}</h3>
+                <Button title={'x'} onClick={removeTodolistHandler}/>
+            </div>
             <input
                 className={error ? 'error' : ''}
                 type="text"
@@ -64,11 +73,11 @@ export const Todolist = ({
                 <ul>
                     {tasks.map((t: TaskPropsType) => {
                         const removeTaskHandler = () => {
-                            removeTask(t.id)
+                            removeTask(todolistId, t.id)
                         }
                         const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
                             const newStatusValue = e.currentTarget.checked
-                            changeTaskStatus(t.id, newStatusValue)
+                            changeTaskStatus(todolistId, t.id, newStatusValue)
                         }
                         return (
                             <li key={t.id} className={t.isDone ? 'is-done' : ''}>
@@ -89,15 +98,15 @@ export const Todolist = ({
             <div className={'style-button'}>
                 <Button
                     className={filter === 'all' ? 'active-filter' : ''}
-                    onClick={() => changeFilterTasksHandler('all')}
+                    onClick={() => changeFilterTasksHandler(todolistId, 'all')}
                     title={'All'}/>
                 <Button
                     className={filter === 'active' ? 'active-filter' : ''}
-                    onClick={() => changeFilterTasksHandler('active')}
+                    onClick={() => changeFilterTasksHandler(todolistId, 'active')}
                     title={'Active'}/>
                 <Button
                     className={filter === 'completed' ? 'active-filter' : ''}
-                    onClick={() => changeFilterTasksHandler('completed')}
+                    onClick={() => changeFilterTasksHandler(todolistId, 'completed')}
                     title={'Completed'}/>
             </div>
 
