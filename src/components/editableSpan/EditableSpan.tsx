@@ -8,29 +8,30 @@ type PropsType = {
 export const EditableSpan = ({value, onChange}: PropsType) => {
     const [editMode, setEditMode] = useState(false);
     const [title, setTitle] = useState<string>(value);
-    const activeEditModeHandler = () => {
-        setEditMode(!editMode);
-    }
-    const deactivateEditModeHandler = () => {
-        setEditMode(!editMode)
-        onChange(title)
-    }
+    // const activeEditModeHandler = () => {
+    //     setEditMode(!editMode);
+    // }
+    // const deactivateEditModeHandler = () => {
+    //     setEditMode(!editMode)
+    //     onChange(title)
+    // }
     const onTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
-    // const changeEditModeHandler = () => {
-    //     setEditMode(!editMode);
-    // }
+    const changeEditModeHandler = () => {
+        setEditMode(!editMode)
+        onChange(title)
+    }
     return (
         <div >
             {editMode ? (
                 <input
                     onChange={onTitleHandler}
-                    onBlur={deactivateEditModeHandler}
+                    onBlur={changeEditModeHandler}
                     value={title}
                     autoFocus/>
             ) : (
-                <span onDoubleClick={activeEditModeHandler}>{value}</span>
+                <span onDoubleClick={changeEditModeHandler}>{value}</span>
             )
             }
         </div>

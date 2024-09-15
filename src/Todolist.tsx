@@ -3,6 +3,8 @@ import {Button} from "./components/Button";
 import {FilterValuesType, TaskType} from "./App";
 import {AddItemForm} from "./components/addItemForm/AddItemForm";
 import {EditableSpan} from "./components/editableSpan/EditableSpan";
+import {IconButton} from "@mui/material";
+import {Delete} from "@mui/icons-material";
 
 type TodolistPropsType = {
     todolistId: string,
@@ -54,11 +56,17 @@ export const Todolist = ({
                     value={title}
                     onChange={updateTodolistHandler}/>
                 </h3>
-                <Button
-                    title={'x'}
-                    onClick={removeTodolistHandler}/>
+                {/*<Button*/}
+                {/*    title={'x'}*/}
+                {/*    onClick={removeTodolistHandler}/>*/}
+                <IconButton aria-label="delete"
+                            onClick={removeTodolistHandler}
+                            size={'medium'}
+                >
+                    <Delete/>
+                </IconButton>
             </div>
-
+            <AddItemForm addItem={addTaskCallback}/>
             <div>
                 {
                     tasks.length === 0
@@ -84,7 +92,13 @@ export const Todolist = ({
                                                 onChange={changeTaskStatusHandler}
                                             />
                                             <EditableSpan onChange={changeTaskTitleHandler} value={t.title}/>
-                                            <Button onClick={removeTaskHandler} title={'X'}/>
+                                            {/*<Button onClick={removeTaskHandler} title={'X'}/>*/}
+                                            <IconButton aria-label="delete"
+                                                        onClick={removeTaskHandler}
+                                                        size={'small'}
+                                            >
+                                                <Delete/>
+                                            </IconButton>
                                         </div>
                                     </li>
                                 )
