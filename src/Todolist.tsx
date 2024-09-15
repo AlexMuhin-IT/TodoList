@@ -35,9 +35,9 @@ export const Todolist = ({
     const removeTodolistHandler = () => {
         removeTodolist(todolistId)
     }
-const addTaskCallback = (title:string)=>{
+    const addTaskCallback = (title: string) => {
         addTask(todolistId, title)
-}
+    }
     return (
         // <div className={todolistId < todolistId ? 'todolist-wrapper' : 'todolist-secondary'}>
         <div className={'todolist-wrapper'}>
@@ -45,32 +45,36 @@ const addTaskCallback = (title:string)=>{
                 <h3>{title}</h3>
                 <Button title={'x'} onClick={removeTodolistHandler}/>
             </div>
-            <AddItemForm addItem={addTaskCallback} />
+            <AddItemForm addItem={addTaskCallback}/>
             <div>
-                <ul>
-                    {tasks.map((t: TaskType) => {
-                        const removeTaskHandler = () => {
-                            removeTask(todolistId, t.id)
-                        }
-                        const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                            const newStatusValue = e.currentTarget.checked
-                            changeTaskStatus(todolistId, t.id, newStatusValue)
-                        }
-                        return (
-                            <li key={t.id} className={t.isDone ? 'is-done' : ''}>
-                                <div className={'style-tasks'}>
-                                    <input
-                                        type="checkbox"
-                                        checked={t.isDone}
-                                        onChange={changeTaskStatusHandler}
-                                    />
-                                    <span>{t.title}</span>
-                                    <Button onClick={removeTaskHandler} title={'X'}/>
-                                </div>
-                            </li>
-                        )
-                    })}
-                </ul>
+                {
+                    tasks.length === 0
+                        ? <p>Тасок нет</p>
+                        : <ul>
+                            {tasks.map((t: TaskType) => {
+                                const removeTaskHandler = () => {
+                                    removeTask(todolistId, t.id)
+                                }
+                                const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                                    const newStatusValue = e.currentTarget.checked
+                                    changeTaskStatus(todolistId, t.id, newStatusValue)
+                                }
+                                return (
+                                    <li key={t.id} className={t.isDone ? 'is-done' : ''}>
+                                        <div className={'style-tasks'}>
+                                            <input
+                                                type="checkbox"
+                                                checked={t.isDone}
+                                                onChange={changeTaskStatusHandler}
+                                            />
+                                            <span>{t.title}</span>
+                                            <Button onClick={removeTaskHandler} title={'X'}/>
+                                        </div>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                }
             </div>
             <div className={'style-button'}>
                 <Button
@@ -86,11 +90,7 @@ const addTaskCallback = (title:string)=>{
                     onClick={() => changeFilterTasksHandler(todolistId, 'completed')}
                     title={'Completed'}/>
             </div>
-
         </div>
-
     )
-
-
 };
 

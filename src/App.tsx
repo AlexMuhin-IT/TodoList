@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
+import {AddItemForm} from "./components/addItemForm/AddItemForm";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
@@ -23,12 +24,10 @@ function App() {
     const todolistId1 = v1();
     const todolistId2 = v1();
 
-    let [todolists, setTodolists] = useState<TodolistType[]>([
+    const [todolists, setTodolists] = useState<TodolistType[]>([
         {id: todolistId1, title: 'What to learn', filter: 'all',},
         {id: todolistId2, title: 'What to buy', filter: 'all'},
     ]);
-
-
     const [tasks, setTasks] = useState<TasksStateType>({
         [todolistId1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
@@ -50,7 +49,6 @@ function App() {
         // const newTodolists = todolists.map(tl => tl.id === todolistId ? {...tl, filter} : tl);
         setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter} : tl));
     }
-
     const removeTask = (todolistId: string, taskId: string) => {
         // самый большой и подробный код в котором присваиваем тудулистТаскс таски выбраного тудулиста
         // в новой переменной размещаем отфильтрованные таски у которых ID несовпал
@@ -108,13 +106,27 @@ function App() {
         })
     }
     const removeTodolist = (todolistId: string) => {
-        const newTodolists = todolists.filter(tl=>tl.id!==todolistId)
+        const newTodolists = todolists.filter(tl => tl.id !== todolistId)
         setTodolists(newTodolists)
         delete tasks[todolistId];
         setTasks({...tasks})
     }
+    const addTodolist = (title: string) => {
+        const todolistId = v1()
+        const newTodolist: TodolistType = {
+            id: todolistId,
+            title: title,
+            filter: 'all'
+        }
+        setTodolists([newTodolist, ...todolists])
+        setTasks({...tasks, [todolistId]: []})
+    }
+
+
     return (
         <div className="App">
+            <AddItemForm addItem={addTodolist}/>
+
             {todolists.map(tl => {
                 const allTodolistTasks = tasks[tl.id]
                 let taskForTodolist = allTodolistTasks
@@ -127,7 +139,7 @@ function App() {
                 return (
                     <Todolist
 
-                        key={tl.id }
+                        key={tl.id}
                         todolistId={tl.id}
                         title={tl.title}
                         tasks={taskForTodolist}
