@@ -16,7 +16,7 @@ export type TaskType = {
     title: string,
     isDone: boolean,
 }
-export type TasksStateType = {
+type TasksStateType = {
     [key: string]: TaskType[]
 }
 
@@ -121,7 +121,13 @@ function App() {
         setTodolists([newTodolist, ...todolists])
         setTasks({...tasks, [todolistId]: []})
     }
-
+    const updateTask = (todolistId: string, taskId: string, title: string) => {
+        const newTodolistTasks = {
+            ...tasks,
+            [todolistId]: tasks[todolistId].map(t=>t.id === taskId ? {...t, title}: t),
+        }
+        setTasks(newTodolistTasks)
+    }
 
     return (
         <div className="App">
@@ -138,7 +144,6 @@ function App() {
                 }
                 return (
                     <Todolist
-
                         key={tl.id}
                         todolistId={tl.id}
                         title={tl.title}
@@ -149,6 +154,7 @@ function App() {
                         changeTaskStatus={changeTaskStatus}
                         filter={tl.filter}
                         removeTodolist={removeTodolist}
+                        updateTask={updateTask}
                     />
                 )
             })}
