@@ -1,6 +1,7 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {Button} from "./components/Button";
 import {FilterValuesType, TaskType} from "./App";
+import AddItemForm from "./components/addItemForm/AddItemForm";
 
 type TodolistPropsType = {
     todolistId: string,
@@ -61,13 +62,7 @@ export const Todolist = ({
                 <h3>{title}</h3>
                 <Button title={'x'} onClick={removeTodolistHandler}/>
             </div>
-            <input
-                className={error ? 'error' : ''}
-                type="text"
-                value={taskTitle}
-                onChange={changeTaskTitleHandler}
-                onKeyUp={addTaskOnKeyUpHandler}
-            />
+            <AddItemForm/>
             <Button title={'+'}
                     onClick={addTaskHandler}/>
             {error && <div className={'error-message'}>{error}</div>}

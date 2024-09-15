@@ -39,7 +39,7 @@ ul{
 }
 
 .todolist-wrapper{
-    background: linear-gradient(rgba(180, 23, 224, 0.45), rgba(224, 154, 23, 0.45));
+    background: linear-gradient(rgba(23, 70, 224, 0.45), rgba(210, 0, 0, 0.75));
     /*rgba(180, 23, 224, 0.45) | rgba(224, 154, 23, 0.45);*/
     padding: 10px;
     border-radius: 15px;
