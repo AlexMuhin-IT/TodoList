@@ -36,6 +36,7 @@ ul{
 .todolist-title-container {
     display: flex;
     align-items: center;
+    width: 200px;
 }
 
 .todolist-wrapper{
@@ -49,7 +50,3 @@ ul{
 /*    padding: 10px;*/
 /*    border-radius: 15px;*/
 /*}*/
-.wrapper-editableSpan{
-    max-width: 150px;
-    width: 100px;
-}

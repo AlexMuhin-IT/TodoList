@@ -15,6 +15,7 @@ type TodolistPropsType = {
     filter: FilterValuesType
     removeTodolist: (todolistId: string) => void
     updateTask: (todolistId: string, taskId: string, title: string) => void
+    updateTodolist: (todolistId: string, title: string) => void
 }
 
 export const Todolist = ({
@@ -27,7 +28,8 @@ export const Todolist = ({
                              filter,
                              todolistId,
                              removeTodolist,
-                             updateTask
+                             updateTask,
+                             updateTodolist
                          }: TodolistPropsType) => {
 
 
@@ -40,14 +42,23 @@ export const Todolist = ({
     const addTaskCallback = (title: string) => {
         addTask(todolistId, title)
     }
+    const updateTodolistHandler = (title: string) => {
+        updateTodolist(todolistId, title)
+    }
+
     return (
         // <div className={todolistId < todolistId ? 'todolist-wrapper' : 'todolist-secondary'}>
         <div className={'todolist-wrapper'}>
             <div className={'todolist-title-container'}>
-                <h3>{title}</h3>
-                <Button title={'x'} onClick={removeTodolistHandler}/>
+                <h3><EditableSpan
+                    value={title}
+                    onChange={updateTodolistHandler}/>
+                </h3>
+                <Button
+                    title={'x'}
+                    onClick={removeTodolistHandler}/>
             </div>
-            <AddItemForm addItem={addTaskCallback}/>
+
             <div>
                 {
                     tasks.length === 0

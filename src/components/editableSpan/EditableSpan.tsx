@@ -22,9 +22,9 @@ export const EditableSpan = ({value, onChange}: PropsType) => {
     //     setEditMode(!editMode);
     // }
     return (
-        <div className={'wrapper-editableSpan'}>
+        <div >
             {editMode ? (
-                <input className={'wrapper-editableSpan'}
+                <input
                     onChange={onTitleHandler}
                     onBlur={deactivateEditModeHandler}
                     value={title}
