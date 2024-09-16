@@ -1,5 +1,5 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button} from "@mui/material";
+import {Button, TextField} from "@mui/material";
 import {Send} from "@mui/icons-material";
 
 type PropsType = {
@@ -31,19 +31,17 @@ export const AddItemForm = ({addItem}: PropsType) => {
 
     return (
         <div>
-            <input
+            <TextField
+                id="filled-basic"
+                label="Введите название"
+                variant="filled"
                 className={error ? 'error' : ''}
                 type="text"
                 value={title}
                 onChange={changeItemHandler}
                 onKeyUp={addItemOnKeyUpHandler}
-            />
-            {/*<Button onClick={addItemHandler}*/}
-            {/*        variant={"contained"}*/}
-            {/*        color={"primary"}*/}
-            {/*size={"small"}*/}
 
-            {/*>+</Button>*/}
+            />
             <Button onClick={addItemHandler}
                     variant="contained"
                     endIcon={<Send/>}
