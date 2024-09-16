@@ -3,6 +3,12 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./components/addItemForm/AddItemForm";
+import {AppBar, Button, IconButton, Toolbar} from "@mui/material";
+import {Menu} from "@mui/icons-material";
+
+
+// import {AppBar,Toolbar} from "@mui/material";
+
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
@@ -134,9 +140,16 @@ function App() {
     }
 
     return (
-        <div className="App">
+        <div>
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton color="inherit">
+                        <Menu/>
+                    </IconButton>
+                    <Button color='inherit'>Login</Button>
+                </Toolbar>
+            </AppBar>
             <AddItemForm addItem={addTodolist}/>
-
             {todolists.map(tl => {
                 const allTodolistTasks = tasks[tl.id]
                 let taskForTodolist = allTodolistTasks
@@ -163,7 +176,6 @@ function App() {
                     />
                 )
             })}
-
         </div>
     );
 }

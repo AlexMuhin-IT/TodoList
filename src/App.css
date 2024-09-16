@@ -1,35 +1,35 @@
-.App {
-    padding: 30px;
-    display: flex;
-}
+/*.App {*/
+/*    padding: 30px;*/
+/*    display: flex;*/
+/*}*/
 
-.App > div {
-    margin-right: 50px;
-}
+/*.App > div {*/
+/*    margin-right: 50px;*/
+/*}*/
 
-.error {
-    border: red 1px solid;
-}
+/*.error {*/
+/*    border: red 1px solid;*/
+/*}*/
 
-.error-message {
-    color: red;
-}
+/*.error-message {*/
+/*    color: red;*/
+/*}*/
 
-.active-filter {
-    background-color: lightgreen;
-}
+/*.active-filter {*/
+/*    background-color: lightgreen;*/
+/*}*/
 
-.style-tasks {
-    display: flex;
-    justify-content: space-between;
-}
-.style-button {
-    display: flex;
-    justify-content: center;
-}
-ul{
-    padding-left: 20px;
-}
+/*.style-tasks {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*}*/
+/*.style-button {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*}*/
+/*ul{*/
+/*    padding-left: 20px;*/
+/*}*/
 .is-done {
     opacity: 0.5;
     text-decoration: line-through;
@@ -43,7 +43,6 @@ ul{
     align-items: center;
     width: 200px;
 }
-
 .todolist-wrapper{
     background: linear-gradient(rgba(23, 70, 224, 0.45), rgba(210, 0, 0, 0.75));
     /*rgba(180, 23, 224, 0.45) | rgba(224, 154, 23, 0.45);*/

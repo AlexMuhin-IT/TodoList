@@ -1,9 +1,9 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import {Button} from "./components/Button";
+
 import {FilterValuesType, TaskType} from "./App";
 import {AddItemForm} from "./components/addItemForm/AddItemForm";
 import {EditableSpan} from "./components/editableSpan/EditableSpan";
-import {IconButton} from "@mui/material";
+import {Button, Checkbox, IconButton, List, ListItem, TextField} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 
 type TodolistPropsType = {
@@ -56,9 +56,6 @@ export const Todolist = ({
                     value={title}
                     onChange={updateTodolistHandler}/>
                 </h3>
-                {/*<Button*/}
-                {/*    title={'x'}*/}
-                {/*    onClick={removeTodolistHandler}/>*/}
                 <IconButton aria-label="delete"
                             onClick={removeTodolistHandler}
                             size={'medium'}
@@ -71,54 +68,60 @@ export const Todolist = ({
                 {
                     tasks.length === 0
                         ? <p>Тасок нет</p>
-                        : <ul>
-                            {tasks.map((t: TaskType) => {
-                                const removeTaskHandler = () => {
-                                    removeTask(todolistId, t.id)
-                                }
-                                const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
-                                    const newStatusValue = e.currentTarget.checked
-                                    changeTaskStatus(todolistId, t.id, newStatusValue)
-                                }
-                                const changeTaskTitleHandler = (title: string) => {
-                                    updateTask(todolistId, t.id, title)
-                                }
-                                return (
-                                    <li key={t.id} className={t.isDone ? 'is-done' : ''}>
-                                        <div className={'style-tasks'}>
-                                            <input
-                                                type="checkbox"
-                                                checked={t.isDone}
-                                                onChange={changeTaskStatusHandler}
-                                            />
-                                            <EditableSpan onChange={changeTaskTitleHandler} value={t.title}/>
-                                            {/*<Button onClick={removeTaskHandler} title={'X'}/>*/}
-                                            <IconButton aria-label="delete"
-                                                        onClick={removeTaskHandler}
-                                                        size={'small'}
-                                            >
-                                                <Delete/>
-                                            </IconButton>
-                                        </div>
-                                    </li>
-                                )
-                            })}
-                        </ul>
-                }
+                        : (
+                            <List>
+                                {tasks.map((t: TaskType) => {
+                                    const removeTaskHandler = () => {
+                                        removeTask(todolistId, t.id)
+                                    }
+                                    const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
+                                        const newStatusValue = e.currentTarget.checked
+                                        changeTaskStatus(todolistId, t.id, newStatusValue)
+                                    }
+                                    const changeTaskTitleHandler = (title: string) => {
+                                        updateTask(todolistId, t.id, title)
+                                    }
+                                    return (
+                                        <ListItem
+                                            alignItems={"center"}
+                                            disableGutters
+                                            disablePadding
+                                            key={t.id}
+                                            className={t.isDone ? 'is-done' : ''}
+                                        >
+                                                <Checkbox checked={t.isDone} onChange={changeTaskStatusHandler}/>
+                                                <EditableSpan onChange={changeTaskTitleHandler} value={t.title}/>
+                                                <IconButton aria-label="delete"
+                                                            onClick={removeTaskHandler}
+                                                            size={'small'}
+                                                >
+                                                    <Delete/>
+                                                </IconButton>
+                                        </ListItem>
+                                    )
+                                })}
+                            </List>
+                        )}
             </div>
             <div className={'style-button'}>
                 <Button
+                    size={"small"}
+                    variant="contained"
                     className={filter === 'all' ? 'active-filter' : ''}
                     onClick={() => changeFilterTasksHandler(todolistId, 'all')}
-                    title={'All'}/>
+                > All</Button>
                 <Button
+                    size={"small"}
+                    variant="contained"
                     className={filter === 'active' ? 'active-filter' : ''}
                     onClick={() => changeFilterTasksHandler(todolistId, 'active')}
-                    title={'Active'}/>
+                >Active</Button>
                 <Button
+                    size={"small"}
+                    variant="contained"
                     className={filter === 'completed' ? 'active-filter' : ''}
                     onClick={() => changeFilterTasksHandler(todolistId, 'completed')}
-                    title={'Completed'}/>
+                >Completed</Button>
             </div>
         </div>
     )
