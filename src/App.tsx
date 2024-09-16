@@ -3,7 +3,7 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./components/addItemForm/AddItemForm";
-import {AppBar, Button, Container, IconButton, Toolbar} from "@mui/material";
+import {AppBar, Button, Container, IconButton, Paper, Toolbar} from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import {Menu} from "@mui/icons-material";
 
@@ -150,23 +150,24 @@ function App() {
                     <Button color='inherit'>Login</Button>
                 </Toolbar>
             </AppBar>
-            <Container  fixed>
+            <Container fixed>
                 <Grid container spacing={2}>
                     <Grid size={8} alignItems={"center"}>
                         <AddItemForm addItem={addTodolist}/>
                     </Grid>
                     <Grid container spacing={4}>
-                            {todolists.map(tl => {
-                                const allTodolistTasks = tasks[tl.id]
-                                let taskForTodolist = allTodolistTasks
-                                if (tl.filter === 'active') {
-                                    taskForTodolist = allTodolistTasks.filter(t => !t.isDone)
-                                }
-                                if (tl.filter === 'completed') {
-                                    taskForTodolist = allTodolistTasks.filter(t => t.isDone)
-                                }
-                                return (
-                                    <Grid>
+                        {todolists.map(tl => {
+                            const allTodolistTasks = tasks[tl.id]
+                            let taskForTodolist = allTodolistTasks
+                            if (tl.filter === 'active') {
+                                taskForTodolist = allTodolistTasks.filter(t => !t.isDone)
+                            }
+                            if (tl.filter === 'completed') {
+                                taskForTodolist = allTodolistTasks.filter(t => t.isDone)
+                            }
+                            return (
+                                <Grid>
+                                    <Paper>
                                         <Todolist
                                             key={tl.id}
                                             todolistId={tl.id}
@@ -181,14 +182,15 @@ function App() {
                                             updateTask={updateTask}
                                             updateTodolist={updateTodolist}
                                         />
-                                    </Grid>
-                                )
-                            })}
-                        </Grid>
+                                    </Paper>
+                                </Grid>
+                            )
+                        })}
                     </Grid>
+                </Grid>
             </Container>
         </div>
-);
+    );
 }
 
 export default App;
