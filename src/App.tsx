@@ -3,7 +3,8 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./components/addItemForm/AddItemForm";
-import {AppBar, Button, Container, IconButton, Paper, Toolbar} from "@mui/material";
+import {Button, Container, IconButton, Paper, Toolbar} from "@mui/material";
+import AppBar from "@mui/material/AppBar";
 import Grid from '@mui/material/Grid2';
 import {Menu} from "@mui/icons-material";
 
@@ -142,7 +143,7 @@ function App() {
 
     return (
         <div>
-            <AppBar position="static">
+            <AppBar sx={{mb: '30px'}} position="static">
                 <Toolbar>
                     <IconButton color="inherit">
                         <Menu/>
@@ -151,7 +152,7 @@ function App() {
                 </Toolbar>
             </AppBar>
             <Container fixed>
-                <Grid container spacing={2}>
+                <Grid sx={{mb: '30px'}} container spacing={2}>
                     <Grid size={8} alignItems={"center"}>
                         <AddItemForm addItem={addTodolist}/>
                     </Grid>
@@ -167,7 +168,7 @@ function App() {
                             }
                             return (
                                 <Grid>
-                                    <Paper>
+                                    <Paper sx={{p: '0 20px 20px 20px'}}>
                                         <Todolist
                                             key={tl.id}
                                             todolistId={tl.id}
