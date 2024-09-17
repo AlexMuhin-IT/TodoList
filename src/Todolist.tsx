@@ -5,6 +5,7 @@ import {AddItemForm} from "./components/addItemForm/AddItemForm";
 import {EditableSpan} from "./components/editableSpan/EditableSpan";
 import {Box, Button, Checkbox, IconButton, List, ListItem, TextField} from "@mui/material";
 import {Delete} from "@mui/icons-material";
+import {filterButtonsContainerSx, getListItemSx} from "./Todolist.styles";
 
 type TodolistPropsType = {
     todolistId: string,
@@ -86,12 +87,7 @@ export const Todolist = ({
                                     disableGutters
                                     disablePadding
                                     key={t.id}
-                                    // className={t.isDone ? 'is-done' : ''}
-                                    sx={{
-                                        p: 0,
-                                        justifyContent: 'space-between',
-                                        opacity: t.isDone ? 0.5 : 1
-                                    }}>
+                                    sx={getListItemSx(t.isDone)}>
                                     <Checkbox checked={t.isDone} onChange={changeTaskStatusHandler}/>
                                     <EditableSpan onChange={changeTaskTitleHandler} value={t.title}/>
 
@@ -105,7 +101,7 @@ export const Todolist = ({
                         })}
                     </List>
                 )}
-                <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                <Box sx={filterButtonsContainerSx}>
                     <div className={'style-button'}>
                         <Button
                             size={"small"}

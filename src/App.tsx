@@ -144,11 +144,15 @@ function App() {
     return (
         <div>
             <AppBar sx={{mb: '30px'}} position="static">
-                <Toolbar>
+                <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                     <IconButton color="inherit">
                         <Menu/>
                     </IconButton>
-                    <Button color='inherit'>Login</Button>
+                    <div>
+                        <Button color='inherit'>Login</Button>
+                        <Button color='inherit'>Logout</Button>
+                        <Button color='inherit'>Faq</Button>
+                    </div>
                 </Toolbar>
             </AppBar>
             <Container fixed>
