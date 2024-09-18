@@ -3,7 +3,7 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./components/addItemForm/AddItemForm";
-import {Button, Container, IconButton, Paper, Toolbar} from "@mui/material";
+import {Button, Container, createTheme, IconButton, Paper, ThemeProvider, Toolbar} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Grid from '@mui/material/Grid2';
 import {Menu} from "@mui/icons-material";
@@ -12,6 +12,7 @@ import {MenuButton} from "./components/MenuButton";
 
 // import {AppBar,Toolbar} from "@mui/material";
 
+type ThemeMode = "light" | "dark";
 
 export type FilterValuesType = 'all' | 'active' | 'completed'
 
@@ -142,8 +143,17 @@ function App() {
         setTodolists(newTodolists)
     }
 
+
+    // theme in app
+    const [themeMode, setThemeMode] = useState<ThemeMode>('light')
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#a44408',
+            },
+        },})
     return (
-        <div>
+        <ThemeProvider theme={theme}>
             <AppBar sx={{mb: '30px'}} position="static">
                 <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                     <IconButton color="inherit">
@@ -152,7 +162,7 @@ function App() {
                     <div>
                         <MenuButton>Login</MenuButton>
                         <MenuButton>Logout</MenuButton>
-                        <MenuButton background={'#93a1f1'}>Faq</MenuButton>
+                        <MenuButton background={theme.palette.primary.dark}>Faq</MenuButton>
                     </div>
                 </Toolbar>
             </AppBar>
@@ -195,7 +205,7 @@ function App() {
                     </Grid>
                 </Grid>
             </Container>
-        </div>
+        </ThemeProvider>
     );
 }
 
