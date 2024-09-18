@@ -7,6 +7,7 @@ import {Button, Container, IconButton, Paper, Toolbar} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Grid from '@mui/material/Grid2';
 import {Menu} from "@mui/icons-material";
+import {MenuButton} from "./components/MenuButton";
 
 
 // import {AppBar,Toolbar} from "@mui/material";
@@ -149,9 +150,9 @@ function App() {
                         <Menu/>
                     </IconButton>
                     <div>
-                        <Button color='inherit'>Login</Button>
-                        <Button color='inherit'>Logout</Button>
-                        <Button color='inherit'>Faq</Button>
+                        <MenuButton>Login</MenuButton>
+                        <MenuButton>Logout</MenuButton>
+                        <MenuButton background={'#93a1f1'}>Faq</MenuButton>
                     </div>
                 </Toolbar>
             </AppBar>

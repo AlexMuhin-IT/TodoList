@@ -88,9 +88,11 @@ export const Todolist = ({
                                     disablePadding
                                     key={t.id}
                                     sx={getListItemSx(t.isDone)}>
-                                    <Checkbox checked={t.isDone} onChange={changeTaskStatusHandler}/>
-                                    <EditableSpan onChange={changeTaskTitleHandler} value={t.title}/>
+                                    <div>
+                                        <Checkbox checked={t.isDone} onChange={changeTaskStatusHandler}/>
+                                    </div>
 
+                                    <EditableSpan onChange={changeTaskTitleHandler} value={t.title}/>
                                     <IconButton aria-label="delete"
                                                 onClick={removeTaskHandler}
                                                 size={'small'}>
