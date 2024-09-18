@@ -3,7 +3,17 @@ import './App.css';
 import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./components/addItemForm/AddItemForm";
-import {Button, Container, createTheme, IconButton, Paper, ThemeProvider, Toolbar} from "@mui/material";
+import {
+    Button,
+    Container,
+    createTheme,
+    CssBaseline,
+    IconButton,
+    Paper,
+    Switch,
+    ThemeProvider,
+    Toolbar
+} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Grid from '@mui/material/Grid2';
 import {Menu} from "@mui/icons-material";
@@ -148,12 +158,17 @@ function App() {
     const [themeMode, setThemeMode] = useState<ThemeMode>('light')
     const theme = createTheme({
         palette: {
+            mode: themeMode === 'light' ? 'light' : 'dark',
             primary: {
-                main: '#a44408',
+                main: '#087EA4',
             },
         },})
+    const changeModeHandler = ()=>{
+        setThemeMode(themeMode == 'light'?'dark':'light')
+    }
     return (
         <ThemeProvider theme={theme}>
+            <CssBaseline />
             <AppBar sx={{mb: '30px'}} position="static">
                 <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                     <IconButton color="inherit">
@@ -163,6 +178,7 @@ function App() {
                         <MenuButton>Login</MenuButton>
                         <MenuButton>Logout</MenuButton>
                         <MenuButton background={theme.palette.primary.dark}>Faq</MenuButton>
+                        <Switch color={'default'} onChange={changeModeHandler}/>
                     </div>
                 </Toolbar>
             </AppBar>
