@@ -104,26 +104,27 @@ export const Todolist = ({
                     </List>
                 )}
                 <Box sx={filterButtonsContainerSx}>
-                    <div className={'style-button'}>
                         <Button
+                            color='secondary'
                             size={"small"}
                             variant="contained"
                             className={filter === 'all' ? 'active-filter' : ''}
                             onClick={() => changeFilterTasksHandler(todolistId, 'all')}
                         > All</Button>
                         <Button
+                            color='secondary'
                             size={"small"}
                             variant="contained"
                             className={filter === 'active' ? 'active-filter' : ''}
                             onClick={() => changeFilterTasksHandler(todolistId, 'active')}
                         >Active</Button>
                         <Button
+                            color='secondary'
                             size={"small"}
                             variant="contained"
                             className={filter === 'completed' ? 'active-filter' : ''}
                             onClick={() => changeFilterTasksHandler(todolistId, 'completed')}
                         >Completed</Button>
-                    </div>
                 </Box>
             </div>
         </div>

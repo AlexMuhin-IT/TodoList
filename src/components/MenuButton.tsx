@@ -15,4 +15,5 @@ export const MenuButton = styled(Button)<MenuButtonProps>(({background, theme})=
     padding: '8px 24px',
     color: theme.palette.primary.contrastText,
     background: background || theme.palette.primary.light,
+    active: background || theme.palette.action.active,
 }))

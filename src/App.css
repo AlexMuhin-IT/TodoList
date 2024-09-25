@@ -15,9 +15,9 @@
 /*    color: red;*/
 /*}*/
 
-/*.active-filter {*/
-/*    background-color: lightgreen;*/
-/*}*/
+.active-filter {
+    background-color: #e5ee90;
+}
 
 /*.style-tasks {*/
 /*    display: flex;*/
@@ -44,8 +44,7 @@
     width: 200px;
 }
 .todolist-wrapper{
-    background: linear-gradient(rgba(23, 70, 224, 0.45), rgba(210, 0, 0, 0.75));
-    /*rgba(180, 23, 224, 0.45) | rgba(224, 154, 23, 0.45);*/
+    background: linear-gradient(rgba(23, 70, 224, 0.25), rgba(210, 0, 0, 0.25));
     padding: 10px;
     border-radius: 15px;
 }

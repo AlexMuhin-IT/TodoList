@@ -3,7 +3,7 @@ import {SxProps} from "@mui/material";
 
 export const filterButtonsContainerSx: SxProps = () => ({
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
 })
 
 export const getListItemSx =(isDone: boolean): SxProps=>({

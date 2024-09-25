@@ -4,7 +4,6 @@ import {Todolist} from "./Todolist";
 import {v1} from "uuid";
 import {AddItemForm} from "./components/addItemForm/AddItemForm";
 import {
-    Button,
     Container,
     createTheme,
     CssBaseline,
@@ -160,15 +159,22 @@ function App() {
         palette: {
             mode: themeMode === 'light' ? 'light' : 'dark',
             primary: {
-                main: '#087EA4',
+                main: '#18a408',
             },
-        },})
-    const changeModeHandler = ()=>{
-        setThemeMode(themeMode == 'light'?'dark':'light')
+            secondary: {
+                main: '#000998'
+            },
+            action: {
+                active: '#cca126'
+            },
+        },
+    })
+    const changeModeHandler = () => {
+        setThemeMode(themeMode == 'light' ? 'dark' : 'light')
     }
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline />
+            <CssBaseline/>
             <AppBar sx={{mb: '30px'}} position="static">
                 <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                     <IconButton color="inherit">
@@ -199,7 +205,7 @@ function App() {
                             }
                             return (
                                 <Grid>
-                                    <Paper sx={{p: '0 20px 20px 20px'}}>
+                                    <Paper sx={{p: '10px'}}>
                                         <Todolist
                                             key={tl.id}
                                             todolistId={tl.id}
