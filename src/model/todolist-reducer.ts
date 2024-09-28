@@ -23,14 +23,6 @@ export const todolistsReducer = (state: TodolistType[] = initialState, action: A
             return state.filter(tl => tl.id !== action.payload.id)
         }
         case 'ADD-TODOLIST': {
-            // const todolistId = v1()
-            // const newTodolist: TodolistType = {
-            //     id: todolistId,
-            //     title: title,
-            //     filter: 'all'
-            // }
-            // setTodolists([newTodolist, ...todolists])
-            // setTasks({...tasks, [todolistId]: []})
             return [
                 ...state, {
                     id: v1(),
@@ -39,15 +31,16 @@ export const todolistsReducer = (state: TodolistType[] = initialState, action: A
                 },
             ]
         }
+        case 'CHANGE-TODOLIST-TITLE': {
+            return state.map(tl => (tl.id === action.payload.id) ? action.payload.title : tl)
+        }
+        // const newTodolists = todolists.map(tl => {(tl.id === todolistId ? { ...tl, filter } : tl)})
+        // setTodolists(newTodolists)
+        case 'CHANGE-TODOLIST-FILTER': {
+            return state.map(tl => (tl.id === action.payload.id) ? action.payload.filter : tl)
+        }
         default:
             throw new Error(`Unknown action type`);
     }
-// export const todolistsReducer = (state: TodolistType[] = initialState, action: ActionsType) => {
-//     switch (action.type) {
-//         case 'REMOVE-TODOLIST': {
-//             return state.filter(tl => tl.id !== action.payload.id)
-//         }
-//         default:
-//             throw new Error(`Unknown action type`);
-//     }
+
 }
