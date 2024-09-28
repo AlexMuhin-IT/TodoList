@@ -19,17 +19,6 @@
     background-color: #e5ee90;
 }
 
-/*.style-tasks {*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*}*/
-/*.style-button {*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*}*/
-/*ul{*/
-/*    padding-left: 20px;*/
-/*}*/
 .is-done {
     opacity: 0.5;
     text-decoration: line-through;
