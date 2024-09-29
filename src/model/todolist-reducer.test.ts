@@ -1,7 +1,6 @@
 import {TodolistType} from "../App";
 import {v1} from "uuid";
 import {
-    ActionsType,
     AddTodolistAC,
     ChangeTodolistAC,
     ChangeTodolistFilterAC,
