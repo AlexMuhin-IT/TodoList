@@ -50,7 +50,6 @@ export const Todolist = ({
     }
 
     return (
-        // <div className={todolistId < todolistId ? 'todolist-wrapper' : 'todolist-secondary'}>
         <div className={'todolist-wrapper'}>
             <div className={'todolist-title-container'}>
                 <h3><EditableSpan
@@ -66,11 +65,11 @@ export const Todolist = ({
             </div>
             <div>
                 <AddItemForm addItem={addTaskCallback}/>
-                {tasks.length === 0 ? (
+                {tasks?.length === 0 ? (
                     <p>Тасок нет</p>
                 ) : (
                     <List>
-                        {tasks.map((t: TaskType) => {
+                        {tasks?.map((t: TaskType) => {
                             const removeTaskHandler = () => {
                                 removeTask(todolistId, t.id)
                             }
@@ -104,27 +103,27 @@ export const Todolist = ({
                     </List>
                 )}
                 <Box sx={filterButtonsContainerSx}>
-                        <Button
-                            color='secondary'
-                            size={"small"}
-                            variant="contained"
-                            className={filter === 'all' ? 'active-filter' : ''}
-                            onClick={() => changeFilterTasksHandler(todolistId, 'all')}
-                        > All</Button>
-                        <Button
-                            color='secondary'
-                            size={"small"}
-                            variant="contained"
-                            className={filter === 'active' ? 'active-filter' : ''}
-                            onClick={() => changeFilterTasksHandler(todolistId, 'active')}
-                        >Active</Button>
-                        <Button
-                            color='secondary'
-                            size={"small"}
-                            variant="contained"
-                            className={filter === 'completed' ? 'active-filter' : ''}
-                            onClick={() => changeFilterTasksHandler(todolistId, 'completed')}
-                        >Completed</Button>
+                    <Button
+                        color='secondary'
+                        size={"small"}
+                        variant="contained"
+                        className={filter === 'all' ? 'active-filter' : ''}
+                        onClick={() => changeFilterTasksHandler(todolistId, 'all')}
+                    > All</Button>
+                    <Button
+                        color='secondary'
+                        size={"small"}
+                        variant="contained"
+                        className={filter === 'active' ? 'active-filter' : ''}
+                        onClick={() => changeFilterTasksHandler(todolistId, 'active')}
+                    >Active</Button>
+                    <Button
+                        color='secondary'
+                        size={"small"}
+                        variant="contained"
+                        className={filter === 'completed' ? 'active-filter' : ''}
+                        onClick={() => changeFilterTasksHandler(todolistId, 'completed')}
+                    >Completed</Button>
                 </Box>
             </div>
         </div>

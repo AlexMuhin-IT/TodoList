@@ -18,10 +18,10 @@ import Grid from '@mui/material/Grid2';
 import {Menu} from "@mui/icons-material";
 import {MenuButton} from "./components/MenuButton";
 import {
-     AddTaskAC,
-     ChangeTaskStatusAC,
-     ChangeTaskTitleAC,
-     RemoveTaskAC,
+    AddTaskAC, AddTasksAC,
+    ChangeTaskStatusAC,
+    ChangeTaskTitleAC,
+    RemoveTaskAC,
 
     taskReducer
 } from "./model/task-reducer";
@@ -32,9 +32,6 @@ import {
     RemoveTodolistAC,
     todolistsReducer
 } from "./model/todolist-reducer";
-
-
-// import {AppBar,Toolbar} from "@mui/material";
 
 type ThemeMode = "light" | "dark";
 
@@ -78,122 +75,39 @@ function App() {
             {id: v1(), title: "Apply", isDone: false},
         ]
     })
-    // const [tasks, setTasks] = useState<TasksStateType>({
-    //     [todolistId1]: [
-    //         {id: v1(), title: "HTML&CSS", isDone: true},
-    //         {id: v1(), title: "JS", isDone: true},
-    //         {id: v1(), title: "React", isDone: false},
-    //         {id: v1(), title: "Figma", isDone: true},
-    //         {id: v1(), title: "Redux", isDone: false},
-    //     ],
-    //     [todolistId2]: [
-    //         {id: v1(), title: "Milk", isDone: true},
-    //         {id: v1(), title: "Break", isDone: true},
-    //         {id: v1(), title: "Meat", isDone: false},
-    //         {id: v1(), title: "Chocolate", isDone: true},
-    //         {id: v1(), title: "Apply", isDone: false},
-    //     ]
-    // });
+
+
     const removeTask = (todolistId: string, taskId: string) => {
-        // самый большой и подробный код в котором присваиваем тудулистТаскс таски выбраного тудулиста
-        // в новой переменной размещаем отфильтрованные таски у которых ID несовпал
-        // перезаписываем таски тудулиста с отфильтроваными
-        // сетаем новый результат
-        // const todolistTasks = tasks[todolistId];
-        // const newTodolistTasks = todolistTasks.filter(t => t.id !== taskId)
-        // tasks[todolistId] = newTodolistTasks;
-        // setTasks({...tasks, newTodolistTasks});
-        // в переменную помещаем отлифтрованые элементы у которых ID не совпал
-        // const newTodolistTasks = {
-        //     ...tasks, [todolistId]: tasks[todolistId].filter(t=>t.id!==taskId)
-        // }
-        // setTasks(newTodolistTasks)
-        //
-        // setTasks({...tasks, [todolistId]: tasks[todolistId].filter(t => t.id !== taskId)});
         dispatchTasks(RemoveTaskAC(todolistId, taskId))
     }
 
     const addTask = (todolistId: string, title: string) => {
-        // const newTask = {
-        //     id: v1(),
-        //     title: title,
-        //     isDone: false,
-        // }
-        // самый подробный рассписаный метод где сначала мы присваиваем todolistTasks значения конкретного тодолист по которому кликнули
-        // потом к этому списку тасок присваиваем поверхностную копию с новой таской
-        // const todolistTasks = tasks[todolistId]
-        // tasks[todolistId] = [newTask, ...todolistTasks]
-        // setTasks({...tasks})
-        //метод чуть короче за счет того что в новую переменную newTodolistTasks помещаем найденный тодолист
-        // в котором значением является новая таска и копия этого найденого тудулиста и второе значение копия таско
-        // сетаем переменную
-        // const newTodolistTasks = {[todolistId]: [newTask, ...tasks[todolistId]], ...tasks}
-        // setTasks(newTodolistTasks)
-        //самый короткий способ: создаем копию всех тасок, в которой находим нужный тудулист
-        //где ключ это ID а значение это добавленая таска и копия тасок с этим ID
-        // setTasks({...tasks, [todolistId]: [newTask, ...tasks[todolistId]]})
         dispatchTasks(AddTaskAC(todolistId, title))
     }
 
     const updateTask = (todolistId: string, taskId: string, title: string) => {
-        // const newTodolistTasks = {
-        //     ...tasks,
-        //     [todolistId]: tasks[todolistId].map(t => t.id === taskId ? {...t, title} : t)
-        // }
-        // setTasks(newTodolistTasks)
         dispatchTasks(ChangeTaskTitleAC(todolistId, taskId, title))
     }
 
     const changeTaskStatus = (todolistId: string, taskId: string, taskStatus: boolean) => {
-        //
-        // const todolistTasks = tasks[todolistId]
-        // const newTodolistTasks = todolistTasks.map(t =>
-        //     t.id == taskId ? {...t, isDone: taskStatus} : t);
-        // tasks[todolistId] = newTodolistTasks;
-        // setTasks({...tasks})
-        //
-        // const newTodolistTasks = {
-        //     ...tasks,
-        //     [todolistId]: tasks[todolistId].map(t => t.id == taskId ? {...t, isDone: taskStatus} : t)
-        // };
-        // setTasks(newTodolistTasks);
-        //
-        // setTasks({
-        //     ...tasks,
-        //     [todolistId]: tasks[todolistId].map(t => t.id == taskId ? {...t, isDone: taskStatus} : t)
-        // })
         dispatchTasks(ChangeTaskStatusAC(todolistId, taskId, taskStatus))
     }
 
     const changeFilter = (todolistId: string, filter: FilterValuesType) => {
-        // const newTodolists = todolists.map(tl => tl.id === todolistId ? {...tl, filter} : tl);
-        // setTodolists(todolists.map(tl => tl.id === todolistId ? {...tl, filter} : tl));
         dispatchTodolists(ChangeTodolistFilterAC(todolistId,filter))
     }
 
     const removeTodolist = (todolistId: string) => {
-        // const newTodolists = todolists.filter(tl => tl.id !== todolistId)
-        // setTodolists(newTodolists)
-        // delete tasks[todolistId];
-        // setTasks({...tasks})
         dispatchTodolists(RemoveTodolistAC(todolistId))
     }
 
     const addTodolist = (title: string) => {
-        // const todolistId = v1()
-        // const newTodolist: TodolistType = {
-        //     id: todolistId,
-        //     title: title,
-        //     filter: 'all'
-        // }
-        // setTodolists([newTodolist, ...todolists])
-        // setTasks({...tasks, [todolistId]: []})
-        dispatchTodolists(AddTodolistAC(title))
+        const todolistId = v1()
+        dispatchTodolists(AddTodolistAC(todolistId, title))
+        dispatchTasks(AddTasksAC(todolistId))
     }
 
     const updateTodolist = (todolistId: string, title: string) => {
-        // const newTodolists = todolists.map(tl => (tl.id === todolistId ? {...tl, title} : tl));
-        // setTodolists(newTodolists)
         dispatchTodolists(ChangeTodolistAC(todolistId, title))
     }
 
