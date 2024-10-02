@@ -5,7 +5,6 @@ type AddTodolistAT = {
     type: 'ADD-TODOLIST',
     payload: {
         title: string,
-        id: string
     }
 }
 type RemoveTodolistAT = {
@@ -66,9 +65,9 @@ export const todolistsReducer = (state: TodolistType[] = initialState, action: A
     }
 }
 
-export const AddTodolistAC = (id: string, title: string): AddTodolistAT => ({
+export const AddTodolistAC = (title: string): AddTodolistAT => ({
     type: 'ADD-TODOLIST',
-    payload: {id, title}
+    payload: {title}
 } as const)
 
 export const RemoveTodolistAC = (id: string): RemoveTodolistAT => ({
