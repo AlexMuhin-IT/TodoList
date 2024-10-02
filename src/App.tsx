@@ -48,23 +48,7 @@ function App() {
         {id: todolistId1, title: 'What to learn', filter: 'all',},
         {id: todolistId2, title: 'What to buy', filter: 'all'},
     ]);
-    // const [tasks, dispatchTasks]=useReducer<TasksStateType>(taskReducer,{
-    //     [todolistId1]: [
-    //         {id: v1(), title: "HTML&CSS", isDone: true},
-    //         {id: v1(), title: "JS", isDone: true},
-    //         {id: v1(), title: "React", isDone: false},
-    //         {id: v1(), title: "Figma", isDone: true},
-    //         {id: v1(), title: "Redux", isDone: false},
-    //     ],
-    //     [todolistId2]: [
-    //         {id: v1(), title: "Milk", isDone: true},
-    //         {id: v1(), title: "Break", isDone: true},
-    //         {id: v1(), title: "Meat", isDone: false},
-    //         {id: v1(), title: "Chocolate", isDone: true},
-    //         {id: v1(), title: "Apply", isDone: false},
-    //     ]
-    // })
-    const [tasks, setTasks] = useState<TasksStateType>({
+    const [tasks, dispatchTasks]=useReducer<TasksStateType>(taskReducer,{
         [todolistId1]: [
             {id: v1(), title: "HTML&CSS", isDone: true},
             {id: v1(), title: "JS", isDone: true},
@@ -79,7 +63,23 @@ function App() {
             {id: v1(), title: "Chocolate", isDone: true},
             {id: v1(), title: "Apply", isDone: false},
         ]
-    });
+    })
+    // const [tasks, setTasks] = useState<TasksStateType>({
+    //     [todolistId1]: [
+    //         {id: v1(), title: "HTML&CSS", isDone: true},
+    //         {id: v1(), title: "JS", isDone: true},
+    //         {id: v1(), title: "React", isDone: false},
+    //         {id: v1(), title: "Figma", isDone: true},
+    //         {id: v1(), title: "Redux", isDone: false},
+    //     ],
+    //     [todolistId2]: [
+    //         {id: v1(), title: "Milk", isDone: true},
+    //         {id: v1(), title: "Break", isDone: true},
+    //         {id: v1(), title: "Meat", isDone: false},
+    //         {id: v1(), title: "Chocolate", isDone: true},
+    //         {id: v1(), title: "Apply", isDone: false},
+    //     ]
+    // });
     const removeTask = (todolistId: string, taskId: string) => {
         // самый большой и подробный код в котором присваиваем тудулистТаскс таски выбраного тудулиста
         // в новой переменной размещаем отфильтрованные таски у которых ID несовпал
