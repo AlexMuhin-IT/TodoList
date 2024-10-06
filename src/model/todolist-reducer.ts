@@ -72,7 +72,6 @@ export const AddTodolistAC = (todoId: string, title: string): AddTodolistAT => (
     type: 'ADD-TODOLIST',
     payload: {todoId, title}
 } as const)
-
 export const RemoveTodolistAC = (id: string): RemoveTodolistAT => ({
     type: 'REMOVE-TODOLIST',
     payload: {id}
