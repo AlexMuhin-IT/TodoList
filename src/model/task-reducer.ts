@@ -73,15 +73,15 @@ export const addTaskAC = (payload: {todoId: string, title: string}) => {
         payload,
     } as const
 }
-export const changeTaskTitleAC = (todoId: string, id: string, title: string) => {
+export const changeTaskTitleAC = (payload:{todoId: string, id: string, title: string}) => {
     return {
         type: 'CHANGE_TASK_TITLE',
-        payload: {todoId, id, title}
+        payload
     } as const
 }
-export const changeTaskStatusAC = (todoId: string, id: string, taskStatus: boolean) => {
+export const changeTaskStatusAC = (payload:{todoId: string, id: string, taskStatus: boolean}) => {
     return {
         type: 'CHANGE_TASK_STATUS',
-        payload: {todoId, id, taskStatus}
+        payload
     } as const
 }
