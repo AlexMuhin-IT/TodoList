@@ -26,10 +26,10 @@ import {
     taskReducer
 } from "./model/task-reducer";
 import {
-    AddTodolistAC,
-    ChangeTodolistTitleAC,
-    ChangeTodolistFilterAC,
-    RemoveTodolistAC,
+    addTodolistAC,
+    changeTodolistTitleAC,
+    changeTodolistFilterAC,
+    removeTodolistAC,
     todolistsReducer
 } from "./model/todolist-reducer";
 
@@ -78,32 +78,32 @@ function App() {
 
 
     const removeTask = (todolistId: string, taskId: string) => {
-        dispatchTasks(removeTaskAC(todolistId, taskId))
+        dispatchTasks(removeTaskAC({todolistId, taskId}))
     }
     const addTask = (todolistId: string, title: string) => {
-        dispatchTasks(addTaskAC(todolistId, title))
+        dispatchTasks(addTaskAC({todolistId, title}))
     }
     const updateTask = (todolistId: string, taskId: string, title: string) => {
-        dispatchTasks(changeTaskTitleAC(todolistId, taskId, title))
+        dispatchTasks(changeTaskTitleAC({todolistId, taskId, title}))
     }
     const changeTaskStatus = (todolistId: string, taskId: string, taskStatus: boolean) => {
-        dispatchTasks(changeTaskStatusAC(todolistId, taskId, taskStatus))
+        dispatchTasks(changeTaskStatusAC({todolistId, taskId, taskStatus}))
     }
 
 
     const changeFilter = (todolistId: string, filter: FilterValuesType) => {
-        dispatchTodolists(ChangeTodolistFilterAC(todolistId,filter))
+        dispatchTodolists(changeTodolistFilterAC(todolistId, filter))
     }
     const removeTodolist = (todolistId: string) => {
-        dispatchTodolists(RemoveTodolistAC(todolistId))
+        dispatchTodolists(removeTodolistAC(todolistId))
     }
     const addTodolist = (title: string) => {
         const todolistId = v1()
-        dispatchTodolists(AddTodolistAC(todolistId, title))
+        dispatchTodolists(addTodolistAC(todolistId, title))
         dispatchTasks(addTasksAC(todolistId))
     }
     const updateTodolist = (todolistId: string, title: string) => {
-        dispatchTodolists(ChangeTodolistTitleAC(todolistId, title))
+        dispatchTodolists(changeTodolistTitleAC(todolistId, title))
     }
 
 
