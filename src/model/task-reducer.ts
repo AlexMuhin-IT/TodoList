@@ -1,21 +1,22 @@
 import {FilterValuesType, TasksStateType, TaskType} from "../App";
 import {v1} from "uuid";
-import {AddTodolistAT} from "./todolist-reducer";
+import {AddTodolistAT, RemoveTodolistAT} from "./todolist-reducer";
 
 export type ActionType =
-    AddTasksArray |
     RemoveTaskAT |
     AddTaskAT |
     ChangeTaskTitleAT |
     ChangeTaskStatusAT |
-    AddTodolistAT
+    AddTodolistAT |
+    RemoveTodolistAT
 
 
-type RemoveTaskAT = ReturnType<typeof removeTaskAC>
-type AddTaskAT = ReturnType<typeof addTaskAC>
-type ChangeTaskTitleAT = ReturnType<typeof changeTaskTitleAC>
-type ChangeTaskStatusAT = ReturnType<typeof changeTaskStatusAC>
-type AddTasksArray = ReturnType<typeof addTasksAC>
+export type RemoveTaskAT = ReturnType<typeof removeTaskAC>
+export type AddTaskAT = ReturnType<typeof addTaskAC>
+export type ChangeTaskTitleAT = ReturnType<typeof changeTaskTitleAC>
+export type ChangeTaskStatusAT = ReturnType<typeof changeTaskStatusAC>
+
+
 
 const todolistId1 = v1();
 const todolistId2 = v1();
@@ -41,12 +42,16 @@ const initialState: TasksStateType = {
 export const taskReducer = (state: TasksStateType = initialState, action: ActionType): TasksStateType => {
     let taskId = v1();
     switch (action.type) {
-        case 'ADD_TASK_ARRAY': {
-            const {todoId} = action.payload
-            return ({...state, [todoId]: []})
+        case 'REMOVE-TODOLIST': {
+            const copyState = {...state}
+            delete copyState[action.payload.id];
+            return copyState
         }
+        case 'ADD-TODOLIST': {
+            return {...state, [action.payload.todolistId]:[]}
+        }
+
         case 'REMOVE_TASK': {
-            // const {id, todoId} = action.payload
             return ({
                 ...state,
                 [action.payload.todolistId]: state[action.payload.todolistId].filter(t => t.id !== action.payload.taskId)
@@ -68,12 +73,7 @@ export const taskReducer = (state: TasksStateType = initialState, action: Action
             return state;
     }
 }
-export const addTasksAC = (todoId: string) => {
-    return {
-        type: 'ADD_TASK_ARRAY',
-        payload: {todoId}
-    } as const
-}
+
 export const removeTaskAC = (payload:{todolistId: string, taskId: string}) => {
     return {
         type: 'REMOVE_TASK',
