@@ -18,10 +18,10 @@ import Grid from '@mui/material/Grid2';
 import {Menu} from "@mui/icons-material";
 import {MenuButton} from "./components/MenuButton";
 import {
-    AddTaskAC, AddTasksAC,
-    ChangeTaskStatusAC,
-    ChangeTaskTitleAC,
-    RemoveTaskAC,
+    addTaskAC, addTasksAC,
+    changeTaskStatusAC,
+    changeTaskTitleAC,
+    removeTaskAC,
 
     taskReducer
 } from "./model/task-reducer";
@@ -78,19 +78,19 @@ function App() {
 
 
     const removeTask = (todolistId: string, taskId: string) => {
-        dispatchTasks(RemoveTaskAC(todolistId, taskId))
+        dispatchTasks(removeTaskAC(todolistId, taskId))
     }
 
     const addTask = (todolistId: string, title: string) => {
-        dispatchTasks(AddTaskAC(todolistId, title))
+        dispatchTasks(addTaskAC(todolistId, title))
     }
 
     const updateTask = (todolistId: string, taskId: string, title: string) => {
-        dispatchTasks(ChangeTaskTitleAC(todolistId, taskId, title))
+        dispatchTasks(changeTaskTitleAC(todolistId, taskId, title))
     }
 
     const changeTaskStatus = (todolistId: string, taskId: string, taskStatus: boolean) => {
-        dispatchTasks(ChangeTaskStatusAC(todolistId, taskId, taskStatus))
+        dispatchTasks(changeTaskStatusAC(todolistId, taskId, taskStatus))
     }
 
     const changeFilter = (todolistId: string, filter: FilterValuesType) => {
@@ -104,7 +104,7 @@ function App() {
     const addTodolist = (title: string) => {
         const todolistId = v1()
         dispatchTodolists(AddTodolistAC(todolistId, title))
-        dispatchTasks(AddTasksAC(todolistId))
+        dispatchTasks(addTasksAC(todolistId))
     }
 
     const updateTodolist = (todolistId: string, title: string) => {
