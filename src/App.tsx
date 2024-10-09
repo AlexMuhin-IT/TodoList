@@ -27,7 +27,7 @@ import {
 } from "./model/task-reducer";
 import {
     AddTodolistAC,
-    ChangeTodolistAC,
+    ChangeTodolistTitleAC,
     ChangeTodolistFilterAC,
     RemoveTodolistAC,
     todolistsReducer
@@ -108,7 +108,7 @@ function App() {
     }
 
     const updateTodolist = (todolistId: string, title: string) => {
-        dispatchTodolists(ChangeTodolistAC(todolistId, title))
+        dispatchTodolists(ChangeTodolistTitleAC(todolistId, title))
     }
 
 
