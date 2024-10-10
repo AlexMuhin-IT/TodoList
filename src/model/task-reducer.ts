@@ -19,25 +19,25 @@ export type ChangeTaskStatusAT = ReturnType<typeof changeTaskStatusAC>
 
 
 
-const todolistId1 = v1();
-const todolistId2 = v1();
+// const todolistId1 = v1();
+// const todolistId2 = v1();
 
 
 const initialState: TasksStateType = {
-    [todolistId1]: [
-        {id: v1(), title: "HTML&CSS", isDone: true},
-        {id: v1(), title: "JS", isDone: true},
-        {id: v1(), title: "React", isDone: false},
-        {id: v1(), title: "Figma", isDone: true},
-        {id: v1(), title: "Redux", isDone: false},
-    ],
-    [todolistId2]: [
-        {id: v1(), title: "Milk", isDone: true},
-        {id: v1(), title: "Break", isDone: true},
-        {id: v1(), title: "Meat", isDone: false},
-        {id: v1(), title: "Chocolate", isDone: true},
-        {id: v1(), title: "Apply", isDone: false},
-    ]
+    // [todolistId1]: [
+    //     {id: v1(), title: "HTML&CSS", isDone: true},
+    //     {id: v1(), title: "JS", isDone: true},
+    //     {id: v1(), title: "React", isDone: false},
+    //     {id: v1(), title: "Figma", isDone: true},
+    //     {id: v1(), title: "Redux", isDone: false},
+    // ],
+    // [todolistId2]: [
+    //     {id: v1(), title: "Milk", isDone: true},
+    //     {id: v1(), title: "Break", isDone: true},
+    //     {id: v1(), title: "Meat", isDone: false},
+    //     {id: v1(), title: "Chocolate", isDone: true},
+    //     {id: v1(), title: "Apply", isDone: false},
+    // ]
 }
 
 export const taskReducer = (state: TasksStateType = initialState, action: ActionType): TasksStateType => {
@@ -59,7 +59,7 @@ export const taskReducer = (state: TasksStateType = initialState, action: Action
         }
         case 'ADD_TASK': {
             const {todolistId, title} = action.payload
-            return ({...state, [todolistId]: [{id: todolistId, title, isDone: false}, ...state[todolistId]]})
+            return ({...state, [todolistId]: [{id: v1(), title, isDone: false}, ...state[todolistId]]})
         }
         case 'CHANGE_TASK_TITLE': {
             const {todolistId, taskId, title} = action.payload
