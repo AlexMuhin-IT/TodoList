@@ -6,6 +6,7 @@ import {EditableSpan} from "./components/editableSpan/EditableSpan";
 import {Box, Button, Checkbox, IconButton, List, ListItem, TextField} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {filterButtonsContainerSx, getListItemSx} from "./Todolist.styles";
+import {removeTaskAC} from "./model/task-reducer";
 
 type TodolistPropsType = {
     todolistId: string,
@@ -72,6 +73,7 @@ export const Todolist = ({
                         {tasks?.map((t: TaskType) => {
                             const removeTaskHandler = () => {
                                 removeTask(todolistId, t.id)
+                                // dispatch(removeTaskAC({props.todolistId, t.id}))
                             }
                             const changeTaskStatusHandler = (e: ChangeEvent<HTMLInputElement>) => {
                                 const newStatusValue = e.currentTarget.checked
