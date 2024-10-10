@@ -95,12 +95,14 @@ function App() {
         dispatchTodolists(changeTodolistFilterAC({todolistId, filter}))
     }
     const removeTodolist = (todolistId: string) => {
+        // dispatchTodolists(removeTodolistAC(todolistId))
+
         dispatchTodolists(removeTodolistAC(todolistId))
+        dispatchTasks(removeTodolistAC(todolistId))
     }
     const addTodolist = (title: string) => {
-        debugger
-        dispatchTodolists(addTodolistAC(title))
-        dispatchTasks(addTaskAC(title))
+        dispatchTodolists(addTodolistAC( title))
+        dispatchTasks(addTodolistAC( title))
     }
     const updateTodolist = (todolistId: string, title: string) => {
         dispatchTodolists(changeTodolistTitleAC({todolistId, title}))
