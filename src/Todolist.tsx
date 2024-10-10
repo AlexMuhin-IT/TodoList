@@ -6,7 +6,10 @@ import {EditableSpan} from "./components/editableSpan/EditableSpan";
 import {Box, Button, Checkbox, IconButton, List, ListItem, TextField} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {filterButtonsContainerSx, getListItemSx} from "./Todolist.styles";
-import {removeTaskAC} from "./model/task-reducer";
+import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./model/task-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {AppRootState} from "./model/store";
+import {TasksStateType} from "./AppWithRedux";
 
 type TodolistPropsType = {
     todolistId: string,
@@ -24,15 +27,15 @@ type TodolistPropsType = {
 
 export const Todolist = ({
                              title,
-                             tasks,
                              addTask,
                              removeTask,
-                             changeFilter,
                              changeTaskStatus,
+                             tasks,
+                             updateTask,
+                             changeFilter,
                              filter,
                              todolistId,
                              removeTodolist,
-                             updateTask,
                              updateTodolist
                          }: TodolistPropsType) => {
 
