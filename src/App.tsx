@@ -18,7 +18,7 @@ import Grid from '@mui/material/Grid2';
 import {Menu} from "@mui/icons-material";
 import {MenuButton} from "./components/MenuButton";
 import {
-    addTaskAC, addTasksAC,
+    addTaskAC,
     changeTaskStatusAC,
     changeTaskTitleAC,
     removeTaskAC,
@@ -92,18 +92,18 @@ function App() {
 
 
     const changeFilter = (todolistId: string, filter: FilterValuesType) => {
-        dispatchTodolists(changeTodolistFilterAC(todolistId, filter))
+        dispatchTodolists(changeTodolistFilterAC({todolistId, filter}))
     }
     const removeTodolist = (todolistId: string) => {
         dispatchTodolists(removeTodolistAC(todolistId))
     }
     const addTodolist = (title: string) => {
-        const todolistId = v1()
-        dispatchTodolists(addTodolistAC(todolistId, title))
-        dispatchTasks(addTasksAC(todolistId))
+        debugger
+        dispatchTodolists(addTodolistAC(title))
+        dispatchTasks(addTaskAC(title))
     }
     const updateTodolist = (todolistId: string, title: string) => {
-        dispatchTodolists(changeTodolistTitleAC(todolistId, title))
+        dispatchTodolists(changeTodolistTitleAC({todolistId, title}))
     }
 
 

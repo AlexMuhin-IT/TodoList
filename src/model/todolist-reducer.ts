@@ -23,16 +23,16 @@ const initialState: TodolistType[] = [
 export const todolistsReducer = (state: TodolistType[] = initialState, action: ActionsType): TodolistType[] => {
     switch (action.type) {
         case 'ADD-TODOLIST': {
-            return [...state, {id: action.payload.todolistId,title: action.payload.title,filter: 'all'}]
+            return [{id: action.payload.todolistId,title: action.payload.title,filter: 'all'},...state]
         }
         case 'REMOVE-TODOLIST': {
             return state.filter(tl => tl.id !== action.payload.id)
         }
         case 'CHANGE-TODOLIST-TITLE': {
-            return state.map(tl => (tl.id === action.payload.id) ? {...tl, title: action.payload.title} : tl)
+            return state.map(tl => (tl.id === action.payload.todolistId) ? {...tl, title: action.payload.title} : tl)
         }
         case 'CHANGE-TODOLIST-FILTER': {
-            return state.map(tl => tl.id === action.payload.id ? {...tl, filter: action.payload.filter} : tl)
+            return state.map(tl => tl.id === action.payload.todolistId ? {...tl, filter: action.payload.filter} : tl)
         }
         default:
             return state
@@ -46,8 +46,8 @@ export const removeTodolistAC = (todolistId: string) => ({
 export const addTodolistAC = (title: string) => ({
     type: 'ADD-TODOLIST', payload: {title, todolistId: v1()}} as const)
 
-export const changeTodolistTitleAC = (payload:{id: string, title: string}) => ({
+export const changeTodolistTitleAC = (payload:{todolistId: string, title: string}) => ({
     type: 'CHANGE-TODOLIST-TITLE', payload} as const)
 
-export const changeTodolistFilterAC = (payload:{id: string, filter: FilterValuesType}) => ({
+export const changeTodolistFilterAC = (payload:{todolistId: string, filter: FilterValuesType}) => ({
     type: 'CHANGE-TODOLIST-FILTER', payload} as const)
