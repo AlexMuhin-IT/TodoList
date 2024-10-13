@@ -46,32 +46,8 @@ function AppWithRedux() {
     const tasks = useSelector<AppRootState, TasksStateType>(state=>state.tasks)
 
 
-    // const [todolists, ] = useReducer(todolistsReducer, [
-    //     {id: todolistId1, title: 'What to learn', filter: 'all',},
-    //     {id: todolistId2, title: 'What to buy', filter: 'all'},
-    // ]);
-    // const [tasks, ] = useReducer(taskReducer, {
-    //     [todolistId1]: [
-    //         {id: v1(), title: "HTML&CSS", isDone: true},
-    //         {id: v1(), title: "JS", isDone: true},
-    //         {id: v1(), title: "React", isDone: false},
-    //         {id: v1(), title: "Figma", isDone: true},
-    //         {id: v1(), title: "Redux", isDone: false},
-    //     ],
-    //     [todolistId2]: [
-    //         {id: v1(), title: "Milk", isDone: true},
-    //         {id: v1(), title: "Break", isDone: true},
-    //         {id: v1(), title: "Meat", isDone: false},
-    //         {id: v1(), title: "Chocolate", isDone: true},
-    //         {id: v1(), title: "Apply", isDone: false},
-    //     ]
-    // })
-
 
     const removeTask = (todolistId: string, taskId: string) => {
-        // dispatchTasks(removeTaskAC({todolistId, taskId}))
-
-        // const action = removeTaskAC({todolistId, taskId})
         dispatch(removeTaskAC({todolistId, taskId}))
     }
 
@@ -83,9 +59,6 @@ function AppWithRedux() {
 
     }
     const changeTaskStatus = (todolistId: string, taskId: string, taskStatus: boolean) => {
-        // dispatchTasks(changeTaskStatusAC({todolistId, taskId, taskStatus}))
-
-        // const action = changeTaskStatusAC({todolistId, taskId, taskStatus})
         dispatch(changeTaskStatusAC({todolistId, taskId, taskStatus}))
     }
     const changeFilter = (todolistId: string, filter: FilterValuesType) => {
