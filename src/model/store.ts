@@ -10,9 +10,9 @@ const rootReducer = combineReducers({
 })
 export type AppRootState = ReturnType<typeof rootReducer>;
 export const store = configureStore({
+// export const store = createStore(rootReducer);
     reducer: rootReducer,
 });
-// export const store = createStore(rootReducer);
 
 
 // @ts-ignore
