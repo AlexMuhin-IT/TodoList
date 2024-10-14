@@ -68,6 +68,7 @@ export const Todolist = ({
                 </IconButton>
             </div>
             <div>
+
                 <AddItemForm addItem={addTaskCallback}/>
                 {tasks?.length === 0 ? (
                     <p>Тасок нет</p>
