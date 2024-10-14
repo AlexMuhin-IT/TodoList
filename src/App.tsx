@@ -76,7 +76,6 @@ function App() {
         ]
     })
 
-
     const removeTask = (todolistId: string, taskId: string) => {
         dispatchTasks(removeTaskAC({todolistId, taskId}))
     }
