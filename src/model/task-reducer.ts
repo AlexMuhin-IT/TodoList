@@ -53,10 +53,10 @@ export const taskReducer = (state: TasksStateType = initialState, action: Action
             return {...state, [todolistId]: []}
         }
         case 'REMOVE_TASK': {
-
+            const {todolistId, taskId} = action.payload
             return ({
                 ...state,
-                [action.payload.todolistId]: state[action.payload.todolistId].filter(t => t.id !== action.payload.taskId)
+                [todolistId]: state[todolistId].filter(t => t.id !== taskId)
             })
         }
         case 'ADD_TASK': {
