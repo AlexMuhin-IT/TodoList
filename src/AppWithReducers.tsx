@@ -35,7 +35,7 @@ export type TasksStateType = {
     [key: string]: TaskType[]
 }
 
-function AppWithReducers() {
+export const AppWithReducers = () => {
     const todolistId1 = v1();
     const todolistId2 = v1();
 
@@ -196,4 +196,4 @@ function AppWithReducers() {
     );
 }
 
-export default AppWithReducers;
+// export default AppWithReducers;

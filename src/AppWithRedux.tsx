@@ -36,12 +36,11 @@ export type TasksStateType = {
     [key: string]: TaskType[]
 }
 
-function AppWithRedux() {
+export const AppWithRedux = () => {
 
     const dispatch = useDispatch();
-    const todolists = useSelector<AppRootState, Array<TodolistType>>(state=>state.todolist)
-    const tasks = useSelector<AppRootState, TasksStateType>(state=>state.tasks)
-
+    const todolists = useSelector<AppRootState, Array<TodolistType>>(state => state.todolist)
+    const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks)
 
 
     const removeTask = (todolistId: string, taskId: string) => {
@@ -149,4 +148,4 @@ function AppWithRedux() {
     );
 }
 
-export default AppWithRedux;
+// export default AppWithRedux;
