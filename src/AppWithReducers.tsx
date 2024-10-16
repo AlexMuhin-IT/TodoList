@@ -85,8 +85,10 @@ function AppWithReducers() {
     const changeTaskStatus = (todolistId: string, taskId: string, taskStatus: boolean) => {
         // dispatchTasks(changeTaskStatusAC({todolistId, taskId, taskStatus}))
 
-        const action = changeTaskStatusAC({todolistId, taskId, taskStatus})
-        dispatchTasks(action)
+        // const action = changeTaskStatusAC({todolistId, taskId, taskStatus})
+        // dispatchTasks(action)
+        // const action = changeTaskStatusAC({todolistId, taskId, taskStatus})
+        dispatchTasks(changeTaskStatusAC({todolistId, taskId, taskStatus}))
     }
 
 
