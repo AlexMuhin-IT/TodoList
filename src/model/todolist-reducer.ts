@@ -1,6 +1,6 @@
 // import {FilterValuesType, TodolistType} from "../App";
 import {v1} from "uuid";
-import {FilterValuesType, TodolistType} from "../AppWithRedux";
+import {FilterValuesType, TodolistType} from "../app/App";
 
 export type AddTodolistAT = ReturnType<typeof addTodolistAC>
 export type RemoveTodolistAT = ReturnType<typeof removeTodolistAC>
