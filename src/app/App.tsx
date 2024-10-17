@@ -17,6 +17,7 @@ import {
 } from "../model/todolist-reducer";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "./store";
+import {useAppDispatch, useAppSelector} from "./hooks";
 
 type ThemeMode = "light" | "dark";
 
@@ -38,9 +39,10 @@ export type TasksStateType = {
 
 export const App = () => {
 
-    const dispatch = useDispatch();
-    const todolists = useSelector<AppRootState, Array<TodolistType>>(state => state.todolist)
-    const tasks = useSelector<AppRootState, TasksStateType>(state => state.tasks)
+    const dispatch = useAppDispatch();
+
+    const todolists = useAppSelector(state => state.todolist)
+    const tasks = useAppSelector(state => state.tasks)
 
 
     const removeTask = (todolistId: string, taskId: string) => {
