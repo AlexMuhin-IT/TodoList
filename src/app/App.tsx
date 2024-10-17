@@ -15,8 +15,7 @@ import {
     removeTodolistAC,
 
 } from "../model/todolist-reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootState} from "./store";
+
 import {useAppDispatch, useAppSelector} from "./hooks";
 
 type ThemeMode = "light" | "dark";
@@ -148,5 +147,3 @@ export const App = () => {
         </ThemeProvider>
     );
 }
-
-// export default AppWithRedux;

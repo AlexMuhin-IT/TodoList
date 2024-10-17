@@ -9,13 +9,7 @@ type PropsType = {
 export const EditableSpan = ({value, onChange}: PropsType) => {
     const [editMode, setEditMode] = useState(false);
     const [title, setTitle] = useState<string>(value);
-    // const activeEditModeHandler = () => {
-    //     setEditMode(!editMode);
-    // }
-    // const deactivateEditModeHandler = () => {
-    //     setEditMode(!editMode)
-    //     onChange(title)
-    // }
+
     const onTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
         setTitle(e.currentTarget.value)
     }
