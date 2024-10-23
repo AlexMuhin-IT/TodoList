@@ -10,6 +10,7 @@ import {changeThemeAC, ThemeMode} from "./app/app-reducer";
 
 
 export const Header = () => {
+
     const themeMode = useAppSelector<RootState, ThemeMode>(state=>state.app.themeMode)
     const theme = getTheme(themeMode)
     const dispatch = useAppDispatch();

@@ -7,7 +7,22 @@ import {useAppDispatch, useAppSelector} from "./app/hooks";
 import {RootState} from "./app/store";
 import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./model/task-reducer";
 import {addTodolistAC, changeTodolistFilterAC, changeTodolistTitleAC, removeTodolistAC} from "./model/todolist-reducer";
-import {FilterValuesType, TasksStateType, TodolistType} from "./app/App";
+
+export type FilterValuesType = 'all' | 'active' | 'completed'
+
+export type TodolistType = {
+    id: string
+    title: string
+    filter: FilterValuesType
+}
+export type TaskType = {
+    id: string,
+    title: string,
+    isDone: boolean,
+}
+export type TasksStateType = {
+    [key: string]: TaskType[]
+}
 
 const Main = () => {
 

@@ -1,15 +1,12 @@
-import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 
-import {FilterValuesType, TaskType} from "./app/App";
 import {AddItemForm} from "./components/addItemForm/AddItemForm";
 import {EditableSpan} from "./components/editableSpan/EditableSpan";
 import {Box, Button, Checkbox, IconButton, List, ListItem, TextField} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {filterButtonsContainerSx, getListItemSx} from "./Todolist.styles";
-import {addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC} from "./model/task-reducer";
-import {useDispatch, useSelector} from "react-redux";
-import {AppRootState} from "./app/store";
-import {TasksStateType} from "./app/App";
+import {FilterValuesType, TaskType} from "./Main";
+
 
 type TodolistPropsType = {
     todolistId: string,
