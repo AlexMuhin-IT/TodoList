@@ -10,14 +10,4 @@
     font-weight: bold;
     color: #d9d989;
 }
-.todolist-title-container {
-    display: flex;
-    align-items: center;
-    width: 200px;
-}
-.todolist-wrapper{
-    background: linear-gradient(rgba(23, 70, 224, 0.25), rgba(210, 0, 0, 0.25));
-    padding: 10px;
-    border-radius: 15px;
-}
 

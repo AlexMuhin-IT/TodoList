@@ -1,6 +1,6 @@
 import {combineReducers, legacy_createStore} from "redux";
-import {todolistsReducer} from "../model/todolist-reducer";
-import {taskReducer} from "../model/task-reducer";
+import {todolistsReducer} from "../features/todolists/model/todolist-reducer";
+import {taskReducer} from "../features/todolists/model/task-reducer";
 import {appReducer} from "./app-reducer";
 
 

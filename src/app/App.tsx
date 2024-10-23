@@ -1,18 +1,17 @@
 import React from 'react';
 import './App.css';
 import {CssBaseline, ThemeProvider} from "@mui/material";
-import {useAppSelector} from "./hooks";
-import {RootState} from "./store";
-import {getTheme} from "./common/theme/theme";
-import {Header} from "../Header";
-import Main from "../Main";
-import {ThemeMode} from "./app-reducer";
+import {getTheme} from "../common/theme/theme";
+import {Header} from "../common/components/Header/Header";
+import {Main} from "./Main";
+import {useAppSelector} from "../common/hooks/useAppSelector";
+import {selectThemeMode} from "./appSelectors";
+
 
 
 export const App = () => {
 
-    // theme in app
-    const themeMode = useAppSelector<RootState, ThemeMode>(state => state.app.themeMode)
+    const themeMode = useAppSelector(selectThemeMode)
 
     return (
         <ThemeProvider theme={getTheme(themeMode)}>
