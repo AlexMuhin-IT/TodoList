@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import {CssBaseline, ThemeProvider} from "@mui/material";
 import {getTheme} from "../common/theme/theme";
 import {Header} from "../common/components/Header/Header";

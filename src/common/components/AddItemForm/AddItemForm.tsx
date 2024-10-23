@@ -2,10 +2,10 @@ import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
 import {Button, TextField} from "@mui/material";
 import {Send} from "@mui/icons-material";
 
-type PropsType = {
+type Props = {
     addItem: (title: string) => void
 }
-export const AddItemForm = ({addItem}: PropsType) => {
+export const AddItemForm = ({addItem}: Props) => {
 
     const [title, setNewTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
