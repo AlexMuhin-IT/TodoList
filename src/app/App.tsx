@@ -17,6 +17,7 @@ import {
 } from "../model/todolist-reducer";
 
 import {useAppDispatch, useAppSelector} from "./hooks";
+import {changeThemeAC} from "./app-reducer";
 
 type ThemeMode = "light" | "dark";
 
@@ -72,7 +73,7 @@ export const App = () => {
 
 
     // theme in app
-    const [themeMode, setThemeMode] = useState<ThemeMode>('light')
+    const themeMode = useAppSelector(state=>state.app.themeMode)
     const theme = createTheme({
         palette: {
             mode: themeMode === 'light' ? 'light' : 'dark',
@@ -88,7 +89,7 @@ export const App = () => {
         },
     })
     const changeModeHandler = () => {
-        setThemeMode(themeMode == 'light' ? 'dark' : 'light')
+        dispatch(changeThemeAC(themeMode == 'light' ? 'dark' : 'light'))
     }
     return (
         <ThemeProvider theme={theme}>
