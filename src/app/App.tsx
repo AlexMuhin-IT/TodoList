@@ -18,6 +18,9 @@ import {
 
 import {useAppDispatch, useAppSelector} from "./hooks";
 import {changeThemeAC} from "./app-reducer";
+import {RootState} from "./store";
+import {getTheme} from "./common/theme/theme";
+import {Header} from "../Header";
 
 type ThemeMode = "light" | "dark";
 
@@ -41,8 +44,8 @@ export const App = () => {
 
     const dispatch = useAppDispatch();
 
-    const todolists = useAppSelector(state => state.todolist)
-    const tasks = useAppSelector(state => state.tasks)
+    const todolists = useAppSelector<RootState, TodolistType[]>(state => state.todolist)
+    const tasks = useAppSelector<RootState, TasksStateType>(state => state.tasks)
 
 
     const removeTask = (todolistId: string, taskId: string) => {
@@ -73,40 +76,12 @@ export const App = () => {
 
 
     // theme in app
-    const themeMode = useAppSelector(state=>state.app.themeMode)
-    const theme = createTheme({
-        palette: {
-            mode: themeMode === 'light' ? 'light' : 'dark',
-            primary: {
-                main: '#18a408',
-            },
-            secondary: {
-                main: '#000998'
-            },
-            action: {
-                active: '#cca126'
-            },
-        },
-    })
-    const changeModeHandler = () => {
-        dispatch(changeThemeAC(themeMode == 'light' ? 'dark' : 'light'))
-    }
+    const themeMode = useAppSelector<RootState, ThemeMode>(state=>state.app.themeMode)
+
     return (
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={getTheme(themeMode)}>
             <CssBaseline/>
-            <AppBar sx={{mb: '30px'}} position="static">
-                <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
-                    <IconButton color="inherit">
-                        <Menu/>
-                    </IconButton>
-                    <div>
-                        <MenuButton>Login</MenuButton>
-                        <MenuButton>Logout</MenuButton>
-                        <MenuButton background={theme.palette.primary.dark}>Faq</MenuButton>
-                        <Switch color={'default'} onChange={changeModeHandler}/>
-                    </div>
-                </Toolbar>
-            </AppBar>
+          <Header/>
             <Container fixed>
                 <Grid sx={{mb: '30px'}} container spacing={2}>
                     <Grid size={8} alignItems={"center"}>

@@ -21,9 +21,6 @@ export const appReducer = (
             return state
     }
 }
-
-// Action creators
-// 1
 export const changeThemeAC = (themeMode: ThemeMode) => {
     return {
         type: 'CHANGE_THEME',
@@ -31,8 +28,5 @@ export const changeThemeAC = (themeMode: ThemeMode) => {
     }
 }
 
-// 2
-// Actions types
 type ChangeThemeActionType = ReturnType<typeof changeThemeAC>
-
 type ActionsType = ChangeThemeActionType
