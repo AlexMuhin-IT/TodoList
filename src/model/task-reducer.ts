@@ -1,6 +1,6 @@
 import {v1} from "uuid";
 import {AddTodolistAT, RemoveTodolistAT} from "./todolist-reducer";
-import {TasksStateType} from "../Main";
+import {TasksStateType} from "../Todolists";
 
 export type ActionType =
     RemoveTaskAT |
