@@ -7,9 +7,7 @@ const initialState = {
 }
 
 export const appReducer = (
-    state: InitialState = initialState,
-    action: ActionsType
-): InitialState => {
+    state: InitialState = initialState,    action: ActionsType): InitialState => {
     switch (action.type) {
         case 'CHANGE_THEME': {
             return {

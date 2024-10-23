@@ -6,7 +6,7 @@ import {
     removeTodolistAC,
     todolistsReducer
 } from "./todolist-reducer";
-import {TodolistType} from "../Main";
+import {TodolistType} from "../Todolists";
 
 let startState: TodolistType[] = []
 let todolistId1: string

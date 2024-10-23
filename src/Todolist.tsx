@@ -5,7 +5,7 @@ import {EditableSpan} from "./components/editableSpan/EditableSpan";
 import {Box, Button, Checkbox, IconButton, List, ListItem, TextField} from "@mui/material";
 import {Delete} from "@mui/icons-material";
 import {filterButtonsContainerSx, getListItemSx} from "./Todolist.styles";
-import {FilterValuesType, TaskType} from "./Main";
+import {FilterValuesType, TaskType} from "./Todolists";
 
 
 type TodolistPropsType = {
