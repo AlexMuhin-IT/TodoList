@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import Grid from "@mui/material/Grid2";
 import {Paper} from "@mui/material";
 import {Todolist} from "./Todolist/Todolist";
@@ -25,13 +25,14 @@ export type TasksStateType = {
 }
 
 
-const Todolists = () => {
-
+const Todolists = React.memo(() => {
+    console.log('todolists is called')
     const dispatch = useAppDispatch();
     const todolists = useAppSelector(selectTodolists)
-    const addTask = (todolistId: string, title: string) => {
+
+    const addTask = useCallback( (todolistId: string, title: string) => {
         dispatch(addTaskAC({title, todolistId}))
-    }
+    },[dispatch])
     return (
         <>
             {todolists.map(tl => (
@@ -47,6 +48,6 @@ const Todolists = () => {
             ))}
         </>
     );
-};
+});
 
 export default Todolists;

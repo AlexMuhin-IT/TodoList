@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {filterButtonsContainerSx} from "./FilterTasksButtons.styles";
 import {Box, Button} from "@mui/material";
 import {FilterValuesType, TodolistType} from "../../Todolists";
@@ -9,12 +9,12 @@ type Props = {
     todolist: TodolistType
 }
 
-export const FilterTasksButtons = ({todolist}:Props) => {
+export const FilterTasksButtons = React.memo (({todolist}:Props) => {
     const dispatch = useAppDispatch();
 
-    const changeFilter = (filter: FilterValuesType) => {
+    const changeFilter = useCallback( (filter: FilterValuesType) => {
         dispatch(changeTodolistFilterAC({filter, todolistId: todolist.id}))
-    }
+    },[dispatch])
 
     return (
         <Box sx={filterButtonsContainerSx}>
@@ -41,4 +41,4 @@ export const FilterTasksButtons = ({todolist}:Props) => {
             >Completed</Button>
         </Box>
     );
-};
+});

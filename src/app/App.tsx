@@ -9,7 +9,7 @@ import {selectThemeMode} from "./appSelectors";
 
 
 export const App = () => {
-
+    console.log('app is called')
     const themeMode = useAppSelector(selectThemeMode)
 
     return (

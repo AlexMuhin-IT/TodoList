@@ -5,7 +5,9 @@ import {Send} from "@mui/icons-material";
 type Props = {
     addItem: (title: string) => void
 }
-export const AddItemForm = ({addItem}: Props) => {
+export const AddItemForm = React.memo(({addItem}: Props) => {
+
+    console.log('addItemForm is called')
 
     const [title, setNewTitle] = useState('')
     const [error, setError] = useState<string | null>(null)
@@ -52,4 +54,4 @@ export const AddItemForm = ({addItem}: Props) => {
             </Button>
         </div>
     )
-};
+});
