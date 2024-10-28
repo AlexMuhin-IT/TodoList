@@ -14,7 +14,7 @@ type Props = {
 
 export const Task = ({task, todolistId}: Props) => {
     const dispatch = useAppDispatch();
-
+    console.log('Task is called')
     const removeTaskHandler = () => {
         dispatch(removeTaskAC({todolistId, taskId: task.id}))
     }

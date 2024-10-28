@@ -11,7 +11,7 @@ type Props = {
 
 export const FilterTasksButtons = React.memo (({todolist}:Props) => {
     const dispatch = useAppDispatch();
-
+    console.log('Filter Task Button is called')
     const changeFilter = useCallback( (filter: FilterValuesType) => {
         dispatch(changeTodolistFilterAC({filter, todolistId: todolist.id}))
     },[dispatch])
