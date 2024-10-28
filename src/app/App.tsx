@@ -5,6 +5,7 @@ import {Header} from "../common/components/Header/Header";
 import {Main} from "./Main";
 import {useAppSelector} from "../common/hooks/useAppSelector";
 import {selectThemeMode} from "./appSelectors";
+import JsEvgen from "../common/components/JsEvgen";
 
 
 
@@ -17,6 +18,7 @@ export const App = () => {
             <CssBaseline/>
             <Header/>
             <Main/>
+            <JsEvgen/>
         </ThemeProvider>
     );
 }
