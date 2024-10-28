@@ -9,7 +9,7 @@ import Todolists from "../features/todolists/ui/Todolists/Todolists";
 
 export const Main = () => {
     const dispatch = useAppDispatch();
-
+    console.log('Main is called')
     const addTodolist = useCallback( (title: string) => {
         dispatch(addTodolistAC(title))
     }, [dispatch])
