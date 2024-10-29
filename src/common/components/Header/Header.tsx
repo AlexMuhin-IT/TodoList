@@ -8,6 +8,7 @@ import {changeThemeAC} from "../../../app/app-reducer";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {selectThemeMode} from "../../../app/appSelectors";
+import {Clock} from "../Clock/Clock";
 
 
 export const Header = () => {
@@ -23,6 +24,7 @@ export const Header = () => {
             <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <IconButton color="inherit">
                     <Menu/>
+                    <Clock/>
                 </IconButton>
                 <div>
                     <MenuButton>Login</MenuButton>
