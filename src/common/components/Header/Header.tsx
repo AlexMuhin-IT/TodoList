@@ -24,7 +24,9 @@ export const Header = () => {
             <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <IconButton color="inherit">
                     <Menu/>
+
                     <Clock/>
+
                 </IconButton>
                 <div>
                     <MenuButton>Login</MenuButton>
