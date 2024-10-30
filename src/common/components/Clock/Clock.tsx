@@ -8,7 +8,6 @@ export const Clock = () => {
     const [date, setDate] = useState(new Date());
 
     useEffect(() => {
-
         const internalId = setInterval(() => {
             setDate( new Date());
         }, 1000)
