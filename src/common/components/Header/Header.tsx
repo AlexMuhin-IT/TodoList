@@ -36,6 +36,7 @@ export const Header = () => {
                     <MenuButton background={theme.palette.primary.dark}>Faq</MenuButton>
 
                     <Switch color={'default'} onChange={changeModeHandler}/>
+                    
                 </div>
             </Toolbar>
         </AppBar>
