@@ -24,19 +24,13 @@ export const Header = () => {
             <Toolbar sx={{display: 'flex', justifyContent: 'space-between'}}>
                 <IconButton color="inherit">
                     <Menu/>
-
                     <Clock/>
-
                 </IconButton>
                 <div>
                     <MenuButton>Login</MenuButton>
-
                     <MenuButton>Logout</MenuButton>
-
                     <MenuButton background={theme.palette.primary.dark}>Faq</MenuButton>
-
                     <Switch color={'default'} onChange={changeModeHandler}/>
-
                 </div>
             </Toolbar>
         </AppBar>
