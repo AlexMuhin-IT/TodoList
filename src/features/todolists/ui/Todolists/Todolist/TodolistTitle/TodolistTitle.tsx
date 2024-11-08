@@ -1,38 +1,34 @@
-import React from 'react';
-import {IconButton} from "@mui/material";
-import {Delete} from "@mui/icons-material";
-import {TodolistType} from "../../Todolists";
+import React from "react"
+import { IconButton } from "@mui/material"
+import { Delete } from "@mui/icons-material"
+import { TodolistType } from "../../Todolists"
 import s from "./TodolistTitle.module.css"
-import {useAppDispatch} from "../../../../../../common/hooks/useAppDispatch";
-import {changeTodolistTitleAC, removeTodolistAC} from "../../../../model/todolist-reducer";
-import {EditableSpan} from "../../../../../../common/components/EditableSpan/EditableSpan";
+import { useAppDispatch } from "../../../../../../common/hooks/useAppDispatch"
+import { changeTodolistTitleAC, removeTodolistAC } from "../../../../model/todolist-reducer"
+import { EditableSpan } from "../../../../../../common/components/EditableSpan/EditableSpan"
 type Props = {
-    todolist: TodolistType;
+  todolist: TodolistType
 }
 
-export const TodolistTitle = ({todolist}:Props) => {
-    const dispatch = useAppDispatch();
+export const TodolistTitle = ({ todolist }: Props) => {
+  const dispatch = useAppDispatch()
 
-    const removeTodolist = () => {
-        dispatch(removeTodolistAC(todolist.id))
-    }
+  const removeTodolist = () => {
+    dispatch(removeTodolistAC(todolist.id))
+  }
 
-    const updateTodolist = (title: string) => {
-        dispatch(changeTodolistTitleAC({todolistId: todolist.id, title}))
-    }
+  const updateTodolist = (title: string) => {
+    dispatch(changeTodolistTitleAC({ todolistId: todolist.id, title }))
+  }
 
-    return (
-        <div className={s.container}>
-            <h3><EditableSpan
-                value={todolist.title}
-                onChange={updateTodolist}/>
-            </h3>
-            <IconButton aria-label="delete"
-                        onClick={removeTodolist}
-                        size={'medium'}
-            >
-                <Delete/>
-            </IconButton>
-        </div>
-    )
-};
+  return (
+    <div className={s.container}>
+      <h3>
+        <EditableSpan value={todolist.title} onChange={updateTodolist} />
+      </h3>
+      <IconButton aria-label="delete" onClick={removeTodolist} size={"medium"}>
+        <Delete />
+      </IconButton>
+    </div>
+  )
+}
