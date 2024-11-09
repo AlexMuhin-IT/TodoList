@@ -11,8 +11,10 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       {/*<App/>*/}
+
       <AppHttpRequests />
     </Provider>
+
   </React.StrictMode>,
 )
 
