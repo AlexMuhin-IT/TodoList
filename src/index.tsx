@@ -13,6 +13,7 @@ root.render(
       {/*<App/>*/}
 
       <AppHttpRequests />
+
     </Provider>
 
   </React.StrictMode>,
