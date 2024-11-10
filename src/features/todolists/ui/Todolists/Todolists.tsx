@@ -1,9 +1,8 @@
-import React, { useCallback } from "react"
+import React, { memo, useCallback } from "react"
 import Grid from "@mui/material/Grid2"
 import { Paper } from "@mui/material"
 import { Todolist } from "./Todolist/Todolist"
-import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC } from "../../model/task-reducer"
-import { changeTodolistFilterAC } from "../../model/todolist-reducer"
+import { addTaskAC} from "../../model/task-reducer"
 import { useAppDispatch } from "../../../../common/hooks/useAppDispatch"
 import { useAppSelector } from "../../../../common/hooks/useAppSelector"
 import { selectTodolists } from "../../../../app/appSelectors"
@@ -24,7 +23,7 @@ export type TasksStateType = {
   [key: string]: TaskType[]
 }
 
-const Todolists = React.memo(() => {
+const Todolists = memo(() => {
   console.log("todolists is called")
   const dispatch = useAppDispatch()
   const todolists = useAppSelector(selectTodolists)
