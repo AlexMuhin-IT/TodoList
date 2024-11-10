@@ -19,7 +19,6 @@ const initialState: TasksStateType = {}
 
 export const taskReducer = (state: TasksStateType = initialState, action: ActionType): TasksStateType => {
   switch (action.type) {
-
     case "REMOVE-TODOLIST": {
       const { id } = action.payload
       const copyState = { ...state }
