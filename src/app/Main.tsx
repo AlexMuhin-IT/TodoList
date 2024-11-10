@@ -7,6 +7,7 @@ import { useAppDispatch } from "../common/hooks/useAppDispatch"
 import Todolists from "../features/todolists/ui/Todolists/Todolists"
 
 export const Main = () => {
+
   const dispatch = useAppDispatch()
   console.log("Main is called")
 
