@@ -26,6 +26,7 @@ export type TasksStateType = {
 const Todolists = memo(() => {
 
   console.log("todolists is called")
+
   const dispatch = useAppDispatch()
   const todolists = useAppSelector(selectTodolists)
 
