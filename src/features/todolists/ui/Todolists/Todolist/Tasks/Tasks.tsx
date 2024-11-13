@@ -12,7 +12,7 @@ type Props = {
 export const Tasks = ({ todolist }: Props) => {
   const tasks = useAppSelector(selectTasks)
 
-  console.log("Tasks is called")
+  // console.log("Tasks is called")
   const allTodolistTasks = tasks[todolist.id]
 
   let taskForTodolist = allTodolistTasks

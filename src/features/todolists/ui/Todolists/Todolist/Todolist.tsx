@@ -11,7 +11,7 @@ type TodolistPropsType = {
   addTask: (todolistId: string, title: string) => void
 }
 export const Todolist = React.memo(({ todolist, addTask }: TodolistPropsType) => {
-  console.log("todolist is called")
+  // console.log("todolist is called")
   const addTaskCallback = useCallback(
     (title: string) => {
       addTask(todolist.id, title)
