@@ -1,4 +1,4 @@
-import { FilterValuesType, TaskType, TodolistType } from "../Todolists"
+import { TodolistType } from "../Todolists"
 import { TodolistTitle } from "./TodolistTitle/TodolistTitle"
 import { Tasks } from "./Tasks/Tasks"
 import s from "./TodolistTitle/TodolistTitle.module.css"
