@@ -2,7 +2,7 @@ import React, { useCallback } from "react"
 import { filterButtonsContainerSx } from "./FilterTasksButtons.styles"
 import { Box, Button } from "@mui/material"
 import { FilterValuesType, TodolistType } from "../../Todolists"
-import { useAppDispatch } from "../../../../../../common/hooks/useAppDispatch"
+import { useAppDispatch } from "common/hooks"
 import { changeTodolistFilterAC } from "../../../../model/todolist-reducer"
 
 type Props = {
