@@ -3,9 +3,9 @@ import { Checkbox, IconButton, ListItem } from "@mui/material"
 import { Delete } from "@mui/icons-material"
 import { TaskType } from "../../../Todolists"
 import { getListItemSx } from "./Task.styles"
+import { useAppDispatch } from "common/hooks"
+import { EditableSpan } from "common/components"
 import { changeTaskStatusAC, changeTaskTitleAC, removeTaskAC } from "../../../../../model/task-reducer"
-import { useAppDispatch } from "../../../../../../../common/hooks/useAppDispatch"
-import { EditableSpan } from "../../../../../../../common/components/EditableSpan/EditableSpan"
 
 type Props = {
   task: TaskType

@@ -3,17 +3,18 @@ import Grid from "@mui/material/Grid2"
 import { Paper } from "@mui/material"
 import { Todolist } from "./Todolist/Todolist"
 import { addTaskAC} from "../../model/task-reducer"
-import { useAppDispatch } from "../../../../common/hooks/useAppDispatch"
-import { useAppSelector } from "../../../../common/hooks/useAppSelector"
+import { useAppDispatch } from "../../../../common/hooks"
+import { useAppSelector } from "../../../../common/hooks"
 import { selectTodolists } from "../../../../app/appSelectors"
 
 export type FilterValuesType = "all" | "active" | "completed"
 
-export type TodolistType = {
+type Created = {
   id: string
   title: string
   filter: FilterValuesType
 }
+export type TodolistType = Created
 export type TaskType = {
   id: string
   title: string

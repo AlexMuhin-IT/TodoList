@@ -1,8 +1,8 @@
 import React from "react"
 import { List } from "@mui/material"
 import { TaskType, TodolistType } from "../../Todolists"
-import { useAppSelector } from "../../../../../../common/hooks/useAppSelector"
-import { selectTasks } from "../../../../../../app/appSelectors"
+import { useAppSelector } from "common/hooks"
+import { selectTasks } from "app/appSelectors"
 import { Task } from "./Task/Task"
 
 type Props = {
