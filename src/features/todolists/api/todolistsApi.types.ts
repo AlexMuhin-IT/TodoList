@@ -7,26 +7,9 @@ export type Todolist = {
   order: number
 }
 
-
-export type CreateTodolistResponse = {
+export type BaseResponse<D={}>={
   resultCode: number
   messages: string[]
   fieldsErrors: FieldError[]
-  data: {
-    item: Todolist
-  }
-}
-
-export type DeleteTodolistResponse = {
-  resultCode: number
-  messages: string[]
-  fieldsErrors: FieldError[]
-  data: {}
-}
-
-export type UpdateTodolistResponse = {
-  resultCode: number
-  messages: string[]
-  fieldsErrors: FieldError[]
-  data: {}
+  data: D
 }
