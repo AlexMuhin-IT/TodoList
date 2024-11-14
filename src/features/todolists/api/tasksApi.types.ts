@@ -1,4 +1,3 @@
-import { FieldError } from "../../../app/AppHttpRequests"
 import { TaskPriority, TaskStatus } from "../../../common/enums/enums"
 
 export type GetTasksResponse = {
@@ -19,27 +18,22 @@ export type DomainTask = {
   order: number
   addedDate: string
 }
-export type UpdateTaskStatusResponse = {
-  status: number
-  title: string
-  deadline: string
-  description: string
-  priority: number,
-  startDate: string
-}
-export type BaseResponse<T={}>={
-  resultCode: number
-  messages: string[]
-  fieldsErrors: FieldError[]
-  data: T
-}
+// export type UpdateTaskStatusResponse = {
+//   status: number
+//   title: string
+//   deadline: string
+//   description: string
+//   priority: number,
+//   startDate: string
+// }
+
 export type UpdateTaskModel = {
-  description: string | null
+  description: string
   title: string
   status: TaskStatus
   priority: TaskPriority
-  startDate: string | null
-  deadline: string | null
+  startDate: string
+  deadline: string
 }
 // export type CreateTaskResponse = {
 //   resultCode: number
