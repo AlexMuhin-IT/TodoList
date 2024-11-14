@@ -3,9 +3,9 @@ import { IconButton } from "@mui/material"
 import { Delete } from "@mui/icons-material"
 import { TodolistType } from "../../Todolists"
 import s from "./TodolistTitle.module.css"
-import { useAppDispatch } from "../../../../../../common/hooks/useAppDispatch"
+import { useAppDispatch } from "common/hooks"
 import { changeTodolistTitleAC, removeTodolistAC } from "../../../../model/todolist-reducer"
-import { EditableSpan } from "../../../../../../common/components/EditableSpan/EditableSpan"
+import { EditableSpan } from "common/components"
 type Props = {
   todolist: TodolistType
 }
