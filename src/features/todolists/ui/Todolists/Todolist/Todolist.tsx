@@ -1,23 +1,23 @@
-import { TodolistType } from "../Todolists"
 import { TodolistTitle } from "./TodolistTitle/TodolistTitle"
 import { Tasks } from "./Tasks/Tasks"
 import s from "./TodolistTitle/TodolistTitle.module.css"
 import { FilterTasksButtons } from "./FilterTasksButtons/FilterTasksButtons"
 import { AddItemForm } from "common/components"
 import React, { useCallback } from "react"
+import { DomainTodolist } from "../../../model/todolist-reducer"
+import { useAppDispatch } from "common/hooks"
+import { addTaskTC } from "../../../model/task-reducer"
 
 type TodolistPropsType = {
-  todolist: TodolistType
-  addTask: (todolistId: string, title: string) => void
+  todolist: DomainTodolist
 }
-export const Todolist = ({ todolist, addTask }: TodolistPropsType) => {
+export const Todolist = ({ todolist }: TodolistPropsType) => {
+  const dispatch = useAppDispatch()
 
-  const addTaskCallback = useCallback(
-    (title: string) => {
-      addTask(todolist.id, title)
-    },
-    [todolist.id],
-  )
+  const addTaskCallback = (title: string) => {
+    dispatch(addTaskTC({ todolistId: todolist.id, title }))
+  }
+
 
   return (
     <div className={s.wrapper}>
