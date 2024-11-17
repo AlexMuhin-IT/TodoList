@@ -1,4 +1,4 @@
-import React, { useCallback } from "react"
+import React from "react"
 import Grid from "@mui/material/Grid2"
 import { AddItemForm } from "common/components"
 import { addTodolistAC } from "../features/todolists/model/todolist-reducer"
@@ -11,12 +11,10 @@ export const Main = () => {
   const dispatch = useAppDispatch()
   // console.log("Main is called")
 
-  const addTodolist = useCallback(
+  const addTodolist =
     (title: string) => {
       dispatch(addTodolistAC(title))
-    },
-    [dispatch],
-  )
+    }
 
   return (
     <Container fixed>
