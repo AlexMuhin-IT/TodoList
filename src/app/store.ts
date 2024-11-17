@@ -9,7 +9,6 @@ const rootReducer = combineReducers({
   tasks: taskReducer,
   app: appReducer,
 })
-// export type AppRootState = ReturnType<typeof rootReducer>;
 
 export const store = legacy_createStore(rootReducer, {}, applyMiddleware(thunk))
 

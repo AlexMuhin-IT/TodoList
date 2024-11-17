@@ -1,20 +1,17 @@
 import React from "react"
 import Grid from "@mui/material/Grid2"
 import { AddItemForm } from "common/components"
-import { addTodolistAC } from "../features/todolists/model/todolist-reducer"
+import { addTodolistAC, addTodolistTC } from "../features/todolists/model/todolist-reducer"
 import { Container } from "@mui/material"
 import { useAppDispatch } from "common/hooks"
 import Todolists from "../features/todolists/ui/Todolists/Todolists"
 
 export const Main = () => {
-
   const dispatch = useAppDispatch()
-  // console.log("Main is called")
 
-  const addTodolist =
-    (title: string) => {
-      dispatch(addTodolistAC(title))
-    }
+  const addTodolist = ( title: string ) => {
+    dispatch(addTodolistTC(title))
+  }
 
   return (
     <Container fixed>
