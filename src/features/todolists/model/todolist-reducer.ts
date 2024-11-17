@@ -1,10 +1,7 @@
-import { v1 } from "uuid"
 import { FilterValuesType } from "../ui/Todolists/Todolists"
 import { Todolist } from "../api/todolistsApi.types"
 import { Dispatch } from "redux"
 import { todolistsApi } from "../api/todolistsApi"
-import { AppThunk, RootState } from "app/store"
-import { TodolistPropsType } from "../ui/Todolists/Todolist/Todolist"
 
 
 export type DomainTodolist = Todolist & {

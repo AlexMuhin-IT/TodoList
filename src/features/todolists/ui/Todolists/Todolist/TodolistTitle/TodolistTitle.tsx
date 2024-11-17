@@ -5,8 +5,6 @@ import { TodolistType } from "../../Todolists"
 import s from "./TodolistTitle.module.css"
 import { useAppDispatch } from "common/hooks"
 import {
-  changeTodolistTitleAC,
-  removeTodolistAC,
   removeTodolistTC,
   updateTodolistTitleTC
 } from "../../../../model/todolist-reducer"
