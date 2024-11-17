@@ -5,7 +5,7 @@ import { Header } from "common/components/Header/Header"
 import { Main } from "./Main"
 import { useAppDispatch, useAppSelector } from "common/hooks"
 import { selectThemeMode } from "./appSelectors"
-import { fetchTodolistsThunk } from "../features/todolists/model/todolist-reducer"
+import { fetchTodolistsTC } from "../features/todolists/model/todolist-reducer"
 
 export const App = () => {
 
@@ -13,7 +13,7 @@ export const App = () => {
   const themeMode = useAppSelector(selectThemeMode)
 
   useEffect(() => {
-    dispatch(fetchTodolistsThunk)
+    dispatch(fetchTodolistsTC())
   }, [])
 
   return (

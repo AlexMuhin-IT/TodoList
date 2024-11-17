@@ -9,15 +9,14 @@ type Props = {
   todolist: TodolistType
 }
 
-export const FilterTasksButtons = React.memo(({ todolist }: Props) => {
+export const FilterTasksButtons = ({ todolist }: Props) => {
   const dispatch = useAppDispatch()
-  // console.log("Filter Task Button is called")
-  const changeFilter = useCallback(
+
+  const changeFilter =
     (filter: FilterValuesType) => {
       dispatch(changeTodolistFilterAC({ filter, todolistId: todolist.id }))
-    },
-    [dispatch],
-  )
+    }
+
 
   return (
     <Box sx={filterButtonsContainerSx}>
@@ -51,4 +50,4 @@ export const FilterTasksButtons = React.memo(({ todolist }: Props) => {
       </Button>
     </Box>
   )
-})
+}
