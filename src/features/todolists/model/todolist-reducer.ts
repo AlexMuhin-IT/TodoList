@@ -96,3 +96,9 @@ export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => 
     dispatch(removeTodolistAC(todolistId))
   })
 }
+export const updateTodolistTitleTC = (payload:{todolistId:string, title: string } ) => (dispatch: Dispatch) => {
+  const { todolistId, title } = payload
+  todolistsApi.updateTodolist({title,todolistId}).then(res => {
+    dispatch(changeTodolistTitleAC({todolistId, title }))
+  })
+}
