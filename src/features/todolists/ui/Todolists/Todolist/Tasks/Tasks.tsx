@@ -4,7 +4,6 @@ import { useAppDispatch, useAppSelector } from "common/hooks"
 import { selectTasks } from "app/appSelectors"
 import { Task } from "./Task/Task"
 import { TaskStatus } from "common/enums"
-import { DomainTask } from "../../../../api/tasksApi.types"
 import { DomainTodolist } from "../../../../model/todolist-reducer"
 import { fetchTasksTC } from "../../../../model/task-reducer"
 
