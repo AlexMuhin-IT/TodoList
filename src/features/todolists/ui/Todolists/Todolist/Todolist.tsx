@@ -3,12 +3,12 @@ import { Tasks } from "./Tasks/Tasks"
 import s from "./TodolistTitle/TodolistTitle.module.css"
 import { FilterTasksButtons } from "./FilterTasksButtons/FilterTasksButtons"
 import { AddItemForm } from "common/components"
-import React, { useCallback } from "react"
+import React from "react"
 import { DomainTodolist } from "../../../model/todolist-reducer"
 import { useAppDispatch } from "common/hooks"
 import { addTaskTC } from "../../../model/task-reducer"
 
-type TodolistPropsType = {
+export type TodolistPropsType = {
   todolist: DomainTodolist
 }
 export const Todolist = ({ todolist }: TodolistPropsType) => {

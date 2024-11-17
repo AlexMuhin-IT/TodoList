@@ -4,7 +4,7 @@ import { Delete } from "@mui/icons-material"
 import { TodolistType } from "../../Todolists"
 import s from "./TodolistTitle.module.css"
 import { useAppDispatch } from "common/hooks"
-import { changeTodolistTitleAC, removeTodolistAC } from "../../../../model/todolist-reducer"
+import { changeTodolistTitleAC, removeTodolistAC, removeTodolistTC } from "../../../../model/todolist-reducer"
 import { EditableSpan } from "common/components"
 type Props = {
   todolist: TodolistType
@@ -14,7 +14,7 @@ export const TodolistTitle = ({ todolist }: Props) => {
   const dispatch = useAppDispatch()
 
   const removeTodolist = () => {
-    dispatch(removeTodolistAC(todolist.id))
+    dispatch(removeTodolistTC(todolist.id))
   }
 
   const updateTodolist = (title: string) => {
