@@ -100,8 +100,8 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
   })
 }
 export const addTaskTC = (payload: { title: string, todolistId: string }): AppThunk =>
-  (dispatch) => {
-    tasksApi.createTask(payload).then((res) => {
+  (dispatch) => {    tasksApi.createTask(payload)
+      .then((res) => {
       dispatch(addTaskAC({ task: res.data.data.item }))
     })
   }
