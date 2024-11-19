@@ -1,14 +1,12 @@
-import React, {useEffect } from "react"
+import React, { useEffect } from "react"
 import Grid from "@mui/material/Grid2"
 import { Paper } from "@mui/material"
 import { Todolist } from "./Todolist/Todolist"
-import { useAppDispatch } from "common/hooks"
-import { useAppSelector } from "common/hooks"
+import { useAppDispatch, useAppSelector } from "common/hooks"
 import { selectTodolists } from "app/appSelectors"
-import { fetchTodolistsTC} from "../../model/todolist-reducer"
+import { fetchTodolistsTC } from "../../model/todolist-reducer"
 
 export type FilterValuesType = "all" | "active" | "completed"
-
 export type TodolistType = {
   id: string
   title: string
