@@ -1,12 +1,15 @@
 // import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, taskReducer } from "../task-reducer"
-// import { addTodolistAC, removeTodolistAC } from "../todolist-reducer"
-// // import { TasksStateType } from "../../ui/Todolists/Todolists"
+// import { addTodolistAC, DomainTodolist, removeTodolistAC } from "../todolist-reducer"
+// import { TasksStateType } from "../../ui/Todolists/Todolists"
+// import { DomainTask } from "../../api/tasksApi.types"
 //
-// let startState: TasksStateType = {}
+// // let startState: TasksStateType = {}
+
+// let startState: DomainTodolist = {}
 //
 // beforeEach(() => {
 //   startState = {
-//     todolistId1: [
+//     ['todolistId1']: [
 //       { id: "1", title: "CSS", isDone: false },
 //       { id: "2", title: "JS", isDone: true },
 //       { id: "3", title: "React", isDone: false },
@@ -16,6 +19,12 @@
 //       { id: "2", title: "milk", isDone: true },
 //       { id: "3", title: "tea", isDone: false },
 //     ],
+//   }
+// })
+// beforeEach(() => {
+//   startState = {
+//     ['todolistId1']: [],
+//     ['todolistId2']: [],
 //   }
 // })
 //
@@ -104,4 +113,22 @@
 //   expect(endState["todolistId2"]).not.toBeDefined()
 //   // or
 //   expect(endState["todolistId2"]).toBeUndefined()
+// })
+// import { setTasksAC, taskReducer } from "../task-reducer"
+//
+// test("new array should be added when new todolists is added", () => {
+//   const action = setTasksAC(startState["todolistId1"], ["todolistId2"])
+//   const endState = taskReducer({
+//     "todolistId2": [],
+//     "todolistId1": []
+//   }, action)
+//
+//   // const keys = Object.keys(endState)
+//   // const newKey = keys.find((k) => k !== "todolistId1" && k !== "todolistId2")
+//   // if (!newKey) {
+//   //   throw Error("new key should be added")
+//   // }
+//
+//   expect(endState["todolistId1"].length).toBe(3)
+//   expect(endState["todolistId2"].length).toBe(0)
 // })
