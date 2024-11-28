@@ -7,6 +7,8 @@ import { setAppErrorAC, setAppStatusAC } from "app/app-reducer"
 import { ResultCode } from "common/enums"
 import { Simulate } from "react-dom/test-utils"
 import error = Simulate.error
+import { handleServerNetworkError } from "common/utils/handleServerNetworkError"
+import { handleServerAppError } from "common/utils/handleServerAppError"
 
 export type TasksStateType = {
   [key: string]: DomainTask[]
@@ -35,7 +37,7 @@ export const taskReducer = (state: TasksStateType = initialState, action: Action
         filter: "all",
         order: 0,
         addedDate: "",
-        entityStatus: 'idle'
+        entityStatus: "idle"
       }
       return { [newTodolist.id]: [], ...state }
     }
@@ -99,42 +101,51 @@ export type ChangeTaskAT = ReturnType<typeof updateTaskAC>
 
 
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
-  tasksApi.getTasks(todolistId).then(res => {
-    dispatch(setAppStatusAC('loading'))
-    const tasks = res.data.items
-    dispatch(setTasksAC({ todolistId, tasks }))
-    dispatch(setAppStatusAC('idle'))
-  })
+  dispatch(setAppStatusAC("loading"))
+  tasksApi.getTasks(todolistId)
+    .then(res => {
+      if (res.data.items) {
+        const tasks = res.data.items
+        dispatch(setTasksAC({ todolistId, tasks }))
+        dispatch(setAppStatusAC("idle"))
+      }
+    })
+    .catch((error) => {
+      handleServerNetworkError(error, dispatch)
+    })
 }
 export const addTaskTC = (payload: { title: string, todolistId: string }): AppThunk =>
   (dispatch) => {
     dispatch(setAppStatusAC("loading"))
-    tasksApi.createTask(payload)
+    tasksApi
+      .createTask(payload)
       .then((res) => {
-        if (res.data.resultCode === ResultCode.Success){
+        if (res.data.resultCode === ResultCode.Success) {
           dispatch(addTaskAC({ task: res.data.data.item }))
           dispatch(setAppStatusAC("idle"))
-        }else{
-          if(res.data.messages.length){
-            dispatch(setAppErrorAC(res.data.messages[0]))
-          }else{
-            dispatch(setAppErrorAC('Some error occurred'))
-          }
-          dispatch(setAppStatusAC('failed'))
+        } else {
+          handleServerAppError(res.data, dispatch)
         }
       })
-      .catch((error)=>{
-        dispatch(setAppErrorAC(error.message))
-        dispatch(setAppStatusAC('failed'))
+      .catch((error) => {
+        handleServerNetworkError(error, dispatch)
       })
   }
 export const removeTaskTC = (payload: { todolistId: string, taskId: string }) =>
   (dispatch: Dispatch) => {
-    dispatch(setAppStatusAC('loading'))
-    tasksApi.removeTask(payload).then((res) => {
-      dispatch(removeTaskAC(payload))
-      dispatch(setAppStatusAC('idle'))
-    })
+    dispatch(setAppStatusAC("loading"))
+    tasksApi.removeTask(payload)
+      .then((res) => {
+        if (res.data.resultCode === ResultCode.Success) {
+          dispatch(removeTaskAC(payload))
+          dispatch(setAppStatusAC("idle"))
+        } else {
+          handleServerAppError(res.data, dispatch)
+        }
+      })
+      .catch((error) => {
+        handleServerNetworkError(error, dispatch)
+      })
   }
 
 export const updateTaskTC = (payload: { taskId: string, todolistId: string, domainModel: UpdateTaskDomainModel }) =>
@@ -143,23 +154,17 @@ export const updateTaskTC = (payload: { taskId: string, todolistId: string, doma
     const allTasksFromState = getState().tasks
     const tasksForCurrentTodolist = allTasksFromState[todolistId]
     const task = tasksForCurrentTodolist.find(t => t.id === taskId)
-    dispatch(setAppStatusAC('loading'))
+    dispatch(setAppStatusAC("loading"))
     tasksApi.updateTask({ taskId, todolistId, domainModel })
       .then(res => {
-        if(res.data.resultCode===ResultCode.Success){
-        dispatch(updateTaskAC(payload))
-        dispatch(setAppStatusAC('idle'))
-        }else{
-          if(res.data.messages.length){
-            dispatch(setAppErrorAC(res.data.messages[0]))
-          }else{
-            dispatch(setAppErrorAC('Some error occurred'))
-          }
-          dispatch(setAppStatusAC('failed'))
+        if (res.data.resultCode === ResultCode.Success) {
+          dispatch(updateTaskAC(payload))
+          dispatch(setAppStatusAC("idle"))
+        } else {
+          handleServerAppError(res.data, dispatch)
         }
       })
-      .catch((error)=>{
-        dispatch(setAppErrorAC(error.message))
-        dispatch(setAppStatusAC('failed'))
+      .catch((error) => {
+        handleServerNetworkError(error, dispatch)
       })
   }

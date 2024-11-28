@@ -40,8 +40,8 @@ export const todolistsReducer = (state: DomainTodolist[] = initialState, action:
       const { id, filter } = action.payload
       return state.map((tl) => (tl.id === id ? { ...tl, filter } : tl))
     }
-    case "CHANGE_TODOLIST_ENTITY_STATUS":{
-      const {id, entityStatus} = action.payload
+    case "CHANGE_TODOLIST_ENTITY_STATUS": {
+      const { id, entityStatus } = action.payload
       return state.map(tl => tl.id === id
         ? { ...tl, entityStatus }
         : tl)
@@ -70,7 +70,7 @@ export const setTodolistsAC = (todolists: Todolist[]) => {
   return { type: "SET_TODOLISTS", todolists } as const
 }
 export const changeTodolistEntityStatusAC = (
-  payload: {  id: string,  entityStatus: RequestStatus}) => {
+  payload: { id: string, entityStatus: RequestStatus }) => {
   return { type: "CHANGE_TODOLIST_ENTITY_STATUS", payload } as const
 }
 
@@ -106,7 +106,7 @@ export const addTodolistTC = (title: string) => (dispatch: Dispatch) => {
 }
 export const removeTodolistTC = (id: string) => (dispatch: Dispatch) => {
   dispatch(setAppStatusAC("loading"))
-  dispatch(changeTodolistEntityStatusAC({id, entityStatus: 'loading'}))
+  dispatch(changeTodolistEntityStatusAC({ id, entityStatus: "loading" }))
   todolistsApi.deleteTodolist(id).then(res => {
     dispatch(removeTodolistAC(id))
     dispatch(setAppStatusAC("idle"))
@@ -114,8 +114,10 @@ export const removeTodolistTC = (id: string) => (dispatch: Dispatch) => {
 }
 export const updateTodolistTitleTC = (payload: { id: string, title: string }) => (dispatch: Dispatch) => {
   const { id, title } = payload
-  todolistsApi.updateTodolist({ title, id }).then(res => {
+  dispatch(setAppStatusAC("loading"))
+    todolistsApi.updateTodolist({ title, id }).then(res => {
     dispatch(changeTodolistTitleAC({ id, title }))
+      dispatch(setAppStatusAC("idle"))
   })
 }
 
