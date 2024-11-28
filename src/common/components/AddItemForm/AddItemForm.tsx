@@ -22,7 +22,6 @@ export const AddItemForm = ({ addItem, disabled }: Props) => {
   const changeItemHandler = (e: ChangeEvent<HTMLInputElement>) => {
     setNewTitle(e.currentTarget.value)
   }
-
   const addItemOnKeyUpHandler = (e: KeyboardEvent<HTMLInputElement>) => {
     setError(null)
     if (e.key === "Enter") {

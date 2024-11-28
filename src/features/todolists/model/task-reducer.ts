@@ -1,9 +1,9 @@
-import { AddTodolistAT, DomainTodolist, RemoveTodolistAT } from "./todolist-reducer"
+import { AddTodolistAT, changeTodolistEntityStatusAC, DomainTodolist, RemoveTodolistAT } from "./todolist-reducer"
 import { Dispatch } from "redux"
 import { tasksApi } from "../api/tasksApi"
 import { DomainTask, UpdateTaskDomainModel } from "../api/tasksApi.types"
 import { AppThunk, RootState } from "app/store"
-import { setAppStatusAC } from "app/app-reducer"
+import { RequestStatus, setAppStatusAC } from "app/app-reducer"
 import { ResultCode } from "common/enums"
 import { handleServerNetworkError } from "common/utils/handleServerNetworkError"
 import { handleServerAppError } from "common/utils/handleServerAppError"
@@ -83,7 +83,6 @@ export const updateTaskAC = (payload: { todolistId: string; taskId: string; doma
   } as const
 }
 
-
 export type ActionType =
   | RemoveTaskAT
   | AddTaskAT
@@ -112,45 +111,59 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
       handleServerNetworkError(error, dispatch)
     })
 }
-export const addTaskTC = (payload: { title: string, todolistId: string }): AppThunk =>  (dispatch) => {
+export const addTaskTC = (payload: { title: string, todolistId: string }): AppThunk => (dispatch) => {
+  dispatch(setAppStatusAC("loading"))
+  tasksApi
+    .createTask(payload)
+    .then((res) => {
+      if (res.data.resultCode === ResultCode.Success) {
+        dispatch(addTaskAC({ task: res.data.data.item }))
+        dispatch(setAppStatusAC("idle"))
+      } else {
+        handleServerAppError(res.data, dispatch)
+      }
+    })
+    .catch((error) => {
+      handleServerNetworkError(error, dispatch)
+    })
+}
+export const removeTaskTC = (payload: { todolistId: string, taskId: string }) => (dispatch: Dispatch) => {
+  dispatch(setAppStatusAC("loading"))
+  tasksApi.removeTask(payload)
+    .then((res) => {
+      if (res.data.resultCode === ResultCode.Success) {
+        dispatch(removeTaskAC(payload))
+        dispatch(setAppStatusAC("idle"))
+      } else {
+        handleServerAppError(res.data, dispatch)
+      }
+    })
+    .catch((error) => {
+      handleServerNetworkError(error, dispatch)
+    })
+}
+export const updateTaskTC = (payload: {
+  taskId: string,
+  todolistId: string,
+  domainModel: UpdateTaskDomainModel
+}) => (dispatch: Dispatch, getState: () => RootState) => {
+  const { taskId, todolistId, domainModel } = payload
+  const allTasksFromState = getState().tasks
+  const tasksForCurrentTodolist = allTasksFromState[todolistId]
+  const task = tasksForCurrentTodolist.find(t => t.id === taskId)
+  if (task) {
+    const model: UpdateTaskDomainModel = {
+      status: task.status,
+      title: task.title,
+      deadline: task.deadline,
+      description: task.description,
+      priority: task.priority,
+      startDate: task.startDate,
+      ...domainModel
+    }
     dispatch(setAppStatusAC("loading"))
     tasksApi
-      .createTask(payload)
-      .then((res) => {
-        if (res.data.resultCode === ResultCode.Success) {
-          dispatch(addTaskAC({ task: res.data.data.item }))
-          dispatch(setAppStatusAC("idle"))
-        } else {
-          handleServerAppError(res.data, dispatch)
-        }
-      })
-      .catch((error) => {
-        handleServerNetworkError(error, dispatch)
-      })
-  }
-export const removeTaskTC = (payload: { todolistId: string, taskId: string }) =>  (dispatch: Dispatch) => {
-    dispatch(setAppStatusAC("loading"))
-    tasksApi.removeTask(payload)
-      .then((res) => {
-        if (res.data.resultCode === ResultCode.Success) {
-          dispatch(removeTaskAC(payload))
-          dispatch(setAppStatusAC("idle"))
-        } else {
-          handleServerAppError(res.data, dispatch)
-        }
-      })
-      .catch((error) => {
-        handleServerNetworkError(error, dispatch)
-      })
-  }
-export const updateTaskTC = (payload: { taskId: string, todolistId: string, domainModel: UpdateTaskDomainModel }) =>  (dispatch: Dispatch, getState: () => RootState) => {
-    const { taskId, todolistId, domainModel } = payload
-    const allTasksFromState = getState().tasks
-    const tasksForCurrentTodolist = allTasksFromState[todolistId]
-    const task = tasksForCurrentTodolist.find(t => t.id === taskId)
-    dispatch(setAppStatusAC("loading"))
-    tasksApi
-      .updateTask({ taskId, todolistId, domainModel })
+      .updateTask({ taskId, todolistId, model })
       .then(res => {
         if (res.data.resultCode === ResultCode.Success) {
           dispatch(updateTaskAC(payload))
@@ -163,3 +176,4 @@ export const updateTaskTC = (payload: { taskId: string, todolistId: string, doma
         handleServerNetworkError(error, dispatch)
       })
   }
+}

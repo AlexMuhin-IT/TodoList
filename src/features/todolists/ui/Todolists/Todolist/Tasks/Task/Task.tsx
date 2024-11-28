@@ -12,9 +12,10 @@ import { removeTaskTC, updateTaskTC } from "../../../../../model/task-reducer"
 type Props = {
   task: DomainTask
   todolist: DomainTodolist
+  disabled?: boolean
 }
 
-export const Task = ({ task, todolist }: Props) => {
+export const Task = ({ task, todolist, disabled }: Props) => {
 
   const dispatch = useAppDispatch()
 
@@ -48,13 +49,23 @@ export const Task = ({ task, todolist }: Props) => {
   }
 
   return (
-    <ListItem key={task.id} alignItems={"center"} disableGutters disablePadding
+    <ListItem key={task.id} alignItems={"center"}
               sx={getListItemSx(task.status === TaskStatus.Completed)}>
       <div>
-        <Checkbox checked={task.status === TaskStatus.Completed} onChange={changeTaskHandler} />
+        <Checkbox checked={task.status === TaskStatus.Completed}
+                  onChange={changeTaskHandler}
+                  disabled={disabled}
+        />
       </div>
-      <EditableSpan onChange={changeTaskTitleHandler} value={task.title} disabled={todolist.entityStatus === "loading"}/>
-      <IconButton aria-label="delete" onClick={removeTaskHandler} size={"small"}>
+      <EditableSpan onChange={changeTaskTitleHandler}
+                    value={task.title}
+                    disabled={disabled}
+      />
+      <IconButton aria-label="delete"
+                  onClick={removeTaskHandler}
+                  size={"small"}
+                  disabled={disabled}
+      >
         <Delete />
       </IconButton>
     </ListItem>
