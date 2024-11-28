@@ -3,10 +3,8 @@ import { Dispatch } from "redux"
 import { tasksApi } from "../api/tasksApi"
 import { DomainTask, UpdateTaskDomainModel } from "../api/tasksApi.types"
 import { AppThunk, RootState } from "app/store"
-import { setAppErrorAC, setAppStatusAC } from "app/app-reducer"
+import { setAppStatusAC } from "app/app-reducer"
 import { ResultCode } from "common/enums"
-import { Simulate } from "react-dom/test-utils"
-import error = Simulate.error
 import { handleServerNetworkError } from "common/utils/handleServerNetworkError"
 import { handleServerAppError } from "common/utils/handleServerAppError"
 

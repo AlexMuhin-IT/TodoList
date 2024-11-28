@@ -1,5 +1,7 @@
 import React, { ChangeEvent, useState } from "react"
 import { TextField } from "@mui/material"
+import { useAppSelector } from "common/hooks"
+import { selectTodolists } from "app/appSelectors"
 
 type Props = {
   value: string
@@ -8,6 +10,7 @@ type Props = {
 }
 
 export const EditableSpan = ({ value, onChange, disabled }: Props) => {
+
   const [editMode, setEditMode] = useState(false)
   const [title, setTitle] = useState<string>(value)
 
@@ -20,7 +23,7 @@ export const EditableSpan = ({ value, onChange, disabled }: Props) => {
   }
   return (
     <div>
-      {editMode ? (
+      {editMode && !disabled ? (
         <TextField size={"small"}
                    onChange={onTitleHandler}
                    onBlur={changeEditModeHandler}

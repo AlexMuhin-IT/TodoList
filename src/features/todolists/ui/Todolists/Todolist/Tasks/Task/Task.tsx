@@ -53,7 +53,7 @@ export const Task = ({ task, todolist }: Props) => {
       <div>
         <Checkbox checked={task.status === TaskStatus.Completed} onChange={changeTaskHandler} />
       </div>
-      <EditableSpan onChange={changeTaskTitleHandler} value={task.title} />
+      <EditableSpan onChange={changeTaskTitleHandler} value={task.title} disabled={todolist.entityStatus === "loading"}/>
       <IconButton aria-label="delete" onClick={removeTaskHandler} size={"small"}>
         <Delete />
       </IconButton>
