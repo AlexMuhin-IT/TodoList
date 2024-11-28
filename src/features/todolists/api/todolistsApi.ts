@@ -20,3 +20,4 @@ export const todolistsApi = {
     return instance.delete<BaseResponse>(`todo-lists/${id}`)
   }
 }
+
