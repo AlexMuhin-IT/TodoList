@@ -3,6 +3,7 @@ import { Dispatch } from "redux"
 import { tasksApi } from "../api/tasksApi"
 import { DomainTask, UpdateTaskDomainModel } from "../api/tasksApi.types"
 import { AppThunk, RootState } from "app/store"
+import { setAppStatusAC } from "app/app-reducer"
 
 export type TasksStateType = {
   [key: string]: DomainTask[]
@@ -95,20 +96,27 @@ export type ChangeTaskAT = ReturnType<typeof changeTaskAC>
 
 export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
   tasksApi.getTasks(todolistId).then(res => {
+    dispatch(setAppStatusAC('loading'))
     const tasks = res.data.items
     dispatch(setTasksAC({ todolistId, tasks }))
+    dispatch(setAppStatusAC('idle'))
   })
 }
 export const addTaskTC = (payload: { title: string, todolistId: string }): AppThunk =>
-  (dispatch) => {    tasksApi.createTask(payload)
+  (dispatch) => {
+    dispatch(setAppStatusAC("loading"))
+    tasksApi.createTask(payload)
       .then((res) => {
-      dispatch(addTaskAC({ task: res.data.data.item }))
-    })
+        dispatch(addTaskAC({ task: res.data.data.item }))
+        dispatch(setAppStatusAC("idle"))
+      })
   }
 export const removeTaskTC = (payload: { todolistId: string, taskId: string }) =>
   (dispatch: Dispatch) => {
+    dispatch(setAppStatusAC('loading'))
     tasksApi.removeTask(payload).then((res) => {
       dispatch(removeTaskAC(payload))
+      dispatch(setAppStatusAC('idle'))
     })
   }
 
@@ -118,8 +126,10 @@ export const updateTaskTC = (payload: { taskId: string, todolistId: string, doma
     const allTasksFromState = getState().tasks
     const tasksForCurrentTodolist = allTasksFromState[todolistId]
     const task = tasksForCurrentTodolist.find(t => t.id === taskId)
+    dispatch(setAppStatusAC('loading'))
     tasksApi.updateTask({ taskId, todolistId, domainModel })
       .then(res => {
         dispatch(changeTaskAC({ taskId, todolistId, domainModel: res.data.data.item }))
+        dispatch(setAppStatusAC('idle'))
       })
   }

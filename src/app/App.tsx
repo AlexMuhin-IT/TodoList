@@ -6,6 +6,7 @@ import { Main } from "./Main"
 import { useAppDispatch, useAppSelector } from "common/hooks"
 import { selectThemeMode } from "./appSelectors"
 import { fetchTodolistsTC } from "../features/todolists/model/todolist-reducer"
+import { ErrorSnackbar } from "common/components"
 
 export const App = () => {
 
@@ -21,6 +22,7 @@ export const App = () => {
       <CssBaseline />
       <Header />
       <Main />
+      <ErrorSnackbar/>
     </ThemeProvider>
   )
 }

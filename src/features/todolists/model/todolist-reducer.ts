@@ -2,6 +2,7 @@ import { FilterValuesType } from "../ui/Todolists/Todolists"
 import { Todolist } from "../api/todolistsApi.types"
 import { Dispatch } from "redux"
 import { todolistsApi } from "../api/todolistsApi"
+import { setAppStatusAC } from "app/app-reducer"
 
 
 export type DomainTodolist = Todolist & {
@@ -79,18 +80,24 @@ export type ActionsType =
   | SetTodolistsAT
 
 export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
+  dispatch(setAppStatusAC('loading'))
   todolistsApi.getTodolists().then(res => {
     dispatch(setTodolistsAC(res.data))
+    dispatch(setAppStatusAC('idle'))
   })
 }
 export const addTodolistTC = (title: string ) => (dispatch: Dispatch) => {
+  dispatch(setAppStatusAC('loading'))
   todolistsApi.createTodolist(title).then(res => {
     dispatch(addTodolistAC(res.data.data.item))
+    dispatch(setAppStatusAC('idle'))
   })
 }
 export const removeTodolistTC = (todolistId: string) => (dispatch: Dispatch) => {
+  dispatch(setAppStatusAC('loading'))
   todolistsApi.deleteTodolist(todolistId).then(res => {
     dispatch(removeTodolistAC(todolistId))
+    dispatch(setAppStatusAC('idle'))
   })
 }
 export const updateTodolistTitleTC = (payload:{todolistId:string, title: string } ) => (dispatch: Dispatch) => {
@@ -99,3 +106,4 @@ export const updateTodolistTitleTC = (payload:{todolistId:string, title: string 
     dispatch(changeTodolistTitleAC({todolistId, title }))
   })
 }
+
