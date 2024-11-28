@@ -114,8 +114,7 @@ export const fetchTasksTC = (todolistId: string) => (dispatch: Dispatch) => {
       handleServerNetworkError(error, dispatch)
     })
 }
-export const addTaskTC = (payload: { title: string, todolistId: string }): AppThunk =>
-  (dispatch) => {
+export const addTaskTC = (payload: { title: string, todolistId: string }): AppThunk =>  (dispatch) => {
     dispatch(setAppStatusAC("loading"))
     tasksApi
       .createTask(payload)
@@ -131,8 +130,7 @@ export const addTaskTC = (payload: { title: string, todolistId: string }): AppTh
         handleServerNetworkError(error, dispatch)
       })
   }
-export const removeTaskTC = (payload: { todolistId: string, taskId: string }) =>
-  (dispatch: Dispatch) => {
+export const removeTaskTC = (payload: { todolistId: string, taskId: string }) =>  (dispatch: Dispatch) => {
     dispatch(setAppStatusAC("loading"))
     tasksApi.removeTask(payload)
       .then((res) => {
@@ -147,15 +145,14 @@ export const removeTaskTC = (payload: { todolistId: string, taskId: string }) =>
         handleServerNetworkError(error, dispatch)
       })
   }
-
-export const updateTaskTC = (payload: { taskId: string, todolistId: string, domainModel: UpdateTaskDomainModel }) =>
-  (dispatch: Dispatch, getState: () => RootState) => {
+export const updateTaskTC = (payload: { taskId: string, todolistId: string, domainModel: UpdateTaskDomainModel }) =>  (dispatch: Dispatch, getState: () => RootState) => {
     const { taskId, todolistId, domainModel } = payload
     const allTasksFromState = getState().tasks
     const tasksForCurrentTodolist = allTasksFromState[todolistId]
     const task = tasksForCurrentTodolist.find(t => t.id === taskId)
     dispatch(setAppStatusAC("loading"))
-    tasksApi.updateTask({ taskId, todolistId, domainModel })
+    tasksApi
+      .updateTask({ taskId, todolistId, domainModel })
       .then(res => {
         if (res.data.resultCode === ResultCode.Success) {
           dispatch(updateTaskAC(payload))
