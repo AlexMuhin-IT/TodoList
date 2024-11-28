@@ -1,12 +1,11 @@
-import React, { useCallback } from "react"
+import React from "react"
 import { filterButtonsContainerSx } from "./FilterTasksButtons.styles"
 import { Box, Button } from "@mui/material"
-import { FilterValuesType, TodolistType } from "../../Todolists"
 import { useAppDispatch } from "common/hooks"
-import { changeTodolistFilterAC } from "../../../../model/todolist-reducer"
+import { changeTodolistFilterAC, DomainTodolist, FilterValuesType } from "../../../../model/todolist-reducer"
 
 type Props = {
-  todolist: TodolistType
+  todolist: DomainTodolist
 }
 
 export const FilterTasksButtons = ({ todolist }: Props) => {
@@ -14,7 +13,7 @@ export const FilterTasksButtons = ({ todolist }: Props) => {
 
   const changeFilter =
     (filter: FilterValuesType) => {
-      dispatch(changeTodolistFilterAC({ filter, todolistId: todolist.id }))
+      dispatch(changeTodolistFilterAC({ filter, id: todolist.id }))
     }
 
 

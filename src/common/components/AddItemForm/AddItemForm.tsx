@@ -4,8 +4,9 @@ import { Send } from "@mui/icons-material"
 
 type Props = {
   addItem: (title: string) => void
+  disabled?: boolean
 }
-export const AddItemForm = ({ addItem }: Props) => {
+export const AddItemForm = ({ addItem, disabled }: Props) => {
 
   const [title, setNewTitle] = useState("")
   const [error, setError] = useState<string | null>(null)
@@ -42,9 +43,15 @@ export const AddItemForm = ({ addItem }: Props) => {
         onKeyUp={addItemOnKeyUpHandler}
         error={!!error}
         helperText={error}
+        disabled={disabled}
       />
-      <Button onClick={addItemHandler} variant="contained" endIcon={<Send />} size={"small"}>
-        Send
+      <Button
+        onClick={addItemHandler}
+        variant="contained"
+        endIcon={<Send />}
+        size={"small"}
+        disabled={disabled}
+      > Send
       </Button>
     </div>
   )

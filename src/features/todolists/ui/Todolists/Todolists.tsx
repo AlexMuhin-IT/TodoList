@@ -6,13 +6,6 @@ import { useAppDispatch, useAppSelector } from "common/hooks"
 import { selectTodolists } from "app/appSelectors"
 import { fetchTodolistsTC } from "../../model/todolist-reducer"
 
-export type FilterValuesType = "all" | "active" | "completed"
-export type TodolistType = {
-  id: string
-  title: string
-  filter: FilterValuesType
-}
-
 
 const Todolists = () => {
 
