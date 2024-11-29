@@ -5,7 +5,6 @@ import { RequestStatus, setAppStatusAC } from "app/app-reducer"
 import { ResultCode } from "common/enums"
 import { handleServerAppError } from "common/utils/handleServerAppError"
 import { handleServerNetworkError } from "common/utils/handleServerNetworkError"
-import { updateTaskAC } from "./task-reducer"
 
 export type FilterValuesType = "all" | "active" | "completed"
 export type DomainTodolist = Todolist & {
