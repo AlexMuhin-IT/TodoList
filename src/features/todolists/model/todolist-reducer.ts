@@ -123,7 +123,6 @@ export const removeTodolistTC = (id: string) => (dispatch: Dispatch) => {
   todolistsApi
 
     .deleteTodolist(id)
-
     .then(res => {
       if (res.data.resultCode === ResultCode.Success) {
         dispatch(removeTodolistAC(id))
