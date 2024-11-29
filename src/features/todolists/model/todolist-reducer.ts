@@ -121,7 +121,9 @@ export const removeTodolistTC = (id: string) => (dispatch: Dispatch) => {
   dispatch(setAppStatusAC("loading"))
   dispatch(changeTodolistEntityStatusAC({ id, entityStatus: "loading" }))
   todolistsApi
+
     .deleteTodolist(id)
+
     .then(res => {
       if (res.data.resultCode === ResultCode.Success) {
         dispatch(removeTodolistAC(id))
