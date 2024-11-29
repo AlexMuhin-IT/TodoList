@@ -1,7 +1,5 @@
 import React, { ChangeEvent, useState } from "react"
 import { TextField } from "@mui/material"
-import { useAppSelector } from "common/hooks"
-import { selectTodolists } from "app/appSelectors"
 
 type Props = {
   value: string
