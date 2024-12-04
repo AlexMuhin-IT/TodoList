@@ -1,4 +1,10 @@
-import { AddTodolistAT, changeTodolistEntityStatusAC, DomainTodolist, RemoveTodolistAT } from "./todolist-reducer"
+import {
+  AddTodolistAT,
+  changeTodolistEntityStatusAC,
+  ClearTodolistDataAT,
+  DomainTodolist,
+  RemoveTodolistAT
+} from "./todolist-reducer"
 import { Dispatch } from "redux"
 import { tasksApi } from "../api/tasksApi"
 import { DomainTask, UpdateTaskDomainModel } from "../api/tasksApi.types"
@@ -56,6 +62,8 @@ export const taskReducer = (state: TasksStateType = initialState, action: Action
         ...state, [todolistId]: state[todolistId].map((t) => (t.id === taskId ? { ...t, ...domainModel } : t))
       }
     }
+    case "CLEAR_DATA":
+      return {}
     default:
       return state
   }
@@ -90,6 +98,7 @@ export type ActionType =
   | RemoveTodolistAT
   | SetTasksAT
   | ChangeTaskAT
+  | ClearTodolistDataAT
 
 export type RemoveTaskAT = ReturnType<typeof removeTaskAC>
 export type AddTaskAT = ReturnType<typeof addTaskAC>
