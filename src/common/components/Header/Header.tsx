@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "common/hooks"
 import { selectStatus, selectThemeMode } from "app/appSelectors"
 import { Clock } from "../Clock/Clock"
 import { selectIsLoggedIn } from "app/authSelector"
-import { logoutTC } from "../../../features/auth/model/auth-reducer"
+import { logoutTC } from "features/auth/model/auth-reducer"
 
 export const Header = () => {
   const themeMode = useAppSelector(selectThemeMode)
