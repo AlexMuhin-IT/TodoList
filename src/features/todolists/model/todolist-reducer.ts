@@ -5,6 +5,7 @@ import { RequestStatus, setAppStatusAC } from "app/app-reducer"
 import { ResultCode } from "common/enums"
 import { handleServerAppError } from "common/utils/handleServerAppError"
 import { handleServerNetworkError } from "common/utils/handleServerNetworkError"
+import { fetchTasksTC, SetTasksAT } from "./task-reducer"
 
 export type FilterValuesType = "all" | "active" | "completed"
 export type DomainTodolist = Todolist & {
@@ -16,6 +17,7 @@ const initialState: DomainTodolist[] = []
 
 export const todolistsReducer = (state: DomainTodolist[] = initialState, action: ActionsType): DomainTodolist[] => {
   switch (action.type) {
+
     case "SET_TODOLISTS": {
       return action.todolists.map((tl) => ({ ...tl, filter: "all", entityStatus: "idle" }))
     }
@@ -49,6 +51,9 @@ export const todolistsReducer = (state: DomainTodolist[] = initialState, action:
         ? { ...tl, entityStatus }
         : tl)
     }
+    case "CLEAR_DATA":
+      return []
+
     default:
       return state
   }
@@ -92,13 +97,21 @@ export type ActionsType =
   | ChangeTodolistFilterAT
   | SetTodolistsAT
   | ChangeTodolistEntityStatusAT
+  | ClearTodolistDataAT
+
 
 export const fetchTodolistsTC = () => (dispatch: Dispatch) => {
   dispatch(setAppStatusAC("loading"))
   todolistsApi.getTodolists().then(res => {
     dispatch(setTodolistsAC(res.data))
     dispatch(setAppStatusAC("idle"))
+    return res.data
   })
+    .then((todos) => {
+      todos.forEach((tl) => {
+        // dispatch(fetchTasksTC(tl.id))
+      })
+    })
 }
 export const addTodolistTC = (title: string) => (dispatch: Dispatch) => {
   dispatch(setAppStatusAC("loading"))
@@ -152,3 +165,7 @@ export const updateTodolistTitleTC = (payload: { id: string, title: string }) =>
     })
 }
 
+export const clearTodolistDataAC = () => ({
+  type: "CLEAR_DATA"
+} as const)
+export type ClearTodolistDataAT = ReturnType<typeof clearTodolistDataAC>
