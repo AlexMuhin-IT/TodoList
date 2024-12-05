@@ -14,6 +14,7 @@ export type TodolistPropsType = {
 export const Todolist = ({ todolist }: TodolistPropsType) => {
   const dispatch = useAppDispatch()
 
+
   const addTaskCallback = (title: string) => {
     dispatch(addTaskTC({ todolistId: todolist.id, title }))
   }
