@@ -15,7 +15,7 @@ const Todolists = () => {
 
   useEffect(() => {
     dispatch(fetchTodolistsTC())
-  },[])
+  }, [])
 
 
   return (
@@ -23,7 +23,7 @@ const Todolists = () => {
       {todolists.map((tl) => (
         <Grid key={tl.id}>
           <Paper sx={{ p: "10px" }}>
-            <Todolist key={tl.id} todolist={tl}  />
+            <Todolist key={tl.id} todolist={tl} />
           </Paper>
         </Grid>
       ))}
@@ -32,3 +32,4 @@ const Todolists = () => {
 }
 
 export default Todolists
+
