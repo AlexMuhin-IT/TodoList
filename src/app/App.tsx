@@ -11,7 +11,6 @@ import { selectIsInitialized } from "app/authSelector"
 import s from "./App.module.css"
 
 export const App = () => {
-
   const dispatch = useAppDispatch()
   const themeMode = useAppSelector(selectThemeMode)
   const isInitialized = useAppSelector(selectIsInitialized)
@@ -31,8 +30,8 @@ export const App = () => {
     <ThemeProvider theme={getTheme(themeMode)}>
       <CssBaseline />
       <Header />
-      <Routing/>
-      <ErrorSnackbar/>
+      <Routing />
+      <ErrorSnackbar />
     </ThemeProvider>
   )
 }
