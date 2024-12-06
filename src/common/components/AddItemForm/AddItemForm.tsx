@@ -7,7 +7,6 @@ type Props = {
   disabled?: boolean
 }
 export const AddItemForm = ({ addItem, disabled }: Props) => {
-
   const [title, setNewTitle] = useState("")
   const [error, setError] = useState<string | null>(null)
 
@@ -44,13 +43,9 @@ export const AddItemForm = ({ addItem, disabled }: Props) => {
         helperText={error}
         disabled={disabled}
       />
-      <Button
-        onClick={addItemHandler}
-        variant="contained"
-        endIcon={<Send />}
-        size={"small"}
-        disabled={disabled}
-      > Send
+      <Button onClick={addItemHandler} variant="contained" endIcon={<Send />} size={"small"} disabled={disabled}>
+        {" "}
+        Send
       </Button>
     </div>
   )
