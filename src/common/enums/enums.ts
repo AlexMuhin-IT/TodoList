@@ -3,7 +3,6 @@ export enum TaskStatus {
   InProgress = 1,
   Completed = 2,
   Draft = 3,
-
 }
 
 export enum TaskPriority {
