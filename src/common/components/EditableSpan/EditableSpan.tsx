@@ -8,7 +8,6 @@ type Props = {
 }
 
 export const EditableSpan = ({ value, onChange, disabled }: Props) => {
-
   const [editMode, setEditMode] = useState(false)
   const [title, setTitle] = useState<string>(value)
 
@@ -22,11 +21,13 @@ export const EditableSpan = ({ value, onChange, disabled }: Props) => {
   return (
     <div>
       {editMode && !disabled ? (
-        <TextField size={"small"}
-                   onChange={onTitleHandler}
-                   onBlur={changeEditModeHandler}
-                   value={title} autoFocus
-                   disabled={disabled}
+        <TextField
+          size={"small"}
+          onChange={onTitleHandler}
+          onBlur={changeEditModeHandler}
+          value={title}
+          autoFocus
+          disabled={disabled}
         />
       ) : (
         <span onDoubleClick={changeEditModeHandler}>{value}</span>
