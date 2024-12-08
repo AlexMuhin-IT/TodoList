@@ -2,8 +2,7 @@ import * as React from "react"
 import Snackbar, { SnackbarCloseReason } from "@mui/material/Snackbar"
 import Alert from "@mui/material/Alert"
 import { useAppDispatch, useAppSelector } from "common/hooks"
-import { selectError } from "app/appSelectors"
-import { setAppErrorAC } from "app/app-reducer"
+import { selectError, setAppError } from "app/appSlice"
 
 export const ErrorSnackbar = () => {
   const dispatch = useAppDispatch()
@@ -13,7 +12,7 @@ export const ErrorSnackbar = () => {
     if (reason === "clickaway") {
       return
     }
-    dispatch(setAppErrorAC(null))
+    dispatch(setAppError({ error: null }))
   }
 
   return (
