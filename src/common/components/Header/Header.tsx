@@ -1,15 +1,13 @@
 import AppBar from "@mui/material/AppBar"
 import { IconButton, LinearProgress, Switch, Toolbar } from "@mui/material"
-import { Logout, Menu } from "@mui/icons-material"
+import { Menu } from "@mui/icons-material"
 import { MenuButton } from "../MenuButton/MenuButton"
 import React from "react"
 import { getTheme } from "../../theme/theme"
-import { changeThemeAC } from "app/app-reducer"
 import { useAppDispatch, useAppSelector } from "common/hooks"
-import { selectStatus, selectThemeMode } from "app/appSelectors"
 import { Clock } from "../Clock/Clock"
-import { selectIsLoggedIn } from "app/authSelector"
-import { logoutTC } from "features/auth/model/auth-reducer"
+import { logoutTC, selectIsLoggedIn } from "features/auth/model/authSlice"
+import { changeTheme, selectStatus, selectThemeMode } from "app/appSlice"
 
 export const Header = () => {
   const themeMode = useAppSelector(selectThemeMode)
@@ -19,7 +17,7 @@ export const Header = () => {
   const dispatch = useAppDispatch()
 
   const changeModeHandler = () => {
-    dispatch(changeThemeAC(themeMode == "light" ? "dark" : "light"))
+    dispatch(changeTheme({ themeMode: themeMode == "light" ? "dark" : "light" }))
   }
   const logoutHandler = () => {
     dispatch(logoutTC())
@@ -39,9 +37,7 @@ export const Header = () => {
           <Switch color={"default"} onChange={changeModeHandler} />
         </div>
       </Toolbar>
-      {
-        status === "loading" && <LinearProgress color="error" />
-      }
+      {status === "loading" && <LinearProgress color="error" />}
     </AppBar>
   )
 }
