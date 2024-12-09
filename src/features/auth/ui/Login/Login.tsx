@@ -6,16 +6,15 @@ import FormGroup from "@mui/material/FormGroup"
 import FormLabel from "@mui/material/FormLabel"
 import TextField from "@mui/material/TextField"
 import { useAppDispatch, useAppSelector } from "common/hooks"
-import { selectThemeMode } from "app/appSelectors"
 import { getTheme } from "common/theme/theme"
 import Grid from "@mui/material/Grid2"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import s from "./Login.module.css"
-import { loginTC } from "../../model/auth-reducer"
-import { selectIsLoggedIn } from "app/authSelector"
-import { Navigate, useNavigate } from "react-router"
+import { loginTC, selectIsLoggedIn } from "features/auth/model/authSlice"
+import { useNavigate } from "react-router"
 import { Path } from "common/routing/Routing"
 import { useEffect } from "react"
+import { selectThemeMode } from "app/appSlice"
 
 export type Inputs = {
   email: string
@@ -23,7 +22,6 @@ export type Inputs = {
   rememberMe: boolean
   captcha?: string
 }
-
 
 export const Login = () => {
   const dispatch = useAppDispatch()
@@ -36,10 +34,10 @@ export const Login = () => {
     watch,
     reset,
     control,
-    formState: { errors }
+    formState: { errors },
   } = useForm<Inputs>({ defaultValues: { email: "myx87@bk.ru", password: "", rememberMe: false } })
 
-  const onSubmit: SubmitHandler<Inputs> = data => {
+  const onSubmit: SubmitHandler<Inputs> = (data) => {
     dispatch(loginTC(data))
     reset()
   }
@@ -86,8 +84,8 @@ export const Login = () => {
                   required: "Email is required",
                   pattern: {
                     value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                    message: "Incorrect email address"
-                  }
+                    message: "Incorrect email address",
+                  },
                 })}
               />
               {errors.email && <span className={s.errorMessage}>{errors.email.message}</span>}
@@ -99,8 +97,8 @@ export const Login = () => {
                   required: "Password is required",
                   pattern: {
                     value: /^.{3,}$/,
-                    message: "Password must be at least 3 characters long"
-                  }
+                    message: "Password must be at least 3 characters long",
+                  },
                 })}
               />
               {errors.password && <span className={s.errorMessage}>{errors.password.message}</span>}
@@ -110,9 +108,7 @@ export const Login = () => {
                   <Controller
                     name={"rememberMe"}
                     control={control}
-                    render={({
-                               field: { value, ...rest }
-                             }) => <Checkbox {...rest} checked={value} />}
+                    render={({ field: { value, ...rest } }) => <Checkbox {...rest} checked={value} />}
                   />
                 }
               />
