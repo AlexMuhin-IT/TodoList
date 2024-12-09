@@ -1,3 +1,2 @@
-export { taskReducer } from "./task-reducer"
-export { todolistsReducer } from "./todolist-reducer"
-
+export { todolistsReducer } from "features/todolists/model/todolistsSlice"
+export { tasksSlice } from "features/todolists/model/taskSlice"
