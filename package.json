@@ -33,6 +33,15 @@
     "uuid": "^10.0.0",
     "web-vitals": "^3.5.1"
   },
+  "baseUrl": "src",
+  "paths": {
+    "model/*": [
+      "model/*"
+    ],
+    "api/*": [
+      "api/*"
+    ]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
