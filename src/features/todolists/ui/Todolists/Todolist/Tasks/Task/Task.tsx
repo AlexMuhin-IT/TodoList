@@ -4,10 +4,10 @@ import { Delete } from "@mui/icons-material"
 import { getListItemSx } from "./Task.styles"
 import { useAppDispatch } from "common/hooks"
 import { EditableSpan } from "common/components"
-import { DomainTask, UpdateTaskDomainModel } from "../../../../../api/tasksApi.types"
 import { TaskStatus } from "common/enums"
-import { DomainTodolist } from "../../../../../model/todolist-reducer"
-import { removeTaskTC, updateTaskTC } from "../../../../../model/task-reducer"
+import { DomainTodolist } from "features/todolists/model/todolistsSlice"
+import { DomainTask, UpdateTaskDomainModel } from "features/todolists/api/tasksApi.types"
+import { removeTaskTC, updateTaskTC } from "features/todolists/model/taskSlice"
 
 type Props = {
   task: DomainTask
@@ -16,7 +16,6 @@ type Props = {
 }
 
 export const Task = ({ task, todolist, disabled }: Props) => {
-
   const dispatch = useAppDispatch()
 
   const removeTaskHandler = () => {
@@ -31,7 +30,7 @@ export const Task = ({ task, todolist, disabled }: Props) => {
       deadline: task.deadline,
       description: task.description,
       priority: task.priority,
-      startDate: task.startDate
+      startDate: task.startDate,
     }
     dispatch(updateTaskTC({ todolistId: todolist.id, taskId: task.id, domainModel }))
   }
@@ -43,29 +42,18 @@ export const Task = ({ task, todolist, disabled }: Props) => {
       deadline: task.deadline,
       description: task.description,
       priority: task.priority,
-      startDate: task.startDate
+      startDate: task.startDate,
     }
     dispatch(updateTaskTC({ todolistId: todolist.id, taskId: task.id, domainModel }))
   }
 
   return (
-    <ListItem key={task.id} alignItems={"center"}
-              sx={getListItemSx(task.status === TaskStatus.Completed)}>
+    <ListItem key={task.id} alignItems={"center"} sx={getListItemSx(task.status === TaskStatus.Completed)}>
       <div>
-        <Checkbox checked={task.status === TaskStatus.Completed}
-                  onChange={changeTaskHandler}
-                  disabled={disabled}
-        />
+        <Checkbox checked={task.status === TaskStatus.Completed} onChange={changeTaskHandler} disabled={disabled} />
       </div>
-      <EditableSpan onChange={changeTaskTitleHandler}
-                    value={task.title}
-                    disabled={disabled}
-      />
-      <IconButton aria-label="delete"
-                  onClick={removeTaskHandler}
-                  size={"small"}
-                  disabled={disabled}
-      >
+      <EditableSpan onChange={changeTaskTitleHandler} value={task.title} disabled={disabled} />
+      <IconButton aria-label="delete" onClick={removeTaskHandler} size={"small"} disabled={disabled}>
         <Delete />
       </IconButton>
     </ListItem>
