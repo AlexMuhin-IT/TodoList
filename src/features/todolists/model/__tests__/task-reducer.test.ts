@@ -1,15 +1,15 @@
-// import { addTaskAC, changeTaskStatusAC, changeTaskTitleAC, removeTaskAC, taskReducer } from "../task-reducer"
-// import { addTodolistAC, DomainTodolist, removeTodolistAC } from "../todolist-reducer"
-// import { TasksStateType } from "../../ui/Todolists/Todolists"
-// import { DomainTask } from "../../api/tasksApi.types"
+//
 //
 // // let startState: TasksStateType = {}
-
+//
+// import { addTask, removeTask, setTasks } from "features/todolists/model/taskSlice"
+// import { addTodolist, removeTodolist } from "features/todolists/model/todolistsSlice"
+//
 // let startState: DomainTodolist = {}
 //
 // beforeEach(() => {
 //   startState = {
-//     ['todolistId1']: [
+//     ["todolistId1"]: [
 //       { id: "1", title: "CSS", isDone: false },
 //       { id: "2", title: "JS", isDone: true },
 //       { id: "3", title: "React", isDone: false },
@@ -23,15 +23,15 @@
 // })
 // beforeEach(() => {
 //   startState = {
-//     ['todolistId1']: [],
-//     ['todolistId2']: [],
+//     ["todolistId1"]: [],
+//     ["todolistId2"]: [],
 //   }
 // })
 //
 // test("correct task should be deleted from correct array", () => {
 //   const endState = taskReducer(
 //     startState,
-//     removeTaskAC({
+//     removeTask({
 //       todolistId: "todolistId2",
 //       taskId: "2",
 //     }),
@@ -52,7 +52,7 @@
 // test("correct task should be added to correct array", () => {
 //   const endState = taskReducer(
 //     startState,
-//     addTaskAC({
+//     addTask({
 //       todolistId: "todolistId2",
 //       title: "juce",
 //     }),
@@ -67,7 +67,7 @@
 // test("status of specified task should be changed", () => {
 //   const endState = taskReducer(
 //     startState,
-//     changeTaskStatusAC({
+//     changeTaskStatus({
 //       taskId: "2",
 //       taskStatus: false,
 //       todolistId: "todolistId2",
@@ -91,7 +91,7 @@
 // })
 //
 // test("new array should be added when new todolists is added", () => {
-//   const endState = taskReducer(startState, addTodolistAC("new todolists"))
+//   const endState = taskReducer(startState, addTodolist("new todolists"))
 //
 //   const keys = Object.keys(endState)
 //   const newKey = keys.find((k) => k !== "todolistId1" && k !== "todolistId2")
@@ -103,7 +103,7 @@
 //   expect(endState[newKey]).toEqual([])
 // })
 // test("property with todolistId should be deleted", () => {
-//   const action = removeTodolistAC("todolistId2")
+//   const action = removeTodolist("todolistId2")
 //
 //   const endState = taskReducer(startState, action)
 //
@@ -114,14 +114,16 @@
 //   // or
 //   expect(endState["todolistId2"]).toBeUndefined()
 // })
-// import { setTasksAC, taskReducer } from "../task-reducer"
 //
 // test("new array should be added when new todolists is added", () => {
-//   const action = setTasksAC(startState["todolistId1"], ["todolistId2"])
-//   const endState = taskReducer({
-//     "todolistId2": [],
-//     "todolistId1": []
-//   }, action)
+//   const action = setTasks(startState["todolistId1"], ["todolistId2"])
+//   const endState = taskReducer(
+//     {
+//       todolistId2: [],
+//       todolistId1: [],
+//     },
+//     action,
+//   )
 //
 //   // const keys = Object.keys(endState)
 //   // const newKey = keys.find((k) => k !== "todolistId1" && k !== "todolistId2")
