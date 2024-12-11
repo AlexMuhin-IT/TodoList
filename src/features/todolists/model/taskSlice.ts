@@ -147,6 +147,12 @@ export const updateTaskTC =
     }
   }
 
-export const { addTask, setTasks, updateTask, removeTask } = tasksSlice.actions
+export const {
+  addTask,
+  setTasks,
+  updateTask,
+  removeTask,
+  clearTasks
+} = tasksSlice.actions
 export const tasksReducer = tasksSlice.reducer
 export const { selectTasks } = tasksSlice.selectors
