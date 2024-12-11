@@ -50,7 +50,6 @@ export const Login = () => {
       navigate(Path.Main)
     }
   }, [isLoggedIn])
-  debugger
   return (
     <Grid container justifyContent={"center"}>
       <Grid justifyContent={"center"}>
