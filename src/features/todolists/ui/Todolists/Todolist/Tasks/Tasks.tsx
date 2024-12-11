@@ -1,11 +1,10 @@
 import React, { useEffect } from "react"
 import { List } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "common/hooks"
-import { selectTasks } from "app/appSelectors"
-import { Task } from "./Task/Task"
 import { TaskStatus } from "common/enums"
-import { DomainTodolist } from "../../../../model/todolist-reducer"
-import { fetchTasksTC } from "../../../../model/task-reducer"
+import { DomainTodolist } from "features/todolists/model/todolistsSlice"
+import { fetchTasksTC, selectTasks } from "features/todolists/model/taskSlice"
+import { Task } from "features/todolists/ui/Todolists/Todolist/Tasks/Task/Task"
 
 type Props = {
   todolist: DomainTodolist
@@ -38,11 +37,7 @@ export const Tasks = ({ todolist }: Props) => {
       ) : (
         <List>
           {taskForTodolist?.map((task) => (
-            <Task key={task.id}
-                  task={task}
-                  todolist={todolist}
-                  disabled={todolist.entityStatus === "loading"}
-            />
+            <Task key={task.id} task={task} todolist={todolist} disabled={todolist.entityStatus === "loading"} />
           ))}
         </List>
       )}
