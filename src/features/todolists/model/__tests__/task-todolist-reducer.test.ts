@@ -1,12 +1,11 @@
-// import { addTodolistAC, todolistsReducer } from "../todolist-reducer"
-// import { taskReducer } from "../task-reducer"
-// import { TasksStateType, TodolistType } from "../../ui/Todolists/Todolists"
+// import { TasksStateType } from "features/todolists/model/taskSlice"
+// import { addTodolist, todolistsReducer } from "features/todolists/model/todolistsSlice"
 //
 // test("ids should be equals", () => {
 //   const startTasksState: TasksStateType = {}
 //   const startTodolistsState: TodolistType[] = []
 //
-//   const action = addTodolistAC("new todolists")
+//   const action = addTodolist("new todolists")
 //
 //   const endTasksState = taskReducer(startTasksState, action)
 //   const endTodolistsState = todolistsReducer(startTodolistsState, action)
