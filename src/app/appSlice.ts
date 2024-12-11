@@ -10,7 +10,6 @@ export const appSlice = createSlice({
     status: "idle" as RequestStatus,
     error: null as string | null,
   },
-  // selectIsLoggedIn: (state) => state.isLoggedIn,
 
   selectors: {
     selectThemeMode: (state) => state.themeMode,
