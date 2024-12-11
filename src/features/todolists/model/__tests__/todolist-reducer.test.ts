@@ -1,12 +1,11 @@
 // import { v1 } from "uuid"
 // import {
-//   addTodolistAC,
-//   changeTodolistTitleAC,
-//   changeTodolistFilterAC,
-//   removeTodolistAC,
+//   addTodolist,
+//   changeTodolistTitle,
+//   changeTodolistFilter,
+//   removeTodolist,
 //   todolistsReducer, DomainTodolist
 // } from "../todolist-reducer"
-// import { TodolistType } from "../../ui/Todolists/Todolists"
 //
 // let todolistId1: string
 // let todolistId2: string
@@ -17,8 +16,8 @@
 //   todolistId2 = v1()
 //
 //   startState = [
-//     { id: todolistId1, title: "What to learn", filter: "all",order:0,addedDate:'' },
-//     { id: todolistId2, title: "What to buy", filter: "all",order:0,addedDate:'' },
+//     { id: todolistId1, title: "What to learn", filter: "all",order:0,addedDate:'', entityStatus: 'idle' },
+//     { id: todolistId2, title: "What to buy", filter: "all",order:0,addedDate:'', entityStatus: 'idle'},
 //   ]
 // })
 //
@@ -28,15 +27,16 @@
 //     title: "New Todolist",
 //     filter: "all",
 //     order: 0,
-//     addedDate: ""
+//     addedDate: "",
+//     entityStatus: 'idle'
 //   }
-//   const endState = todolistsReducer(startState, addTodolistAC(newTodolist))
+//   const endState = todolistsReducer(startState, addTodolist(newTodolist))
 //
 //   expect(endState.length).toBe(3)
 //   expect(endState[0].title).toBe("New Todolist")
 // })
 // test("correct todolists should be removed", () => {
-//   const endState = todolistsReducer(startState, removeTodolistAC(todolistId1))
+//   const endState = todolistsReducer(startState, removeTodolist(todolistId1))
 //
 //   expect(endState.length).toBe(1)
 //   expect(endState[0].id).toBe(todolistId2)
@@ -46,7 +46,7 @@
 //
 //   const endState = todolistsReducer(
 //     startState,
-//     changeTodolistTitleAC({ todolistId: todolistId2, title: newTodolistTitle }),
+//     changeTodolistTitle({ todolistId: todolistId2, title: newTodolistTitle }),
 //   )
 //
 //   expect(endState[0].title).toBe("What to learn")
@@ -55,7 +55,7 @@
 // test("correct filter of todolists should be change", () => {
 //
 //   const newFilter = "completed"
-//   const endState = todolistsReducer(startState, changeTodolistFilterAC({ todolistId: todolistId2, filter: newFilter }))
+//   const endState = todolistsReducer(startState, changeTodolistFilter({ todolistId: todolistId2, filter: newFilter }))
 //
 //   expect(endState[0].filter).toBe("all")
 //   expect(endState[1].filter).toBe("completed")
