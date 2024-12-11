@@ -7,9 +7,9 @@ import { handleServerNetworkError } from "common/utils/handleServerNetworkError"
 import { createSlice } from "@reduxjs/toolkit"
 import { setAppStatus } from "app/appSlice"
 import { clearTodolists } from "features/todolists/model/todolistsSlice"
+import { clearTasks } from "features/todolists/model/taskSlice"
 
 export const authSlice = createSlice({
-  // name: "auth",
   name: "auth",
   initialState: {
     isLoggedIn: false,
@@ -28,9 +28,6 @@ export const authSlice = createSlice({
     }),
   }),
 })
-export const { selectIsLoggedIn, selectIsInitialized } = authSlice.selectors
-export const { setIsInitialized, setIsLoggedIn } = authSlice.actions
-export const authReducer = authSlice.reducer
 
 //THUNK
 export const loginTC = (data: Inputs) => (dispatch: Dispatch) => {
@@ -60,6 +57,7 @@ export const logoutTC = () => (dispatch: Dispatch) => {
         dispatch(setIsLoggedIn({ isLoggedIn: false }))
         localStorage.removeItem("sn-token")
         dispatch(clearTodolists())
+        dispatch(clearTasks())
       } else {
         handleServerAppError(res.data, dispatch)
       }
@@ -87,3 +85,7 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
       dispatch(setIsInitialized({ isInitialized: true }))
     })
 }
+
+export const { selectIsLoggedIn, selectIsInitialized } = authSlice.selectors
+export const { setIsInitialized, setIsLoggedIn } = authSlice.actions
+export const authReducer = authSlice.reducer
