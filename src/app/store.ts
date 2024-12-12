@@ -16,12 +16,8 @@ export const store = configureStore({
   },
 })
 
-// export const store = legacy_createStore(rootReducer, {}, applyMiddleware(thunk))
-// export const store = configureStore({ reducer: rootReducer })
-
 export type RootState = ReturnType<typeof store.getState>
 
-// export type AppDispatch = ThunkDispatch<RootState, unknown, UnknownAction>
 export type AppDispatch = typeof store.dispatch
 export type AppThunk = ThunkAction<void, RootState, unknown, UnknownAction>
 
