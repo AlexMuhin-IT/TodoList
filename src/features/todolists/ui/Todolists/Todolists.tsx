@@ -1,22 +1,17 @@
 import React, { useEffect } from "react"
 import Grid from "@mui/material/Grid2"
 import { Paper } from "@mui/material"
-import { Todolist } from "./Todolist/Todolist"
 import { useAppDispatch, useAppSelector } from "common/hooks"
-import { selectTodolists } from "app/appSelectors"
-import { fetchTodolistsTC } from "../../model/todolist-reducer"
-
+import { fetchTodolistsTC, selectTodolists } from "features/todolists/model/todolistsSlice"
+import { Todolist } from "features/todolists/ui/Todolists/Todolist/Todolist"
 
 const Todolists = () => {
-
   const todolists = useAppSelector(selectTodolists)
   const dispatch = useAppDispatch()
-
 
   useEffect(() => {
     dispatch(fetchTodolistsTC())
   }, [])
-
 
   return (
     <>
@@ -32,4 +27,3 @@ const Todolists = () => {
 }
 
 export default Todolists
-
