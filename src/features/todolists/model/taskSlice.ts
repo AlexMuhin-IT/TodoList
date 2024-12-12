@@ -1,4 +1,4 @@
-import { addTodolist, DomainTodolist, removeTodolist, todolistsSlice } from "features/todolists/model/todolistsSlice"
+import { addTodolist, removeTodolist } from "features/todolists/model/todolistsSlice"
 import { Dispatch } from "redux"
 import { tasksApi } from "../api/tasksApi"
 import { DomainTask, UpdateTaskDomainModel } from "../api/tasksApi.types"
@@ -12,8 +12,6 @@ import { createSlice } from "@reduxjs/toolkit"
 export type TasksStateType = {
   [key: string]: DomainTask[]
 }
-
-// const initialState: TasksStateType = {}
 
 export const tasksSlice = createSlice({
   name: "tasks",
@@ -147,12 +145,6 @@ export const updateTaskTC =
     }
   }
 
-export const {
-  addTask,
-  setTasks,
-  updateTask,
-  removeTask,
-  clearTasks
-} = tasksSlice.actions
+export const { addTask, setTasks, updateTask, removeTask, clearTasks } = tasksSlice.actions
 export const tasksReducer = tasksSlice.reducer
 export const { selectTasks } = tasksSlice.selectors
