@@ -4,5 +4,3 @@ export type Todolist = {
   addedDate: string
   order: number
 }
-
-
