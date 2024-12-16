@@ -35,7 +35,7 @@ export const Login = () => {
     reset,
     control,
     formState: { errors },
-  } = useForm<Inputs>({ defaultValues: { email: "myx87@bk.ru", password: "", rememberMe: false } })
+  } = useForm<Inputs>({ defaultValues: { email: "myx87@bk.ru", password: "Aa21031987!", rememberMe: false } })
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     dispatch(loginTC(data))
