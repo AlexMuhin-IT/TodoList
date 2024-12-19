@@ -7,6 +7,7 @@ import { handleServerNetworkError } from "common/utils/handleServerNetworkError"
 import { createSlice } from "@reduxjs/toolkit"
 import { RequestStatus, setAppStatus } from "app/appSlice"
 import { removeTask } from "features/todolists/model/taskSlice"
+import { clearTasksAndTodolists } from "common/actions/common.actions"
 
 export type FilterValuesType = "all" | "active" | "completed"
 
@@ -59,17 +60,18 @@ export const todolistsSlice = createSlice({
     setTodolists: create.reducer<{ todolists: Todolist[] }>((state, action) => {
       return action.payload.todolists.map((tl) => ({ ...tl, filter: "all", entityStatus: "idle" }))
     }),
-    clearTodolists: create.reducer(() => {
-      return []
-    }),
   }),
   extraReducers: (builder) => {
-    builder.addCase(removeTask, (state, action) => {
-      const index = state.findIndex((el) => el.id === action.payload.todolistId)
-      if (index != -1) {
-        state.splice(index, 1)
-      }
-    })
+    builder
+      .addCase(removeTask, (state, action) => {
+        const index = state.findIndex((el) => el.id === action.payload.todolistId)
+        if (index != -1) {
+          state.splice(index, 1)
+        }
+      })
+      .addCase(clearTasksAndTodolists, () => {
+        return []
+      })
   },
 })
 
@@ -147,7 +149,7 @@ export const {
   changeTodolistFilter,
   changeTodolistTitle,
   setTodolists,
-  clearTodolists,
+  /*clearTodolists,*/
 } = todolistsSlice.actions
 
 export const todolistsReducer = todolistsSlice.reducer
