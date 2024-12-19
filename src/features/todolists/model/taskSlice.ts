@@ -8,6 +8,7 @@ import { handleServerNetworkError } from "common/utils/handleServerNetworkError"
 import { handleServerAppError } from "common/utils/handleServerAppError"
 import { setAppStatus } from "app/appSlice"
 import { createSlice } from "@reduxjs/toolkit"
+import { clearTasksAndTodolists } from "common/actions/common.actions"
 
 export type TasksStateType = {
   [key: string]: DomainTask[]
@@ -47,9 +48,6 @@ export const tasksSlice = createSlice({
         tasks[index] = { ...tasks[index], ...action.payload.domainModel }
       }
     }),
-    clearTasks: create.reducer(() => {
-      return {}
-    }),
   }),
   extraReducers: (builder) => {
     builder
@@ -58,6 +56,9 @@ export const tasksSlice = createSlice({
       })
       .addCase(removeTodolist, (state, action) => {
         delete state[action.payload.todolistId]
+      })
+      .addCase(clearTasksAndTodolists, () => {
+        return {}
       })
   },
 })
@@ -145,6 +146,6 @@ export const updateTaskTC =
     }
   }
 
-export const { addTask, setTasks, updateTask, removeTask, clearTasks } = tasksSlice.actions
+export const { addTask, setTasks, updateTask, removeTask /*clearTasks*/ } = tasksSlice.actions
 export const tasksReducer = tasksSlice.reducer
 export const { selectTasks } = tasksSlice.selectors
