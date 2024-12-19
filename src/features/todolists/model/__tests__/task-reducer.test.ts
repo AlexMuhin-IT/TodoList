@@ -3,7 +3,7 @@
 // // let startState: TasksStateType = {}
 //
 // import { addTask, removeTask, setTasks } from "features/todolists/model/taskSlice"
-// import { addTodolist, removeTodolist } from "features/todolists/model/todolistsSlice"
+// import { addTodolist, DomainTodolist, removeTodolist } from "features/todolists/model/todolistsSlice"
 //
 // let startState: DomainTodolist = {}
 //
