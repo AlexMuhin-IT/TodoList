@@ -10,7 +10,13 @@ export const Page404 = () => {
       <img alt={""} className={s.img} />
       {/*<h2 className={s.subTitle}>page not found</h2>*/}
       <h2 className={s.subTitle}>нет такой страницы</h2>
-      <Button className={s.button} href={Path.Main} variant="contained" size={"large"} sx={{ m: "auto" }}>
+      <Button
+        className={s.button}
+        href={Path.Main}
+        variant="contained"
+        size={"large"}
+        sx={{ m: "auto" }}
+      >
         Todolist's
       </Button>
 
