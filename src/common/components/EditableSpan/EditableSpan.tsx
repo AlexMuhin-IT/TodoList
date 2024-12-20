@@ -7,11 +7,17 @@ type Props = {
   disabled?: boolean
 }
 
-export const EditableSpan = ({ value, onChange, disabled }: Props) => {
+export const EditableSpan = ({
+  value,
+  onChange,
+  disabled,
+}: Props) => {
   const [editMode, setEditMode] = useState(false)
   const [title, setTitle] = useState<string>(value)
 
-  const onTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const onTitleHandler = (
+    e: ChangeEvent<HTMLInputElement>,
+  ) => {
     setTitle(e.currentTarget.value)
   }
   const changeEditModeHandler = () => {
@@ -30,7 +36,9 @@ export const EditableSpan = ({ value, onChange, disabled }: Props) => {
           disabled={disabled}
         />
       ) : (
-        <span onDoubleClick={changeEditModeHandler}>{value}</span>
+        <span onDoubleClick={changeEditModeHandler}>
+          {value}
+        </span>
       )}
     </div>
   )
