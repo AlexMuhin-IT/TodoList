@@ -2,7 +2,11 @@ import React from "react"
 import { filterButtonsContainerSx } from "./FilterTasksButtons.styles"
 import { Box, Button } from "@mui/material"
 import { useAppDispatch } from "common/hooks"
-import { changeTodolistFilter, DomainTodolist, FilterValuesType } from "features/todolists/model/todolistsSlice"
+import {
+  changeTodolistFilter,
+  DomainTodolist,
+  FilterValuesType,
+} from "features/todolists/model/todolistsSlice"
 
 type Props = {
   todolist: DomainTodolist
@@ -12,7 +16,9 @@ export const FilterTasksButtons = ({ todolist }: Props) => {
   const dispatch = useAppDispatch()
 
   const changeFilter = (filter: FilterValuesType) => {
-    dispatch(changeTodolistFilter({ filter, id: todolist.id }))
+    dispatch(
+      changeTodolistFilter({ filter, id: todolist.id }),
+    )
   }
 
   return (
@@ -21,7 +27,9 @@ export const FilterTasksButtons = ({ todolist }: Props) => {
         color="secondary"
         size={"small"}
         variant="contained"
-        className={todolist.filter === "all" ? "active-filter" : ""}
+        className={
+          todolist.filter === "all" ? "active-filter" : ""
+        }
         onClick={() => changeFilter("all")}
       >
         {" "}
@@ -31,7 +39,11 @@ export const FilterTasksButtons = ({ todolist }: Props) => {
         color="secondary"
         size={"small"}
         variant="contained"
-        className={todolist.filter === "active" ? "active-filter" : ""}
+        className={
+          todolist.filter === "active"
+            ? "active-filter"
+            : ""
+        }
         onClick={() => changeFilter("active")}
       >
         Active
@@ -40,7 +52,11 @@ export const FilterTasksButtons = ({ todolist }: Props) => {
         color="secondary"
         size={"small"}
         variant="contained"
-        className={todolist.filter === "completed" ? "active-filter" : ""}
+        className={
+          todolist.filter === "completed"
+            ? "active-filter"
+            : ""
+        }
         onClick={() => changeFilter("completed")}
       >
         Completed
