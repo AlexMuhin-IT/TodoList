@@ -1,4 +1,8 @@
-import React, { ChangeEvent, KeyboardEvent, useState } from "react"
+import React, {
+  ChangeEvent,
+  KeyboardEvent,
+  useState,
+} from "react"
 import { Button, TextField } from "@mui/material"
 import { Send } from "@mui/icons-material"
 
@@ -6,7 +10,10 @@ type Props = {
   addItem: (title: string) => void
   disabled?: boolean
 }
-export const AddItemForm = ({ addItem, disabled }: Props) => {
+export const AddItemForm = ({
+  addItem,
+  disabled,
+}: Props) => {
   const [title, setNewTitle] = useState("")
   const [error, setError] = useState<string | null>(null)
 
@@ -18,10 +25,14 @@ export const AddItemForm = ({ addItem, disabled }: Props) => {
       setError("Title is required")
     }
   }
-  const changeItemHandler = (e: ChangeEvent<HTMLInputElement>) => {
+  const changeItemHandler = (
+    e: ChangeEvent<HTMLInputElement>,
+  ) => {
     setNewTitle(e.currentTarget.value)
   }
-  const addItemOnKeyUpHandler = (e: KeyboardEvent<HTMLInputElement>) => {
+  const addItemOnKeyUpHandler = (
+    e: KeyboardEvent<HTMLInputElement>,
+  ) => {
     setError(null)
     if (e.key === "Enter") {
       addItemHandler()
@@ -43,7 +54,13 @@ export const AddItemForm = ({ addItem, disabled }: Props) => {
         helperText={error}
         disabled={disabled}
       />
-      <Button onClick={addItemHandler} variant="contained" endIcon={<Send />} size={"small"} disabled={disabled}>
+      <Button
+        onClick={addItemHandler}
+        variant="contained"
+        endIcon={<Send />}
+        size={"small"}
+        disabled={disabled}
+      >
         {" "}
         Send
       </Button>

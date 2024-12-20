@@ -1,11 +1,21 @@
 import React, { useEffect } from "react"
-import { CircularProgress, CssBaseline, ThemeProvider } from "@mui/material"
+import {
+  CircularProgress,
+  CssBaseline,
+  ThemeProvider,
+} from "@mui/material"
 import { getTheme } from "common/theme/theme"
 import { Header } from "common/components/Header/Header"
-import { useAppDispatch, useAppSelector } from "common/hooks"
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "common/hooks"
 import { ErrorSnackbar } from "common/components"
 import { Routing } from "common/routing/Routing"
-import { initializeAppTC, selectIsInitialized } from "features/auth/model/authSlice"
+import {
+  initializeAppTC,
+  selectIsInitialized,
+} from "features/auth/model/authSlice"
 import s from "./App.module.css"
 import { selectThemeMode } from "app/appSlice"
 
