@@ -5,12 +5,22 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import FormGroup from "@mui/material/FormGroup"
 import FormLabel from "@mui/material/FormLabel"
 import TextField from "@mui/material/TextField"
-import { useAppDispatch, useAppSelector } from "common/hooks"
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "common/hooks"
 import { getTheme } from "common/theme/theme"
 import Grid from "@mui/material/Grid2"
-import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import {
+  Controller,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form"
 import s from "./Login.module.css"
-import { loginTC, selectIsLoggedIn } from "features/auth/model/authSlice"
+import {
+  loginTC,
+  selectIsLoggedIn,
+} from "features/auth/model/authSlice"
 import { useNavigate } from "react-router"
 import { Path } from "common/routing/Routing"
 import { useEffect } from "react"
@@ -35,7 +45,13 @@ export const Login = () => {
     reset,
     control,
     formState: { errors },
-  } = useForm<Inputs>({ defaultValues: { email: "myx87@bk.ru", password: "Aa21031987!", rememberMe: false } })
+  } = useForm<Inputs>({
+    defaultValues: {
+      email: "myx87@bk.ru",
+      password: "Aa21031987!",
+      rememberMe: false,
+    },
+  })
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
     dispatch(loginTC(data))
@@ -58,8 +74,13 @@ export const Login = () => {
             <p>
               To login get registered
               <a
-                style={{ color: theme.palette.primary.main, marginLeft: "5px" }}
-                href={"https://social-network.samuraijs.com/"}
+                style={{
+                  color: theme.palette.primary.main,
+                  marginLeft: "5px",
+                }}
+                href={
+                  "https://social-network.samuraijs.com/"
+                }
                 target={"_blank"}
                 rel="noreferrer"
               >
@@ -82,12 +103,17 @@ export const Login = () => {
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
-                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    value:
+                      /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
                     message: "Incorrect email address",
                   },
                 })}
               />
-              {errors.email && <span className={s.errorMessage}>{errors.email.message}</span>}
+              {errors.email && (
+                <span className={s.errorMessage}>
+                  {errors.email.message}
+                </span>
+              )}
               <TextField
                 type="password"
                 label="password"
@@ -96,22 +122,35 @@ export const Login = () => {
                   required: "Password is required",
                   pattern: {
                     value: /^.{3,}$/,
-                    message: "Password must be at least 3 characters long",
+                    message:
+                      "Password must be at least 3 characters long",
                   },
                 })}
               />
-              {errors.password && <span className={s.errorMessage}>{errors.password.message}</span>}
+              {errors.password && (
+                <span className={s.errorMessage}>
+                  {errors.password.message}
+                </span>
+              )}
               <FormControlLabel
                 label={"Remember me"}
                 control={
                   <Controller
                     name={"rememberMe"}
                     control={control}
-                    render={({ field: { value, ...rest } }) => <Checkbox {...rest} checked={value} />}
+                    render={({
+                      field: { value, ...rest },
+                    }) => (
+                      <Checkbox {...rest} checked={value} />
+                    )}
                   />
                 }
               />
-              <Button type={"submit"} variant={"contained"} color={"primary"}>
+              <Button
+                type={"submit"}
+                variant={"contained"}
+                color={"primary"}
+              >
                 Login
               </Button>
             </FormGroup>
