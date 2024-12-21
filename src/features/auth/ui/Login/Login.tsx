@@ -5,28 +5,19 @@ import FormControlLabel from "@mui/material/FormControlLabel"
 import FormGroup from "@mui/material/FormGroup"
 import FormLabel from "@mui/material/FormLabel"
 import TextField from "@mui/material/TextField"
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "common/hooks"
+import { useAppDispatch, useAppSelector } from "common/hooks"
 import { getTheme } from "common/theme/theme"
 import Grid from "@mui/material/Grid2"
-import {
-  Controller,
-  SubmitHandler,
-  useForm,
-} from "react-hook-form"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import s from "./Login.module.css"
-import {
-  loginTC,
-  selectIsLoggedIn,
-} from "features/auth/model/authSlice"
-import { useNavigate } from "react-router"
+import { Navigate, useNavigate } from "react-router"
 import { Path } from "common/routing/Routing"
 import { useEffect } from "react"
-import { selectThemeMode } from "app/appSlice"
+import { selectIsLoggedIn, selectThemeMode, setIsLoggedIn } from "app/appSlice"
+import { useLoginMutation } from "features/auth/api/authApi"
+import { ResultCode } from "common/enums"
 
-export type Inputs = {
+export type LoginArgs = {
   email: string
   password: string
   rememberMe: boolean
@@ -35,8 +26,13 @@ export type Inputs = {
 
 export const Login = () => {
   const dispatch = useAppDispatch()
-  const isLoggedIn = useAppSelector(selectIsLoggedIn)
   const navigate = useNavigate()
+
+  const isLoggedIn = useAppSelector(selectIsLoggedIn)
+  const themeMode = useAppSelector(selectThemeMode)
+
+  const theme = getTheme(themeMode)
+  const [login] = useLoginMutation()
 
   const {
     register,
@@ -45,7 +41,7 @@ export const Login = () => {
     reset,
     control,
     formState: { errors },
-  } = useForm<Inputs>({
+  } = useForm<LoginArgs>({
     defaultValues: {
       email: "myx87@bk.ru",
       password: "Aa21031987!",
@@ -53,19 +49,37 @@ export const Login = () => {
     },
   })
 
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    dispatch(loginTC(data))
-    reset()
+  // const onSubmit: SubmitHandler<LoginArgs> = (data) => {
+  //   // dispatch(loginTC(data))
+  //   // reset()
+  //   login(data)
+  //     .then((res) => {
+  //       if (res.data?.resultCode === ResultCode.Success) {
+  //         dispatch(setIsLoggedIn({ isLoggedIn: true }))
+  //         localStorage.setItem("token", res.data.data.token)
+  //       }
+  //     })
+  //     .finally(() => {
+  //       reset()
+  //     })
+  // }
+  const onSubmit: SubmitHandler<LoginArgs> = (data) => {
+    login(data)
+      .then((res) => {
+        if (res.data?.resultCode === ResultCode.Success) {
+          dispatch(setIsLoggedIn({ isLoggedIn: true }))
+          localStorage.setItem("sn-token", res.data.data.token)
+        }
+      })
+      .finally(() => {
+        reset()
+      })
   }
 
-  const themeMode = useAppSelector(selectThemeMode)
-  const theme = getTheme(themeMode)
+  if (isLoggedIn) {
+    return <Navigate to={"/"} />
+  }
 
-  useEffect(() => {
-    if (isLoggedIn) {
-      navigate(Path.Main)
-    }
-  }, [isLoggedIn])
   return (
     <Grid container justifyContent={"center"}>
       <Grid justifyContent={"center"}>
@@ -78,9 +92,7 @@ export const Login = () => {
                   color: theme.palette.primary.main,
                   marginLeft: "5px",
                 }}
-                href={
-                  "https://social-network.samuraijs.com/"
-                }
+                href={"https://social-network.samuraijs.com/"}
                 target={"_blank"}
                 rel="noreferrer"
               >
@@ -103,17 +115,12 @@ export const Login = () => {
                 {...register("email", {
                   required: "Email is required",
                   pattern: {
-                    value:
-                      /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
                     message: "Incorrect email address",
                   },
                 })}
               />
-              {errors.email && (
-                <span className={s.errorMessage}>
-                  {errors.email.message}
-                </span>
-              )}
+              {errors.email && <span className={s.errorMessage}>{errors.email.message}</span>}
               <TextField
                 type="password"
                 label="password"
@@ -122,35 +129,22 @@ export const Login = () => {
                   required: "Password is required",
                   pattern: {
                     value: /^.{3,}$/,
-                    message:
-                      "Password must be at least 3 characters long",
+                    message: "Password must be at least 3 characters long",
                   },
                 })}
               />
-              {errors.password && (
-                <span className={s.errorMessage}>
-                  {errors.password.message}
-                </span>
-              )}
+              {errors.password && <span className={s.errorMessage}>{errors.password.message}</span>}
               <FormControlLabel
                 label={"Remember me"}
                 control={
                   <Controller
                     name={"rememberMe"}
                     control={control}
-                    render={({
-                      field: { value, ...rest },
-                    }) => (
-                      <Checkbox {...rest} checked={value} />
-                    )}
+                    render={({ field: { value, ...rest } }) => <Checkbox {...rest} checked={value} />}
                   />
                 }
               />
-              <Button
-                type={"submit"}
-                variant={"contained"}
-                color={"primary"}
-              >
+              <Button type={"submit"} variant={"contained"} color={"primary"}>
                 Login
               </Button>
             </FormGroup>
