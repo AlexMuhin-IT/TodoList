@@ -1,28 +1,16 @@
 import AppBar from "@mui/material/AppBar"
-import {
-  IconButton,
-  LinearProgress,
-  Switch,
-  Toolbar,
-} from "@mui/material"
+import { IconButton, LinearProgress, Switch, Toolbar } from "@mui/material"
 import { Menu } from "@mui/icons-material"
 import { MenuButton } from "../MenuButton/MenuButton"
 import React from "react"
 import { getTheme } from "../../theme/theme"
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "common/hooks"
+import { useAppDispatch, useAppSelector } from "common/hooks"
 import { Clock } from "../Clock/Clock"
-import {
-  logoutTC,
-  selectIsLoggedIn,
-} from "features/auth/model/authSlice"
-import {
-  changeTheme,
-  selectStatus,
-  selectThemeMode,
-} from "app/appSlice"
+import { changeTheme, selectIsLoggedIn, selectStatus, selectThemeMode, setIsLoggedIn } from "app/appSlice"
+import { useLogoutMutation } from "features/auth/api/authApi"
+import { ResultCode } from "common/enums"
+import { clearTasksAndTodolists } from "common/actions/common.actions"
+import { baseApi } from "app/baseApi"
 
 export const Header = () => {
   const themeMode = useAppSelector(selectThemeMode)
@@ -30,6 +18,8 @@ export const Header = () => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
   const theme = getTheme(themeMode)
   const dispatch = useAppDispatch()
+
+  const [logout] = useLogoutMutation()
 
   const changeModeHandler = () => {
     dispatch(
@@ -39,7 +29,16 @@ export const Header = () => {
     )
   }
   const logoutHandler = () => {
-    dispatch(logoutTC())
+    logout()
+      .then((res) => {
+        if (res.data?.resultCode === ResultCode.Success) {
+          dispatch(setIsLoggedIn({ isLoggedIn: false }))
+          localStorage.removeItem("sn-token")
+        }
+      })
+      .then(() => {
+        dispatch(baseApi.util.invalidateTags(["Todolist", "Task"]))
+      })
   }
   return (
     <AppBar sx={{ mb: "30px" }} position="static">
@@ -54,27 +53,12 @@ export const Header = () => {
           <Clock />
         </IconButton>
         <div>
-          {/*<MenuButton>Login</MenuButton>*/}
-          {isLoggedIn && (
-            <MenuButton onClick={logoutHandler}>
-              Logout
-            </MenuButton>
-          )}
-          {/*<MenuButton onClick={logoutHandler}>Logout</MenuButton>*/}
-          <MenuButton
-            background={theme.palette.primary.dark}
-          >
-            Faq
-          </MenuButton>
-          <Switch
-            color={"default"}
-            onChange={changeModeHandler}
-          />
+          {isLoggedIn && <MenuButton onClick={logoutHandler}>Logout</MenuButton>}
+          <MenuButton background={theme.palette.primary.dark}>Faq</MenuButton>
+          <Switch color={"default"} onChange={changeModeHandler} />
         </div>
       </Toolbar>
-      {status === "loading" && (
-        <LinearProgress color="error" />
-      )}
+      {status === "loading" && <LinearProgress color="error" />}
     </AppBar>
   )
 }
