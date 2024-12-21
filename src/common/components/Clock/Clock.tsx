@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react"
 import s from "./Clock.module.css"
 
-const getTwoDigitalsString = (num: number) =>
-  num < 10 ? "0" + num : num
+const getTwoDigitalsString = (num: number) => (num < 10 ? "0" + num : num)
 
 export const Clock = () => {
   const [date, setDate] = useState(new Date())
