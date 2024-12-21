@@ -1,45 +1,44 @@
-import React, { useEffect } from "react"
-import {
-  CircularProgress,
-  CssBaseline,
-  ThemeProvider,
-} from "@mui/material"
+import React, { useEffect, useState } from "react"
+import { CircularProgress, CssBaseline, ThemeProvider } from "@mui/material"
 import { getTheme } from "common/theme/theme"
 import { Header } from "common/components/Header/Header"
-import {
-  useAppDispatch,
-  useAppSelector,
-} from "common/hooks"
+import { useAppDispatch, useAppSelector } from "common/hooks"
 import { ErrorSnackbar } from "common/components"
 import { Routing } from "common/routing/Routing"
-import {
-  initializeAppTC,
-  selectIsInitialized,
-} from "features/auth/model/authSlice"
 import s from "./App.module.css"
-import { selectThemeMode } from "app/appSlice"
+import { selectThemeMode, setIsLoggedIn } from "app/appSlice"
+import { useMeQuery } from "features/auth/api/authApi"
+import { ResultCode } from "common/enums"
 
 export const App = () => {
-  const dispatch = useAppDispatch()
   const themeMode = useAppSelector(selectThemeMode)
-  const isInitialized = useAppSelector(selectIsInitialized)
+  const [isInitialized, setIsInitialized] = useState(false)
+  const dispatch = useAppDispatch()
+  const { data, isLoading } = useMeQuery()
 
   useEffect(() => {
-    dispatch(initializeAppTC())
-  }, [])
+    if (!isLoading) {
+      setIsInitialized(true)
+      if (data?.resultCode === ResultCode.Success) {
+        dispatch(setIsLoggedIn({ isLoggedIn: true }))
+      }
+    }
+  }, [isLoading, data])
 
-  if (!isInitialized) {
-    return (
-      <div className={s.circularProgressContainer}>
-        <CircularProgress size={150} thickness={3} />
-      </div>
-    )
-  }
   return (
     <ThemeProvider theme={getTheme(themeMode)}>
       <CssBaseline />
-      <Header />
-      <Routing />
+      {isInitialized && (
+        <>
+          <Header />
+          <Routing />
+        </>
+      )}
+      {!isInitialized && (
+        <div className={s.circularProgressContainer}>
+          <CircularProgress size={150} thickness={3} />
+        </div>
+      )}
       <ErrorSnackbar />
     </ThemeProvider>
   )
