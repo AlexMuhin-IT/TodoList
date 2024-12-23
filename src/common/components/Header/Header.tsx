@@ -9,13 +9,13 @@ import { Clock } from "../Clock/Clock"
 import { changeTheme, selectIsLoggedIn, selectStatus, selectThemeMode, setIsLoggedIn } from "app/appSlice"
 import { useLogoutMutation } from "features/auth/api/authApi"
 import { ResultCode } from "common/enums"
-import { clearTasksAndTodolists } from "common/actions/common.actions"
 import { baseApi } from "app/baseApi"
 
 export const Header = () => {
   const themeMode = useAppSelector(selectThemeMode)
   const status = useAppSelector(selectStatus)
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
+
   const theme = getTheme(themeMode)
   const dispatch = useAppDispatch()
 
