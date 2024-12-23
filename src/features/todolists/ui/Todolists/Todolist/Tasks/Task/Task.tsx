@@ -6,8 +6,8 @@ import { useAppDispatch } from "common/hooks"
 import { EditableSpan } from "common/components"
 import { TaskStatus } from "common/enums"
 import { DomainTodolist } from "features/todolists/model/todolistsSlice"
-import { DomainTask, UpdateTaskDomainModel } from "features/todolists/api/tasksApi.types"
-import { removeTaskTC, updateTaskTC } from "features/todolists/model/taskSlice"
+import { DomainTask } from "features/todolists/api/tasksApi.types"
+import { useDeleteTaskMutation, useUpdateTaskMutation } from "features/todolists/api/tasksApi"
 
 type Props = {
   task: DomainTask
@@ -15,36 +15,20 @@ type Props = {
   disabled?: boolean
 }
 
-export const Task = ({ task, todolist, disabled }: Props) => {
-  const dispatch = useAppDispatch()
+export const Task = ({ task, todolist }: Props) => {
+  const [removeTask] = useDeleteTaskMutation()
+  const [updateTask] = useUpdateTaskMutation()
+  const disabled = todolist.entityStatus === "loading"
 
   const removeTaskHandler = () => {
-    dispatch(removeTaskTC({ todolistId: todolist.id, taskId: task.id }))
+    removeTask({ todolistId: todolist.id, taskId: task.id })
   }
-
   const changeTaskHandler = (e: ChangeEvent<HTMLInputElement>) => {
     let status = e.currentTarget.checked ? TaskStatus.Completed : TaskStatus.New
-    const domainModel: UpdateTaskDomainModel = {
-      status: status,
-      title: task.title,
-      deadline: task.deadline,
-      description: task.description,
-      priority: task.priority,
-      startDate: task.startDate,
-    }
-    dispatch(updateTaskTC({ todolistId: todolist.id, taskId: task.id, domainModel }))
+    updateTask({ todolistId: todolist.id, taskId: task.id, model: { ...task, status } })
   }
-
   const changeTaskTitleHandler = (title: string) => {
-    const domainModel: UpdateTaskDomainModel = {
-      status: task.status,
-      title,
-      deadline: task.deadline,
-      description: task.description,
-      priority: task.priority,
-      startDate: task.startDate,
-    }
-    dispatch(updateTaskTC({ todolistId: todolist.id, taskId: task.id, domainModel }))
+    updateTask({ todolistId: todolist.id, taskId: task.id, model: { ...task, title } })
   }
 
   return (
