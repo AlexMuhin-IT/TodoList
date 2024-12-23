@@ -1,7 +1,5 @@
-import { UnknownAction } from "redux"
 import { tasksSlice, todolistsReducer } from "features/todolists/model"
 import { appReducer, appSlice } from "app/appSlice"
-import { ThunkAction } from "redux-thunk"
 import { configureStore } from "@reduxjs/toolkit"
 import { tasksReducer } from "features/todolists/model/taskSlice"
 import { todolistsSlice } from "features/todolists/model/todolistsSlice"
