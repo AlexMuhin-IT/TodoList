@@ -10,9 +10,7 @@ import { getTheme } from "common/theme/theme"
 import Grid from "@mui/material/Grid2"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import s from "./Login.module.css"
-import { Navigate, useNavigate } from "react-router"
-import { Path } from "common/routing/Routing"
-import { useEffect } from "react"
+import { Navigate } from "react-router"
 import { selectIsLoggedIn, selectThemeMode, setIsLoggedIn } from "app/appSlice"
 import { useLoginMutation } from "features/auth/api/authApi"
 import { ResultCode } from "common/enums"
@@ -26,7 +24,6 @@ export type LoginArgs = {
 
 export const Login = () => {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
 
   const isLoggedIn = useAppSelector(selectIsLoggedIn)
   const themeMode = useAppSelector(selectThemeMode)
@@ -37,7 +34,6 @@ export const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
     reset,
     control,
     formState: { errors },
@@ -48,21 +44,6 @@ export const Login = () => {
       rememberMe: false,
     },
   })
-
-  // const onSubmit: SubmitHandler<LoginArgs> = (data) => {
-  //   // dispatch(loginTC(data))
-  //   // reset()
-  //   login(data)
-  //     .then((res) => {
-  //       if (res.data?.resultCode === ResultCode.Success) {
-  //         dispatch(setIsLoggedIn({ isLoggedIn: true }))
-  //         localStorage.setItem("token", res.data.data.token)
-  //       }
-  //     })
-  //     .finally(() => {
-  //       reset()
-  //     })
-  // }
   const onSubmit: SubmitHandler<LoginArgs> = (data) => {
     login(data)
       .then((res) => {
