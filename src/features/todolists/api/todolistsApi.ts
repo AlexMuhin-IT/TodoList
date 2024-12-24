@@ -1,5 +1,4 @@
 // 1
-import { BaseQueryMeta, BaseQueryResult, createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 import { DomainTodolist } from "features/todolists/model/todolistsSlice"
 import { Todolist } from "features/todolists/api/todolistsApi.types"
 import { BaseResponse } from "common/types/types"
