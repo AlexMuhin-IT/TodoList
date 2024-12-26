@@ -2,11 +2,29 @@ import { GetTasksResponse, UpdateTaskDomainModel } from "./tasksApi.types"
 import { BaseResponse } from "common/types/types"
 import { baseApi } from "app/baseApi"
 
+export const PAGE_SIZE = 7
+
 export const tasksApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getTasks: build.query<GetTasksResponse, { todolistId: string }>({
-      query: ({ todolistId }) => ({ url: `todo-lists/${todolistId}/tasks` }),
-      providesTags: ["Task"],
+    getTasks: build.query<GetTasksResponse, { todolistId: string; args: { page: number } }>({
+      query: ({ todolistId, args }) => {
+        const params = { ...args, count: PAGE_SIZE }
+        return {
+          method: "GET",
+          url: `todo-lists/${todolistId}/tasks`,
+          params,
+        }
+      },
+      providesTags: (res, err, { todolistId }) =>
+        res
+          ? [
+              ...res.items.map(({ id }) => ({ type: "Task", id }) as const),
+              {
+                type: "Task",
+                id: todolistId,
+              },
+            ]
+          : ["Task"],
     }),
     createTask: build.mutation<BaseResponse, { title: string; todolistId: string }>({
       query: ({ todolistId, title }) => ({
@@ -29,29 +47,8 @@ export const tasksApi = baseApi.injectEndpoints({
         method: "PUT",
         body: { ...model },
       }),
-      invalidatesTags: ["Task"],
+      invalidatesTags: (res, err, { taskId }) => [{ type: "Task", id: taskId }],
     }),
   }),
 })
 export const { useGetTasksQuery, useCreateTaskMutation, useDeleteTaskMutation, useUpdateTaskMutation } = tasksApi
-
-// export const _tasksApi = {
-//   getTasks(todolistId: string) {
-//     return instance.get<GetTasksResponse>(`todo-lists/${todolistId}/tasks`)
-//   },
-//
-//   createTask(payload: { title: string; todolistId: string }) {
-//     const { title, todolistId } = payload
-//     return instance.post<BaseResponse<{ item: DomainTask }>>(`todo-lists/${todolistId}/tasks`, { title })
-//   },
-//
-//   removeTask(payload: { taskId: string; todolistId: string }) {
-//     const { taskId, todolistId } = payload
-//     return instance.delete<BaseResponse>(`todo-lists/${todolistId}/tasks/${taskId}`, {})
-//   },
-//
-//   updateTask(payload: { taskId: string; todolistId: string; model: UpdateTaskDomainModel }) {
-//     const { taskId, todolistId, model } = payload
-//     return instance.put<BaseResponse<{ item: DomainTask }>>(`todo-lists/${todolistId}/tasks/${taskId}`, model)
-//   },
-// }
