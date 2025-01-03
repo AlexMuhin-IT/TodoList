@@ -2,12 +2,11 @@ import React, { ChangeEvent } from "react"
 import { Checkbox, IconButton, ListItem } from "@mui/material"
 import { Delete } from "@mui/icons-material"
 import { getListItemSx } from "./Task.styles"
-import { useAppDispatch } from "common/hooks"
 import { EditableSpan } from "common/components"
 import { TaskStatus } from "common/enums"
-import { DomainTodolist } from "features/todolists/model/todolistsSlice"
 import { DomainTask } from "features/todolists/api/tasksApi.types"
 import { useDeleteTaskMutation, useUpdateTaskMutation } from "features/todolists/api/tasksApi"
+import { DomainTodolist } from "features/todolists/lib/types/types"
 
 type Props = {
   task: DomainTask
