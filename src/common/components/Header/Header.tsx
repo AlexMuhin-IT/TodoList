@@ -10,6 +10,7 @@ import { changeTheme, selectIsLoggedIn, selectStatus, selectThemeMode, setIsLogg
 import { useLogoutMutation } from "features/auth/api/authApi"
 import { ResultCode } from "common/enums"
 import { baseApi } from "app/baseApi"
+import zIndex from "@mui/material/styles/zIndex"
 
 export const Header = () => {
   const themeMode = useAppSelector(selectThemeMode)
@@ -55,10 +56,10 @@ export const Header = () => {
         <div>
           {isLoggedIn && <MenuButton onClick={logoutHandler}>Logout</MenuButton>}
           <MenuButton background={theme.palette.primary.dark}>Faq</MenuButton>
-          <Switch color={"default"} onChange={changeModeHandler} />
+          <Switch color={"primary"} onChange={changeModeHandler} />
         </div>
       </Toolbar>
-      {status === "loading" && <LinearProgress color="error" />}
+      <div>{status === "loading" && <LinearProgress color="error" sx={{ zIndex: 0 }} />}</div>
     </AppBar>
   )
 }
