@@ -14,9 +14,7 @@ export const appSlice = createSlice({
     isLoggedIn: false,
   },
   reducers: (create) => ({
-    setAppError: create.reducer<{
-      error: string | null
-    }>((state, action) => {
+    setAppError: create.reducer<{ error: string | null }>((state, action) => {
       state.error = action.payload.error
     }),
     setAppStatus: create.reducer<{
