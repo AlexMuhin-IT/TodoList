@@ -46,7 +46,7 @@ export const Header = () => {
       })
   }
   return (
-    <AppBar sx={{ mb: "30px" }} position="static">
+    <AppBar sx={{ mb: "30px", pt: "5px" }} position="static">
       <Toolbar
         sx={{
           display: "flex",
@@ -57,13 +57,28 @@ export const Header = () => {
           <Menu />
           <Clock />
         </IconButton>
+        //test merge
         <div>
           {isLoggedIn && <MenuButton onClick={logoutHandler}>Logout</MenuButton>}
           <MenuButton background={theme.palette.primary.dark}>Faq</MenuButton>
           <Switch color={"primary"} onChange={changeModeHandler} />
         </div>
       </Toolbar>
-      <div>{status === "loading" && <LinearProgress color="error" sx={{ zIndex: 0 }} />}</div>
+      {/*<div>{status === "loading" && <LinearProgress color="error" />}</div>*/}
+      <div>
+        {status === "loading" && (
+          <LinearProgress
+            color="error"
+            sx={{
+              position: "absolute",
+              top: 115,
+              left: 0,
+              right: 0,
+              zIndex: 10,
+            }}
+          />
+        )}
+      </div>
     </AppBar>
   )
 }
