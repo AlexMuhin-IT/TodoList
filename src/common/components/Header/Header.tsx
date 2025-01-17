@@ -63,6 +63,7 @@ export const Header = () => {
           <Switch color={"primary"} onChange={changeModeHandler} />
         </div>
       </Toolbar>
+
       {/*<div>{status === "loading" && <LinearProgress color="error" />}</div>*/}
       <div>
         {status === "loading" && (
