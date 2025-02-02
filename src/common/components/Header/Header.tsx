@@ -72,7 +72,6 @@ export const Header = () => {
               position: "absolute",
               top: 115,
               left: 0,
-
               right: 0,
               zIndex: 10,
             }}
